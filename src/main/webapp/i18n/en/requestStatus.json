@@ -1,0 +1,11 @@
+{
+  "hrSolutionApp": {
+    "RequestStatus": {
+      "null": "",
+      "PROCESSING": "PROCESSING",
+      "ACCEPTED": "ACCEPTED",
+      "REJECTED": "REJECTED",
+      "REVOKED": "REVOKED"
+    }
+  }
+}

@@ -1,0 +1,165 @@
+{
+  "annotations": {
+    "changelogDate": "20240524150424"
+  },
+  "applications": ["HRSolution"],
+  "fields": [
+    {
+      "fieldName": "title",
+      "fieldType": "String",
+      "fieldValidateRules": ["required"]
+    },
+    {
+      "fieldName": "description",
+      "fieldType": "String",
+      "fieldValidateRules": ["required"]
+    },
+    {
+      "fieldName": "numberOfCandidates",
+      "fieldType": "Integer",
+      "fieldValidateRules": ["required"]
+    },
+    {
+      "fieldName": "paymentAmount",
+      "fieldType": "Double",
+      "fieldValidateRules": ["required"]
+    },
+    {
+      "fieldName": "recruiterIncomeRate",
+      "fieldType": "Float"
+    },
+    {
+      "fieldName": "candidateIncomeRate",
+      "fieldType": "Float"
+    },
+    {
+      "fieldName": "deadline",
+      "fieldType": "LocalDate"
+    },
+    {
+      "fieldName": "status",
+      "fieldType": "ApplicationStatus",
+      "fieldValidateRules": ["required"],
+      "fieldValues": "NEW,OPEN,CLOSED,DONE,ABORTED"
+    },
+    {
+      "fieldName": "createdAt",
+      "fieldType": "Instant"
+    },
+    {
+      "fieldName": "openedAt",
+      "fieldType": "Instant"
+    },
+    {
+      "fieldName": "closedAt",
+      "fieldType": "Instant"
+    },
+    {
+      "fieldName": "doneAt",
+      "fieldType": "Instant"
+    }
+  ],
+  "name": "Application",
+  "relationships": [
+    {
+      "options": {
+        "onUpdate": "CASCADE"
+      },
+      "otherEntityField": "label",
+      "otherEntityName": "contract",
+      "otherEntityRelationshipName": "application",
+      "relationshipName": "contracts",
+      "relationshipSide": "left",
+      "relationshipType": "one-to-many"
+    },
+    {
+      "options": {
+        "onUpdate": "CASCADE"
+      },
+      "otherEntityName": "interview",
+      "otherEntityRelationshipName": "application",
+      "relationshipName": "interviews",
+      "relationshipSide": "left",
+      "relationshipType": "one-to-many"
+    },
+    {
+      "options": {
+        "onUpdate": "CASCADE"
+      },
+      "otherEntityField": "name",
+      "otherEntityName": "contractType",
+      "relationshipName": "contractType",
+      "relationshipSide": "left",
+      "relationshipType": "many-to-many",
+      "relationshipValidateRules": "required"
+    },
+    {
+      "options": {
+        "onUpdate": "CASCADE"
+      },
+      "otherEntityField": "label",
+      "otherEntityName": "template",
+      "relationshipName": "contractTemplate",
+      "relationshipSide": "left",
+      "relationshipType": "many-to-many"
+    },
+    {
+      "options": {
+        "onUpdate": "CASCADE"
+      },
+      "otherEntityField": "name",
+      "otherEntityName": "criteria",
+      "relationshipName": "criteria",
+      "relationshipSide": "left",
+      "relationshipType": "many-to-many",
+      "relationshipValidateRules": "required"
+    },
+    {
+      "options": {
+        "onUpdate": "CASCADE"
+      },
+      "otherEntityField": "name",
+      "otherEntityName": "domain",
+      "relationshipName": "domain",
+      "relationshipSide": "left",
+      "relationshipType": "many-to-many",
+      "relationshipValidateRules": "required"
+    },
+    {
+      "options": {
+        "onUpdate": "CASCADE"
+      },
+      "otherEntityField": "lastName",
+      "otherEntityName": "employer",
+      "otherEntityRelationshipName": "application",
+      "relationshipName": "employer",
+      "relationshipSide": "right",
+      "relationshipType": "many-to-one",
+      "relationshipValidateRules": "required"
+    },
+    {
+      "options": {
+        "onDelete": "CASCADE",
+        "onUpdate": "CASCADE"
+      },
+      "otherEntityField": "lastName",
+      "otherEntityName": "recruiter",
+      "otherEntityRelationshipName": "applications",
+      "relationshipName": "recruiters",
+      "relationshipSide": "right",
+      "relationshipType": "many-to-many"
+    },
+    {
+      "options": {
+        "onUpdate": "CASCADE"
+      },
+      "otherEntityField": "lastName",
+      "otherEntityName": "candidate",
+      "otherEntityRelationshipName": "applications",
+      "relationshipName": "candidates",
+      "relationshipSide": "right",
+      "relationshipType": "many-to-many"
+    }
+  ],
+  "searchEngine": "no"
+}

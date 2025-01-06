@@ -1,0 +1,135 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    <form name="editForm" novalidate (ngSubmit)="save()" [formGroup]="editForm">
+      <h2 id="jhi-app-test-heading" data-cy="AppTestCreateUpdateHeading" jhiTranslate="hrSolutionApp.appTest.home.createOrEditLabel">
+        Create or edit a App Test
+      </h2>
+
+      <div>
+        <jhi-alert-error></jhi-alert-error>
+
+        @if (editForm.controls.id.value !== null) {
+          <div class="mb-3">
+            <label class="form-label" for="field_id" jhiTranslate="hrSolutionApp.appTest.id">ID</label>
+            <input type="number" class="form-control" name="id" id="field_id" data-cy="id" formControlName="id" [readonly]="true" />
+          </div>
+        }
+
+        <div class="mb-3">
+          <label class="form-label" for="field_name" jhiTranslate="hrSolutionApp.appTest.name">Name</label>
+          <input type="text" class="form-control" name="name" id="field_name" data-cy="name" formControlName="name" />
+          @if (editForm.get('name')!.invalid && (editForm.get('name')!.dirty || editForm.get('name')!.touched)) {
+            <div>
+              @if (editForm.get('name')?.errors?.required) {
+                <small class="form-text text-danger" jhiTranslate="entity.validation.required">This field is required.</small>
+              }
+            </div>
+          }
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" for="field_invitationLink" jhiTranslate="hrSolutionApp.appTest.invitationLink">Invitation Link</label>
+          <input
+            type="text"
+            class="form-control"
+            name="invitationLink"
+            id="field_invitationLink"
+            data-cy="invitationLink"
+            formControlName="invitationLink"
+          />
+          @if (
+            editForm.get('invitationLink')!.invalid && (editForm.get('invitationLink')!.dirty || editForm.get('invitationLink')!.touched)
+          ) {
+            <div>
+              @if (editForm.get('invitationLink')?.errors?.required) {
+                <small class="form-text text-danger" jhiTranslate="entity.validation.required">This field is required.</small>
+              }
+            </div>
+          }
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" for="field_totalScore" jhiTranslate="hrSolutionApp.appTest.totalScore">Total Score</label>
+          <input
+            type="number"
+            class="form-control"
+            name="totalScore"
+            id="field_totalScore"
+            data-cy="totalScore"
+            formControlName="totalScore"
+          />
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" for="field_status" jhiTranslate="hrSolutionApp.appTest.status">Status</label>
+          <input type="text" class="form-control" name="status" id="field_status" data-cy="status" formControlName="status" />
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" for="field_completed" jhiTranslate="hrSolutionApp.appTest.completed">Completed</label>
+          <input type="checkbox" class="form-check" name="completed" id="field_completed" data-cy="completed" formControlName="completed" />
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" for="field_testID" jhiTranslate="hrSolutionApp.appTest.testID">Test ID</label>
+          <input type="number" class="form-control" name="testID" id="field_testID" data-cy="testID" formControlName="testID" />
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" for="field_algorithm" jhiTranslate="hrSolutionApp.appTest.algorithm">Algorithm</label>
+          <input type="text" class="form-control" name="algorithm" id="field_algorithm" data-cy="algorithm" formControlName="algorithm" />
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" for="field_isCodeTest" jhiTranslate="hrSolutionApp.appTest.isCodeTest">Is Code Test</label>
+          <input
+            type="checkbox"
+            class="form-check"
+            name="isCodeTest"
+            id="field_isCodeTest"
+            data-cy="isCodeTest"
+            formControlName="isCodeTest"
+          />
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" for="field_duration" jhiTranslate="hrSolutionApp.appTest.duration">Duration</label>
+          <input type="number" class="form-control" name="duration" id="field_duration" data-cy="duration" formControlName="duration" />
+        </div>
+
+        <div class="mb-3">
+          <label for="field_types" jhiTranslate="hrSolutionApp.appTest.type">Type</label>
+          <select
+            class="form-control"
+            id="field_types"
+            data-cy="type"
+            multiple
+            name="types"
+            formControlName="types"
+            [compareWith]="compareAppTestType"
+          >
+            @for (appTestTypeOption of appTestTypesSharedCollection; track $index) {
+              <option [ngValue]="appTestTypeOption">{{ appTestTypeOption.type }}</option>
+            }
+          </select>
+        </div>
+      </div>
+
+      <div>
+        <button type="button" id="cancel-save" data-cy="entityCreateCancelButton" class="btn btn-secondary" (click)="previousState()">
+          <fa-icon icon="ban"></fa-icon>&nbsp;<span jhiTranslate="entity.action.cancel">Cancel</span>
+        </button>
+
+        <button
+          type="submit"
+          id="save-entity"
+          data-cy="entityCreateSaveButton"
+          [disabled]="editForm.invalid || isSaving"
+          class="btn btn-primary"
+        >
+          <fa-icon icon="save"></fa-icon>&nbsp;<span jhiTranslate="entity.action.save">Save</span>
+        </button>
+      </div>
+    </form>
+  </div>
+</div>

@@ -1,0 +1,168 @@
+<div>
+  <h2 id="page-heading" data-cy="InterviewHeading">
+    <span jhiTranslate="hrSolutionApp.interview.home.title">Interviews</span>
+
+    <div class="d-flex justify-content-end">
+      <button class="btn btn-info me-2" (click)="load()" [disabled]="isLoading">
+        <fa-icon icon="sync" [spin]="isLoading"></fa-icon>
+        <span jhiTranslate="hrSolutionApp.interview.home.refreshListLabel">Refresh list</span>
+      </button>
+
+      <button
+        id="jh-create-entity"
+        data-cy="entityCreateButton"
+        class="btn btn-primary jh-create-entity create-interview"
+        [routerLink]="['/interview/new']"
+      >
+        <fa-icon icon="plus"></fa-icon>
+        <span jhiTranslate="hrSolutionApp.interview.home.createLabel">Create a new Interview</span>
+      </button>
+    </div>
+  </h2>
+
+  <jhi-alert-error></jhi-alert-error>
+
+  <jhi-alert></jhi-alert>
+
+  @if (interviews?.length === 0) {
+    <div class="alert alert-warning" id="no-result">
+      <span jhiTranslate="hrSolutionApp.interview.home.notFound">No Interviews found</span>
+    </div>
+  }
+
+  @if (interviews && interviews.length > 0) {
+    <div class="table-responsive table-entities" id="entities">
+      <table class="table table-striped" aria-describedby="page-heading">
+        <thead>
+          <tr jhiSort [sortState]="sortState" (sortChange)="navigateToWithComponentValues($event)">
+            <th scope="col" jhiSortBy="id">
+              <div class="d-flex">
+                <span jhiTranslate="global.field.id">ID</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="label">
+              <div class="d-flex">
+                <span jhiTranslate="hrSolutionApp.interview.label">Label</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="entryLink">
+              <div class="d-flex">
+                <span jhiTranslate="hrSolutionApp.interview.entryLink">Entry Link</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="invitationLink">
+              <div class="d-flex">
+                <span jhiTranslate="hrSolutionApp.interview.invitationLink">Invitation Link</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="interviewResult">
+              <div class="d-flex">
+                <span jhiTranslate="hrSolutionApp.interview.interviewResult">Interview Result</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="rate">
+              <div class="d-flex">
+                <span jhiTranslate="hrSolutionApp.interview.rate">Rate</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="startedAt">
+              <div class="d-flex">
+                <span jhiTranslate="hrSolutionApp.interview.startedAt">Started At</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="endedAt">
+              <div class="d-flex">
+                <span jhiTranslate="hrSolutionApp.interview.endedAt">Ended At</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="comments">
+              <div class="d-flex">
+                <span jhiTranslate="hrSolutionApp.interview.comments">Comments</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="attendee.id">
+              <div class="d-flex">
+                <span jhiTranslate="hrSolutionApp.interview.attendee">Attendee</span>
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="application.id">
+              <div class="d-flex">
+                <span jhiTranslate="hrSolutionApp.interview.application">Application</span>
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col"></th>
+          </tr>
+        </thead>
+        <tbody>
+          @for (interview of interviews; track trackId) {
+            <tr data-cy="entityTable">
+              <td>
+                <a [routerLink]="['/interview', interview.id, 'view']">{{ interview.id }}</a>
+              </td>
+              <td>{{ interview.label }}</td>
+              <td>{{ interview.entryLink }}</td>
+              <td>{{ interview.invitationLink }}</td>
+              <td>{{ interview.interviewResult }}</td>
+              <td>{{ interview.rate }}</td>
+              <td>{{ interview.startedAt | formatMediumDate }}</td>
+              <td>{{ interview.endedAt | formatMediumDate }}</td>
+              <td>{{ interview.comments }}</td>
+              <td>
+                @if (interview.attendee) {
+                  <div>
+                    <a [routerLink]="['/candidate', interview.attendee.id, 'view']">{{ interview.attendee.id }}</a>
+                  </div>
+                }
+              </td>
+              <td>
+                @if (interview.application) {
+                  <div>
+                    <a [routerLink]="['/application', interview.application.id, 'view']">{{ interview.application.id }}</a>
+                  </div>
+                }
+              </td>
+              <td class="text-end">
+                <div class="btn-group">
+                  <a [routerLink]="['/interview', interview.id, 'view']" class="btn btn-info btn-sm" data-cy="entityDetailsButton">
+                    <fa-icon icon="eye"></fa-icon>
+                    <span class="d-none d-md-inline" jhiTranslate="entity.action.view">View</span>
+                  </a>
+
+                  <a [routerLink]="['/interview', interview.id, 'edit']" class="btn btn-primary btn-sm" data-cy="entityEditButton">
+                    <fa-icon icon="pencil-alt"></fa-icon>
+                    <span class="d-none d-md-inline" jhiTranslate="entity.action.edit">Edit</span>
+                  </a>
+
+                  <button type="submit" (click)="delete(interview)" class="btn btn-danger btn-sm" data-cy="entityDeleteButton">
+                    <fa-icon icon="times"></fa-icon>
+                    <span class="d-none d-md-inline" jhiTranslate="entity.action.delete">Delete</span>
+                  </button>
+                </div>
+              </td>
+            </tr>
+          }
+        </tbody>
+      </table>
+    </div>
+  }
+</div>

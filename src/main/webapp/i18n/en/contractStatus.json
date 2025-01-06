@@ -1,0 +1,11 @@
+{
+  "hrSolutionApp": {
+    "ContractStatus": {
+      "null": "",
+      "CREATED": "CREATED",
+      "PROCESSING": "PROCESSING",
+      "CLOSED": "CLOSED",
+      "ABORTED": "ABORTED"
+    }
+  }
+}

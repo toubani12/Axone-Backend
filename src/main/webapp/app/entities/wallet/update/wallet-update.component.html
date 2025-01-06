@@ -1,0 +1,90 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    <form name="editForm" novalidate (ngSubmit)="save()" [formGroup]="editForm">
+      <h2 id="jhi-wallet-heading" data-cy="WalletCreateUpdateHeading" jhiTranslate="hrSolutionApp.wallet.home.createOrEditLabel">
+        Create or edit a Wallet
+      </h2>
+
+      <div>
+        <jhi-alert-error></jhi-alert-error>
+
+        @if (editForm.controls.id.value !== null) {
+          <div class="mb-3">
+            <label class="form-label" for="field_id" jhiTranslate="hrSolutionApp.wallet.id">ID</label>
+            <input type="number" class="form-control" name="id" id="field_id" data-cy="id" formControlName="id" [readonly]="true" />
+          </div>
+        }
+
+        <div class="mb-3">
+          <label class="form-label" for="field_balance" jhiTranslate="hrSolutionApp.wallet.balance">Balance</label>
+          <input type="number" class="form-control" name="balance" id="field_balance" data-cy="balance" formControlName="balance" />
+          @if (editForm.get('balance')!.invalid && (editForm.get('balance')!.dirty || editForm.get('balance')!.touched)) {
+            <div>
+              @if (editForm.get('balance')?.errors?.required) {
+                <small class="form-text text-danger" jhiTranslate="entity.validation.required">This field is required.</small>
+              }
+              <small
+                class="form-text text-danger"
+                [hidden]="!editForm.get('balance')?.errors?.number"
+                jhiTranslate="entity.validation.number"
+                >This field should be a number.</small
+              >
+            </div>
+          }
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" for="field_status" jhiTranslate="hrSolutionApp.wallet.status">Status</label>
+          <select class="form-control" name="status" formControlName="status" id="field_status" data-cy="status">
+            <option [ngValue]="null">{{ 'hrSolutionApp.WalletStatus.null' | translate }}</option>
+            @for (walletStatus of walletStatusValues; track $index) {
+              <option [value]="walletStatus">{{ 'hrSolutionApp.WalletStatus.' + walletStatus | translate }}</option>
+            }
+          </select>
+          @if (editForm.get('status')!.invalid && (editForm.get('status')!.dirty || editForm.get('status')!.touched)) {
+            <div>
+              @if (editForm.get('status')?.errors?.required) {
+                <small class="form-text text-danger" jhiTranslate="entity.validation.required">This field is required.</small>
+              }
+            </div>
+          }
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" for="field_relatedToAccount" jhiTranslate="hrSolutionApp.wallet.relatedToAccount"
+            >Related To Account</label
+          >
+          <select
+            class="form-control"
+            id="field_relatedToAccount"
+            data-cy="relatedToAccount"
+            name="relatedToAccount"
+            formControlName="relatedToAccount"
+            [compareWith]="compareAppAccount"
+          >
+            <option [ngValue]="null"></option>
+            @for (appAccountOption of relatedToAccountsCollection; track $index) {
+              <option [ngValue]="appAccountOption">{{ appAccountOption.id }}</option>
+            }
+          </select>
+        </div>
+      </div>
+
+      <div>
+        <button type="button" id="cancel-save" data-cy="entityCreateCancelButton" class="btn btn-secondary" (click)="previousState()">
+          <fa-icon icon="ban"></fa-icon>&nbsp;<span jhiTranslate="entity.action.cancel">Cancel</span>
+        </button>
+
+        <button
+          type="submit"
+          id="save-entity"
+          data-cy="entityCreateSaveButton"
+          [disabled]="editForm.invalid || isSaving"
+          class="btn btn-primary"
+        >
+          <fa-icon icon="save"></fa-icon>&nbsp;<span jhiTranslate="entity.action.save">Save</span>
+        </button>
+      </div>
+    </form>
+  </div>
+</div>

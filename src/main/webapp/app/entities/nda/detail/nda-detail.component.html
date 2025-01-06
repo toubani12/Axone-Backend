@@ -1,0 +1,73 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    @if (nDA()) {
+      <div>
+        <h2 data-cy="nDADetailsHeading"><span jhiTranslate="hrSolutionApp.nDA.detail.title">NDA</span></h2>
+
+        <hr />
+
+        <jhi-alert-error></jhi-alert-error>
+
+        <jhi-alert></jhi-alert>
+
+        <dl class="row-md jh-entity-details">
+          <dt><span jhiTranslate="global.field.id">ID</span></dt>
+          <dd>
+            <span>{{ nDA()!.id }}</span>
+          </dd>
+          <dt><span jhiTranslate="hrSolutionApp.nDA.document">Document</span></dt>
+          <dd>
+            @if (nDA()!.document) {
+              <div>
+                <a (click)="openFile(nDA()!.document ?? '', nDA()!.documentContentType)" jhiTranslate="entity.action.open">Open</a>
+                {{ nDA()!.documentContentType }}, {{ byteSize(nDA()!.document ?? '') }}
+              </div>
+            }
+          </dd>
+          <dt><span jhiTranslate="hrSolutionApp.nDA.status">Status</span></dt>
+          <dd>
+            <span [jhiTranslate]="'hrSolutionApp.NDAStatus.' + (nDA()!.status ?? 'null')">{{
+              { null: '', PROCESSING: 'PROCESSING', SIGNED: 'SIGNED', REJECTED: 'REJECTED', REVOKED: 'REVOKED' }[nDA()!.status ?? 'null']
+            }}</span>
+          </dd>
+          <dt><span jhiTranslate="hrSolutionApp.nDA.period">Period</span></dt>
+          <dd>
+            <span>{{ nDA()!.period | formatMediumDate }}</span>
+          </dd>
+          <dt><span jhiTranslate="hrSolutionApp.nDA.employer">Employer</span></dt>
+          <dd>
+            @if (nDA()!.employer) {
+              <div>
+                <a [routerLink]="['/employer', nDA()!.employer?.id, 'view']">{{ nDA()!.employer?.lastName }}</a>
+              </div>
+            }
+          </dd>
+          <dt><span jhiTranslate="hrSolutionApp.nDA.mediator">Mediator</span></dt>
+          <dd>
+            @if (nDA()!.mediator) {
+              <div>
+                <a [routerLink]="['/recruiter', nDA()!.mediator?.id, 'view']">{{ nDA()!.mediator?.lastName }}</a>
+              </div>
+            }
+          </dd>
+          <dt><span jhiTranslate="hrSolutionApp.nDA.candidate">Candidate</span></dt>
+          <dd>
+            @if (nDA()!.candidate) {
+              <div>
+                <a [routerLink]="['/candidate', nDA()!.candidate?.id, 'view']">{{ nDA()!.candidate?.lastName }}</a>
+              </div>
+            }
+          </dd>
+        </dl>
+
+        <button type="submit" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">
+          <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back">Back</span>
+        </button>
+
+        <button type="button" [routerLink]="['/nda', nDA()!.id, 'edit']" class="btn btn-primary">
+          <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit">Edit</span>
+        </button>
+      </div>
+    }
+  </div>
+</div>

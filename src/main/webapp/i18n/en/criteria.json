@@ -1,0 +1,25 @@
+{
+  "hrSolutionApp": {
+    "criteria": {
+      "home": {
+        "title": "Criteria",
+        "refreshListLabel": "Refresh list",
+        "createLabel": "Create a new Criteria",
+        "createOrEditLabel": "Create or edit a Criteria",
+        "notFound": "No Criteria found"
+      },
+      "created": "A new Criteria is created with identifier {{ param }}",
+      "updated": "A Criteria is updated with identifier {{ param }}",
+      "deleted": "A Criteria is deleted with identifier {{ param }}",
+      "delete": {
+        "question": "Are you sure you want to delete Criteria {{ id }}?"
+      },
+      "detail": {
+        "title": "Criteria"
+      },
+      "id": "ID",
+      "name": "Name",
+      "application": "Application"
+    }
+  }
+}

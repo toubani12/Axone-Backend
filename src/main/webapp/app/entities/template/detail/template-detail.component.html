@@ -1,0 +1,74 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    @if (template()) {
+      <div>
+        <h2 data-cy="templateDetailsHeading"><span jhiTranslate="hrSolutionApp.template.detail.title">Template</span></h2>
+
+        <hr />
+
+        <jhi-alert-error></jhi-alert-error>
+
+        <jhi-alert></jhi-alert>
+
+        <dl class="row-md jh-entity-details">
+          <dt><span jhiTranslate="global.field.id">ID</span></dt>
+          <dd>
+            <span>{{ template()!.id }}</span>
+          </dd>
+          <dt><span jhiTranslate="hrSolutionApp.template.label">Label</span></dt>
+          <dd>
+            <span>{{ template()!.label }}</span>
+          </dd>
+          <dt><span jhiTranslate="hrSolutionApp.template.type">Type</span></dt>
+          <dd>
+            <span [jhiTranslate]="'hrSolutionApp.TemplateContractType.' + (template()!.type ?? 'null')">{{
+              { null: '', CDI: 'CDI', CDD: 'CDD', MISSION: 'MISSION', FREELANCE: 'FREELANCE', REMOTE: 'REMOTE' }[template()!.type ?? 'null']
+            }}</span>
+          </dd>
+          <dt><span jhiTranslate="hrSolutionApp.template.description">Description</span></dt>
+          <dd>
+            <span>{{ template()!.description }}</span>
+          </dd>
+          <dt><span jhiTranslate="hrSolutionApp.template.standard">Standard</span></dt>
+          <dd>
+            <span>{{ template()!.standard }}</span>
+          </dd>
+          <dt><span jhiTranslate="hrSolutionApp.template.docLink">Doc Link</span></dt>
+          <dd>
+            @if (template()!.docLink) {
+              <div>
+                <a (click)="openFile(template()!.docLink ?? '', template()!.docLinkContentType)" jhiTranslate="entity.action.open">Open</a>
+                {{ template()!.docLinkContentType }}, {{ byteSize(template()!.docLink ?? '') }}
+              </div>
+            }
+          </dd>
+          <dt><span jhiTranslate="hrSolutionApp.template.owner">Owner</span></dt>
+          <dd>
+            @if (template()!.owner) {
+              <div>
+                <a [routerLink]="['/employer', template()!.owner?.id, 'view']">{{ template()!.owner?.lastName }}</a>
+              </div>
+            }
+          </dd>
+          <dt><span jhiTranslate="hrSolutionApp.template.application">Application</span></dt>
+          <dd>
+            @for (application of template()!.applications; track $index; let last = $last) {
+              <span>
+                <a [routerLink]="['/application', application.id, 'view']">{{ application?.id }}</a
+                >{{ last ? '' : ', ' }}
+              </span>
+            }
+          </dd>
+        </dl>
+
+        <button type="submit" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">
+          <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back">Back</span>
+        </button>
+
+        <button type="button" [routerLink]="['/template', template()!.id, 'edit']" class="btn btn-primary">
+          <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit">Edit</span>
+        </button>
+      </div>
+    }
+  </div>
+</div>

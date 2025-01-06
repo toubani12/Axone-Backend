@@ -1,0 +1,211 @@
+<div>
+  <h2 id="page-heading" data-cy="ContractHeading">
+    <span jhiTranslate="hrSolutionApp.contract.home.title">Contracts</span>
+
+    <div class="d-flex justify-content-end">
+      <button class="btn btn-info me-2" (click)="load()" [disabled]="isLoading">
+        <fa-icon icon="sync" [spin]="isLoading"></fa-icon>
+        <span jhiTranslate="hrSolutionApp.contract.home.refreshListLabel">Refresh list</span>
+      </button>
+
+      <button
+        id="jh-create-entity"
+        data-cy="entityCreateButton"
+        class="btn btn-primary jh-create-entity create-contract"
+        [routerLink]="['/contract/new']"
+      >
+        <fa-icon icon="plus"></fa-icon>
+        <span jhiTranslate="hrSolutionApp.contract.home.createLabel">Create a new Contract</span>
+      </button>
+    </div>
+  </h2>
+
+  <jhi-alert-error></jhi-alert-error>
+
+  <jhi-alert></jhi-alert>
+
+  @if (contracts?.length === 0) {
+    <div class="alert alert-warning" id="no-result">
+      <span jhiTranslate="hrSolutionApp.contract.home.notFound">No Contracts found</span>
+    </div>
+  }
+
+  @if (contracts && contracts.length > 0) {
+    <div class="table-responsive table-entities" id="entities">
+      <table class="table table-striped" aria-describedby="page-heading">
+        <thead>
+          <tr jhiSort [sortState]="sortState" (sortChange)="navigateToWithComponentValues($event)">
+            <th scope="col" jhiSortBy="id">
+              <div class="d-flex">
+                <span jhiTranslate="global.field.id">ID</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="label">
+              <div class="d-flex">
+                <span jhiTranslate="hrSolutionApp.contract.label">Label</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="type">
+              <div class="d-flex">
+                <span jhiTranslate="hrSolutionApp.contract.type">Type</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="status">
+              <div class="d-flex">
+                <span jhiTranslate="hrSolutionApp.contract.status">Status</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="directContract">
+              <div class="d-flex">
+                <span jhiTranslate="hrSolutionApp.contract.directContract">Direct Contract</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="paymentAmount">
+              <div class="d-flex">
+                <span jhiTranslate="hrSolutionApp.contract.paymentAmount">Payment Amount</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="recruiterIncomeRate">
+              <div class="d-flex">
+                <span jhiTranslate="hrSolutionApp.contract.recruiterIncomeRate">Recruiter Income Rate</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="candidateIncomeRate">
+              <div class="d-flex">
+                <span jhiTranslate="hrSolutionApp.contract.candidateIncomeRate">Candidate Income Rate</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="template.id">
+              <div class="d-flex">
+                <span jhiTranslate="hrSolutionApp.contract.template">Template</span>
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="candidate.lastName">
+              <div class="d-flex">
+                <span jhiTranslate="hrSolutionApp.contract.candidate">Candidate</span>
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="recruiter.lastName">
+              <div class="d-flex">
+                <span jhiTranslate="hrSolutionApp.contract.recruiter">Recruiter</span>
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="employer.lastName">
+              <div class="d-flex">
+                <span jhiTranslate="hrSolutionApp.contract.employer">Employer</span>
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="application.id">
+              <div class="d-flex">
+                <span jhiTranslate="hrSolutionApp.contract.application">Application</span>
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col"></th>
+          </tr>
+        </thead>
+        <tbody>
+          @for (contract of contracts; track trackId) {
+            <tr data-cy="entityTable">
+              <td>
+                <a [routerLink]="['/contract', contract.id, 'view']">{{ contract.id }}</a>
+              </td>
+              <td>{{ contract.label }}</td>
+              <td [jhiTranslate]="'hrSolutionApp.TemplateContractType.' + (contract.type ?? 'null')">
+                {{
+                  { null: '', CDI: 'CDI', CDD: 'CDD', MISSION: 'MISSION', FREELANCE: 'FREELANCE', REMOTE: 'REMOTE' }[
+                    contract.type ?? 'null'
+                  ]
+                }}
+              </td>
+              <td [jhiTranslate]="'hrSolutionApp.ContractStatus.' + (contract.status ?? 'null')">
+                {{
+                  { null: '', CREATED: 'CREATED', PROCESSING: 'PROCESSING', CLOSED: 'CLOSED', ABORTED: 'ABORTED' }[
+                    contract.status ?? 'null'
+                  ]
+                }}
+              </td>
+              <td>{{ contract.directContract }}</td>
+              <td>{{ contract.paymentAmount }}</td>
+              <td>{{ contract.recruiterIncomeRate }}</td>
+              <td>{{ contract.candidateIncomeRate }}</td>
+              <td>
+                @if (contract.template) {
+                  <div>
+                    <a [routerLink]="['/template', contract.template.id, 'view']">{{ contract.template.id }}</a>
+                  </div>
+                }
+              </td>
+              <td>
+                @if (contract.candidate) {
+                  <div>
+                    <a [routerLink]="['/candidate', contract.candidate.id, 'view']">{{ contract.candidate.lastName }}</a>
+                  </div>
+                }
+              </td>
+              <td>
+                @if (contract.recruiter) {
+                  <div>
+                    <a [routerLink]="['/recruiter', contract.recruiter.id, 'view']">{{ contract.recruiter.lastName }}</a>
+                  </div>
+                }
+              </td>
+              <td>
+                @if (contract.employer) {
+                  <div>
+                    <a [routerLink]="['/employer', contract.employer.id, 'view']">{{ contract.employer.lastName }}</a>
+                  </div>
+                }
+              </td>
+              <td>
+                @if (contract.application) {
+                  <div>
+                    <a [routerLink]="['/application', contract.application.id, 'view']">{{ contract.application.id }}</a>
+                  </div>
+                }
+              </td>
+              <td class="text-end">
+                <div class="btn-group">
+                  <a [routerLink]="['/contract', contract.id, 'view']" class="btn btn-info btn-sm" data-cy="entityDetailsButton">
+                    <fa-icon icon="eye"></fa-icon>
+                    <span class="d-none d-md-inline" jhiTranslate="entity.action.view">View</span>
+                  </a>
+
+                  <a [routerLink]="['/contract', contract.id, 'edit']" class="btn btn-primary btn-sm" data-cy="entityEditButton">
+                    <fa-icon icon="pencil-alt"></fa-icon>
+                    <span class="d-none d-md-inline" jhiTranslate="entity.action.edit">Edit</span>
+                  </a>
+
+                  <button type="submit" (click)="delete(contract)" class="btn btn-danger btn-sm" data-cy="entityDeleteButton">
+                    <fa-icon icon="times"></fa-icon>
+                    <span class="d-none d-md-inline" jhiTranslate="entity.action.delete">Delete</span>
+                  </button>
+                </div>
+              </td>
+            </tr>
+          }
+        </tbody>
+      </table>
+    </div>
+  }
+</div>

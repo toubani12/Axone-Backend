@@ -1,0 +1,27 @@
+{
+  "hrSolutionApp": {
+    "customQuestion": {
+      "home": {
+        "title": "Custom Questions",
+        "refreshListLabel": "Refresh list",
+        "createLabel": "Create a new Custom Question",
+        "createOrEditLabel": "Create or edit a Custom Question",
+        "notFound": "No Custom Questions found"
+      },
+      "created": "A new Custom Question is created with identifier {{ param }}",
+      "updated": "A Custom Question is updated with identifier {{ param }}",
+      "deleted": "A Custom Question is deleted with identifier {{ param }}",
+      "delete": {
+        "question": "Are you sure you want to delete Custom Question {{ id }}?"
+      },
+      "detail": {
+        "title": "Custom Question"
+      },
+      "id": "ID",
+      "question": "Question",
+      "answer": "Answer",
+      "correctAnswer": "Correct Answer",
+      "appTest": "App Test"
+    }
+  }
+}

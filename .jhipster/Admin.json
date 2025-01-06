@@ -1,0 +1,42 @@
+{
+  "annotations": {
+    "changelogDate": "20240524151824"
+  },
+  "applications": ["HRSolution"],
+  "fields": [
+    {
+      "fieldName": "systemName",
+      "fieldType": "String",
+      "fieldValidateRules": ["required"]
+    }
+  ],
+  "name": "Admin",
+  "relationships": [
+    {
+      "options": {
+        "onDelete": "CASCADE",
+        "onUpdate": "CASCADE"
+      },
+      "otherEntityField": "login",
+      "otherEntityName": "user",
+      "relationshipName": "relatedUser",
+      "relationshipSide": "left",
+      "relationshipType": "one-to-one",
+      "relationshipValidateRules": "required",
+      "relationshipWithBuiltInEntity": true
+    },
+    {
+      "options": {
+        "onUpdate": "CASCADE"
+      },
+      "otherEntityField": "balance",
+      "otherEntityName": "wallet",
+      "otherEntityRelationshipName": "admin",
+      "relationshipName": "systemWallet",
+      "relationshipSide": "left",
+      "relationshipType": "one-to-one",
+      "relationshipValidateRules": "required"
+    }
+  ],
+  "searchEngine": "no"
+}

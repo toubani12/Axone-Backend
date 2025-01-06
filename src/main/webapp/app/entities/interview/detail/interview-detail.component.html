@@ -1,0 +1,78 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    @if (interview()) {
+      <div>
+        <h2 data-cy="interviewDetailsHeading"><span jhiTranslate="hrSolutionApp.interview.detail.title">Interview</span></h2>
+
+        <hr />
+
+        <jhi-alert-error></jhi-alert-error>
+
+        <jhi-alert></jhi-alert>
+
+        <dl class="row-md jh-entity-details">
+          <dt><span jhiTranslate="global.field.id">ID</span></dt>
+          <dd>
+            <span>{{ interview()!.id }}</span>
+          </dd>
+          <dt><span jhiTranslate="hrSolutionApp.interview.label">Label</span></dt>
+          <dd>
+            <span>{{ interview()!.label }}</span>
+          </dd>
+          <dt><span jhiTranslate="hrSolutionApp.interview.entryLink">Entry Link</span></dt>
+          <dd>
+            <span>{{ interview()!.entryLink }}</span>
+          </dd>
+          <dt><span jhiTranslate="hrSolutionApp.interview.invitationLink">Invitation Link</span></dt>
+          <dd>
+            <span>{{ interview()!.invitationLink }}</span>
+          </dd>
+          <dt><span jhiTranslate="hrSolutionApp.interview.interviewResult">Interview Result</span></dt>
+          <dd>
+            <span>{{ interview()!.interviewResult }}</span>
+          </dd>
+          <dt><span jhiTranslate="hrSolutionApp.interview.rate">Rate</span></dt>
+          <dd>
+            <span>{{ interview()!.rate }}</span>
+          </dd>
+          <dt><span jhiTranslate="hrSolutionApp.interview.startedAt">Started At</span></dt>
+          <dd>
+            <span>{{ interview()!.startedAt | formatMediumDate }}</span>
+          </dd>
+          <dt><span jhiTranslate="hrSolutionApp.interview.endedAt">Ended At</span></dt>
+          <dd>
+            <span>{{ interview()!.endedAt | formatMediumDate }}</span>
+          </dd>
+          <dt><span jhiTranslate="hrSolutionApp.interview.comments">Comments</span></dt>
+          <dd>
+            <span>{{ interview()!.comments }}</span>
+          </dd>
+          <dt><span jhiTranslate="hrSolutionApp.interview.attendee">Attendee</span></dt>
+          <dd>
+            @if (interview()!.attendee) {
+              <div>
+                <a [routerLink]="['/candidate', interview()!.attendee?.id, 'view']">{{ interview()!.attendee?.id }}</a>
+              </div>
+            }
+          </dd>
+          <dt><span jhiTranslate="hrSolutionApp.interview.application">Application</span></dt>
+          <dd>
+            @if (interview()!.application) {
+              <div>
+                <a [routerLink]="['/application', interview()!.application?.id, 'view']">{{ interview()!.application?.id }}</a>
+              </div>
+            }
+          </dd>
+        </dl>
+
+        <button type="submit" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">
+          <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back">Back</span>
+        </button>
+
+        <button type="button" [routerLink]="['/interview', interview()!.id, 'edit']" class="btn btn-primary">
+          <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit">Edit</span>
+        </button>
+      </div>
+    }
+  </div>
+</div>

@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="utf-8"?>
+<databaseChangeLog
+    xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-latest.xsd">
+    <property name="now" value="now()" dbms="mysql"/>
+    <property name="floatType" value="float" dbms="mysql"/>
+    <property name="clobType" value="clob" dbms="mysql"/>
+    <property name="blobType" value="longblob" dbms="mysql"/>
+    <property name="uuidType" value="varchar(36)" dbms="mysql"/>
+    <property name="datetimeType" value="datetime(6)" dbms="mysql"/>
+
+    <include file="config/liquibase/changelog/00000000000000_initial_schema.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20240524144924_added_entity_Recruiter.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20240524145024_added_entity_Employer.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20240524145124_added_entity_Candidate.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20240524145224_added_entity_Resume.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20240524145324_added_entity_NDA.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20240524145424_added_entity_TechnicalCV.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20240524145524_added_entity_TechCVEducation.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20240524145624_added_entity_TechCVEmployment.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20240524145724_added_entity_TechCVProject.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20240524145824_added_entity_TechCVAchievement.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20240524145924_added_entity_TechCVDocs.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20240524150024_added_entity_TechCVHardSkills.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20240524150124_added_entity_TechCVSoftSkills.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20240524150224_added_entity_TechCVAltActivities.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20240524150324_added_entity_Request.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20240524150424_added_entity_Application.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20240524150524_added_entity_ContractType.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20240524150624_added_entity_Domain.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20240524150724_added_entity_Criteria.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20240524150824_added_entity_Template.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20240524150924_added_entity_Contract.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20240524151024_added_entity_Wallet.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20240524151124_added_entity_AppAccount.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20240524151224_added_entity_Provider.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20240524151324_added_entity_AppAccountType.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20240524151424_added_entity_AppTest.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20240524151524_added_entity_AppTestType.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20240524151624_added_entity_CustomQuestion.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20240524151724_added_entity_Interview.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20240524151824_added_entity_Admin.xml" relativeToChangelogFile="false"/>
+    <!-- jhipster-needle-liquibase-add-changelog - JHipster will add liquibase changelogs here -->
+    <include file="config/liquibase/changelog/20240524144924_added_entity_constraints_Recruiter.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20240524145024_added_entity_constraints_Employer.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20240524145124_added_entity_constraints_Candidate.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20240524145224_added_entity_constraints_Resume.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20240524145324_added_entity_constraints_NDA.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20240524145524_added_entity_constraints_TechCVEducation.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20240524145624_added_entity_constraints_TechCVEmployment.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20240524145724_added_entity_constraints_TechCVProject.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20240524145824_added_entity_constraints_TechCVAchievement.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20240524145924_added_entity_constraints_TechCVDocs.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20240524150024_added_entity_constraints_TechCVHardSkills.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20240524150124_added_entity_constraints_TechCVSoftSkills.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20240524150224_added_entity_constraints_TechCVAltActivities.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20240524150324_added_entity_constraints_Request.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20240524150424_added_entity_constraints_Application.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20240524150624_added_entity_constraints_Domain.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20240524150824_added_entity_constraints_Template.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20240524150924_added_entity_constraints_Contract.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20240524151024_added_entity_constraints_Wallet.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20240524151124_added_entity_constraints_AppAccount.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20240524151424_added_entity_constraints_AppTest.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20240524151624_added_entity_constraints_CustomQuestion.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20240524151724_added_entity_constraints_Interview.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20240524151824_added_entity_constraints_Admin.xml" relativeToChangelogFile="false"/>
+    <!-- jhipster-needle-liquibase-add-constraints-changelog - JHipster will add liquibase constraints changelogs here -->
+    <!-- jhipster-needle-liquibase-add-incremental-changelog - JHipster will add incremental liquibase changelogs here -->
+</databaseChangeLog>

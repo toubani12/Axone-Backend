@@ -1,0 +1,85 @@
+{
+  "annotations": {
+    "changelogDate": "20240524151124"
+  },
+  "applications": ["HRSolution"],
+  "fields": [
+    {
+      "fieldName": "accountNumber",
+      "fieldType": "Long",
+      "fieldValidateRules": ["required"]
+    },
+    {
+      "fieldName": "cardNumber",
+      "fieldType": "Long"
+    },
+    {
+      "fieldName": "endDate",
+      "fieldType": "LocalDate"
+    },
+    {
+      "fieldName": "cvv",
+      "fieldType": "Integer"
+    }
+  ],
+  "name": "AppAccount",
+  "relationships": [
+    {
+      "options": {
+        "onDelete": "CASCADE",
+        "onUpdate": "CASCADE"
+      },
+      "otherEntityField": "login",
+      "otherEntityName": "user",
+      "relationshipName": "relatedUser",
+      "relationshipSide": "left",
+      "relationshipType": "one-to-one",
+      "relationshipValidateRules": "required",
+      "relationshipWithBuiltInEntity": true
+    },
+    {
+      "options": {
+        "onUpdate": "CASCADE"
+      },
+      "otherEntityField": "type",
+      "otherEntityName": "appAccountType",
+      "relationshipName": "type",
+      "relationshipSide": "left",
+      "relationshipType": "many-to-many",
+      "relationshipValidateRules": "required"
+    },
+    {
+      "options": {
+        "onUpdate": "CASCADE"
+      },
+      "otherEntityField": "name",
+      "otherEntityName": "provider",
+      "relationshipName": "provider",
+      "relationshipSide": "left",
+      "relationshipType": "many-to-many",
+      "relationshipValidateRules": "required"
+    },
+    {
+      "options": {
+        "onUpdate": "CASCADE"
+      },
+      "otherEntityName": "wallet",
+      "otherEntityRelationshipName": "relatedToAccount",
+      "relationshipName": "relatedWallet",
+      "relationshipSide": "right",
+      "relationshipType": "one-to-one"
+    },
+    {
+      "options": {
+        "onDelete": "CASCADE",
+        "onUpdate": "CASCADE"
+      },
+      "otherEntityName": "employer",
+      "otherEntityRelationshipName": "paymentAccount",
+      "relationshipName": "ifEmployer",
+      "relationshipSide": "right",
+      "relationshipType": "many-to-one"
+    }
+  ],
+  "searchEngine": "no"
+}

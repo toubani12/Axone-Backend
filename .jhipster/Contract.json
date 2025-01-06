@@ -1,0 +1,103 @@
+{
+  "annotations": {
+    "changelogDate": "20240524150924"
+  },
+  "applications": ["HRSolution"],
+  "fields": [
+    {
+      "fieldName": "label",
+      "fieldType": "String",
+      "fieldValidateRules": ["required"]
+    },
+    {
+      "fieldName": "type",
+      "fieldType": "TemplateContractType",
+      "fieldValidateRules": ["required"],
+      "fieldValues": "CDI,CDD,MISSION,FREELANCE,REMOTE"
+    },
+    {
+      "fieldName": "status",
+      "fieldType": "ContractStatus",
+      "fieldValidateRules": ["required"],
+      "fieldValues": "CREATED,PROCESSING,CLOSED,ABORTED"
+    },
+    {
+      "fieldName": "directContract",
+      "fieldType": "Boolean",
+      "fieldValidateRules": ["required"]
+    },
+    {
+      "fieldName": "paymentAmount",
+      "fieldType": "Double",
+      "fieldValidateRules": ["required"]
+    },
+    {
+      "fieldName": "recruiterIncomeRate",
+      "fieldType": "Float",
+      "fieldValidateRules": ["required"]
+    },
+    {
+      "fieldName": "candidateIncomeRate",
+      "fieldType": "Float",
+      "fieldValidateRules": ["required"]
+    }
+  ],
+  "name": "Contract",
+  "relationships": [
+    {
+      "otherEntityName": "template",
+      "otherEntityRelationshipName": "contract",
+      "relationshipName": "template",
+      "relationshipSide": "left",
+      "relationshipType": "one-to-one",
+      "relationshipValidateRules": "required"
+    },
+    {
+      "options": {
+        "onUpdate": "CASCADE"
+      },
+      "otherEntityField": "lastName",
+      "otherEntityName": "candidate",
+      "otherEntityRelationshipName": "contract",
+      "relationshipName": "candidate",
+      "relationshipSide": "left",
+      "relationshipType": "one-to-one"
+    },
+    {
+      "options": {
+        "onUpdate": "CASCADE"
+      },
+      "otherEntityField": "lastName",
+      "otherEntityName": "recruiter",
+      "otherEntityRelationshipName": "contracts",
+      "relationshipName": "recruiter",
+      "relationshipSide": "left",
+      "relationshipType": "many-to-one",
+      "relationshipValidateRules": "required"
+    },
+    {
+      "options": {
+        "onUpdate": "CASCADE"
+      },
+      "otherEntityField": "lastName",
+      "otherEntityName": "employer",
+      "otherEntityRelationshipName": "contract",
+      "relationshipName": "employer",
+      "relationshipSide": "right",
+      "relationshipType": "many-to-one",
+      "relationshipValidateRules": "required"
+    },
+    {
+      "options": {
+        "onUpdate": "CASCADE"
+      },
+      "otherEntityName": "application",
+      "otherEntityRelationshipName": "contracts",
+      "relationshipName": "application",
+      "relationshipSide": "right",
+      "relationshipType": "many-to-one",
+      "relationshipValidateRules": "required"
+    }
+  ],
+  "searchEngine": "no"
+}

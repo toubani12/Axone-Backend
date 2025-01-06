@@ -1,0 +1,9 @@
+export enum NDAStatus {
+  PROCESSING = 'PROCESSING',
+
+  SIGNED = 'SIGNED',
+
+  REJECTED = 'REJECTED',
+
+  REVOKED = 'REVOKED',
+}

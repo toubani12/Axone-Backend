@@ -1,0 +1,34 @@
+{
+  "hrSolutionApp": {
+    "appTest": {
+      "home": {
+        "title": "App Tests",
+        "refreshListLabel": "Refresh list",
+        "createLabel": "Create a new App Test",
+        "createOrEditLabel": "Create or edit a App Test",
+        "notFound": "No App Tests found"
+      },
+      "created": "A new App Test is created with identifier {{ param }}",
+      "updated": "A App Test is updated with identifier {{ param }}",
+      "deleted": "A App Test is deleted with identifier {{ param }}",
+      "delete": {
+        "question": "Are you sure you want to delete App Test {{ id }}?"
+      },
+      "detail": {
+        "title": "App Test"
+      },
+      "id": "ID",
+      "name": "Name",
+      "invitationLink": "Invitation Link",
+      "totalScore": "Total Score",
+      "status": "Status",
+      "completed": "Completed",
+      "testID": "Test ID",
+      "algorithm": "Algorithm",
+      "isCodeTest": "Is Code Test",
+      "duration": "Duration",
+      "customQuestions": "Custom Questions",
+      "type": "Type"
+    }
+  }
+}

@@ -1,0 +1,109 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    <form name="editForm" novalidate (ngSubmit)="save()" [formGroup]="editForm">
+      <h2 id="jhi-admin-heading" data-cy="AdminCreateUpdateHeading" jhiTranslate="hrSolutionApp.admin.home.createOrEditLabel">
+        Create or edit a Admin
+      </h2>
+
+      <div>
+        <jhi-alert-error></jhi-alert-error>
+
+        @if (editForm.controls.id.value !== null) {
+          <div class="mb-3">
+            <label class="form-label" for="field_id" jhiTranslate="hrSolutionApp.admin.id">ID</label>
+            <input type="number" class="form-control" name="id" id="field_id" data-cy="id" formControlName="id" [readonly]="true" />
+          </div>
+        }
+
+        <div class="mb-3">
+          <label class="form-label" for="field_systemName" jhiTranslate="hrSolutionApp.admin.systemName">System Name</label>
+          <input
+            type="text"
+            class="form-control"
+            name="systemName"
+            id="field_systemName"
+            data-cy="systemName"
+            formControlName="systemName"
+          />
+          @if (editForm.get('systemName')!.invalid && (editForm.get('systemName')!.dirty || editForm.get('systemName')!.touched)) {
+            <div>
+              @if (editForm.get('systemName')?.errors?.required) {
+                <small class="form-text text-danger" jhiTranslate="entity.validation.required">This field is required.</small>
+              }
+            </div>
+          }
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" for="field_relatedUser" jhiTranslate="hrSolutionApp.admin.relatedUser">Related User</label>
+          <select
+            class="form-control"
+            id="field_relatedUser"
+            data-cy="relatedUser"
+            name="relatedUser"
+            formControlName="relatedUser"
+            [compareWith]="compareUser"
+          >
+            @if (!editForm.get('relatedUser')!.value) {
+              <option [ngValue]="null" selected></option>
+            }
+            @for (userOption of usersSharedCollection; track $index) {
+              <option [ngValue]="userOption">{{ userOption.login }}</option>
+            }
+          </select>
+        </div>
+        @if (editForm.get(['relatedUser'])!.invalid && (editForm.get(['relatedUser'])!.dirty || editForm.get(['relatedUser'])!.touched)) {
+          <div>
+            @if (editForm.get(['relatedUser'])?.errors?.required) {
+              <small class="form-text text-danger" jhiTranslate="entity.validation.required">This field is required.</small>
+            }
+          </div>
+        }
+
+        <div class="mb-3">
+          <label class="form-label" for="field_systemWallet" jhiTranslate="hrSolutionApp.admin.systemWallet">System Wallet</label>
+          <select
+            class="form-control"
+            id="field_systemWallet"
+            data-cy="systemWallet"
+            name="systemWallet"
+            formControlName="systemWallet"
+            [compareWith]="compareWallet"
+          >
+            @if (editForm.get(['systemWallet'])!.value == null) {
+              <option [ngValue]="null" selected></option>
+            }
+            @for (walletOption of systemWalletsCollection; track $index) {
+              <option [ngValue]="walletOption">{{ walletOption.balance }}</option>
+            }
+          </select>
+        </div>
+        @if (
+          editForm.get(['systemWallet'])!.invalid && (editForm.get(['systemWallet'])!.dirty || editForm.get(['systemWallet'])!.touched)
+        ) {
+          <div>
+            @if (editForm.get(['systemWallet'])?.errors?.required) {
+              <small class="form-text text-danger" jhiTranslate="entity.validation.required">This field is required.</small>
+            }
+          </div>
+        }
+      </div>
+
+      <div>
+        <button type="button" id="cancel-save" data-cy="entityCreateCancelButton" class="btn btn-secondary" (click)="previousState()">
+          <fa-icon icon="ban"></fa-icon>&nbsp;<span jhiTranslate="entity.action.cancel">Cancel</span>
+        </button>
+
+        <button
+          type="submit"
+          id="save-entity"
+          data-cy="entityCreateSaveButton"
+          [disabled]="editForm.invalid || isSaving"
+          class="btn btn-primary"
+        >
+          <fa-icon icon="save"></fa-icon>&nbsp;<span jhiTranslate="entity.action.save">Save</span>
+        </button>
+      </div>
+    </form>
+  </div>
+</div>

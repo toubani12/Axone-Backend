@@ -1,0 +1,25 @@
+{
+  "hrSolutionApp": {
+    "contractType": {
+      "home": {
+        "title": "Contract Types",
+        "refreshListLabel": "Refresh list",
+        "createLabel": "Create a new Contract Type",
+        "createOrEditLabel": "Create or edit a Contract Type",
+        "notFound": "No Contract Types found"
+      },
+      "created": "A new Contract Type is created with identifier {{ param }}",
+      "updated": "A Contract Type is updated with identifier {{ param }}",
+      "deleted": "A Contract Type is deleted with identifier {{ param }}",
+      "delete": {
+        "question": "Are you sure you want to delete Contract Type {{ id }}?"
+      },
+      "detail": {
+        "title": "Contract Type"
+      },
+      "id": "ID",
+      "name": "Name",
+      "application": "Application"
+    }
+  }
+}

@@ -1,0 +1,89 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    @if (employer()) {
+      <div>
+        <h2 data-cy="employerDetailsHeading"><span jhiTranslate="hrSolutionApp.employer.detail.title">Employer</span></h2>
+
+        <hr />
+
+        <jhi-alert-error></jhi-alert-error>
+
+        <jhi-alert></jhi-alert>
+
+        <dl class="row-md jh-entity-details">
+          <dt><span jhiTranslate="global.field.id">ID</span></dt>
+          <dd>
+            <span>{{ employer()!.id }}</span>
+          </dd>
+          <dt><span jhiTranslate="hrSolutionApp.employer.firstName">First Name</span></dt>
+          <dd>
+            <span>{{ employer()!.firstName }}</span>
+          </dd>
+          <dt><span jhiTranslate="hrSolutionApp.employer.lastName">Last Name</span></dt>
+          <dd>
+            <span>{{ employer()!.lastName }}</span>
+          </dd>
+          <dt><span jhiTranslate="hrSolutionApp.employer.profileImage">Profile Image</span></dt>
+          <dd>
+            @if (employer()!.profileImage) {
+              <div>
+                <a (click)="openFile(employer()!.profileImage ?? '', employer()!.profileImageContentType)">
+                  <img
+                    [src]="'data:' + employer()!.profileImageContentType + ';base64,' + employer()!.profileImage"
+                    style="max-width: 100%"
+                    alt="employer"
+                  />
+                </a>
+                {{ employer()!.profileImageContentType }}, {{ byteSize(employer()!.profileImage ?? '') }}
+              </div>
+            }
+          </dd>
+          <dt><span jhiTranslate="hrSolutionApp.employer.address">Address</span></dt>
+          <dd>
+            <span>{{ employer()!.address }}</span>
+          </dd>
+          <dt><span jhiTranslate="hrSolutionApp.employer.role">Role</span></dt>
+          <dd>
+            <span [jhiTranslate]="'hrSolutionApp.UserRole.' + (employer()!.role ?? 'null')">{{
+              { null: '', ADMIN: 'ADMIN', RECRUITER: 'RECRUITER', EMPLOYER: 'EMPLOYER' }[employer()!.role ?? 'null']
+            }}</span>
+          </dd>
+          <dt><span jhiTranslate="hrSolutionApp.employer.status">Status</span></dt>
+          <dd>
+            <span [jhiTranslate]="'hrSolutionApp.UserStatus.' + (employer()!.status ?? 'null')">{{
+              { null: '', ACTIVE: 'ACTIVE', DEACTIVATED: 'DEACTIVATED', BANNED: 'BANNED' }[employer()!.status ?? 'null']
+            }}</span>
+          </dd>
+          <dt><span jhiTranslate="hrSolutionApp.employer.name">Name</span></dt>
+          <dd>
+            <span>{{ employer()!.name }}</span>
+          </dd>
+          <dt><span jhiTranslate="hrSolutionApp.employer.label">Label</span></dt>
+          <dd>
+            <span>{{ employer()!.label }}</span>
+          </dd>
+          <dt><span jhiTranslate="hrSolutionApp.employer.relatedUser">Related User</span></dt>
+          <dd>
+            <span>{{ employer()!.relatedUser?.login }}</span>
+          </dd>
+          <dt><span jhiTranslate="hrSolutionApp.employer.wallet">Wallet</span></dt>
+          <dd>
+            @if (employer()!.wallet) {
+              <div>
+                <a [routerLink]="['/wallet', employer()!.wallet?.id, 'view']">{{ employer()!.wallet?.balance }}</a>
+              </div>
+            }
+          </dd>
+        </dl>
+
+        <button type="submit" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">
+          <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back">Back</span>
+        </button>
+
+        <button type="button" [routerLink]="['/employer', employer()!.id, 'edit']" class="btn btn-primary">
+          <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit">Edit</span>
+        </button>
+      </div>
+    }
+  </div>
+</div>

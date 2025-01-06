@@ -1,0 +1,68 @@
+{
+  "annotations": {
+    "changelogDate": "20240524145324"
+  },
+  "applications": ["HRSolution"],
+  "fields": [
+    {
+      "fieldName": "document",
+      "fieldType": "byte[]",
+      "fieldTypeBlobContent": "any",
+      "fieldValidateRules": ["required"]
+    },
+    {
+      "fieldName": "status",
+      "fieldType": "NDAStatus",
+      "fieldValidateRules": ["required"],
+      "fieldValues": "PROCESSING,SIGNED,REJECTED,REVOKED"
+    },
+    {
+      "fieldName": "period",
+      "fieldType": "LocalDate",
+      "fieldValidateRules": ["required"]
+    }
+  ],
+  "name": "NDA",
+  "relationships": [
+    {
+      "options": {
+        "onDelete": "CASCADE",
+        "onUpdate": "CASCADE"
+      },
+      "otherEntityField": "lastName",
+      "otherEntityName": "employer",
+      "otherEntityRelationshipName": "ndaStatus",
+      "relationshipName": "employer",
+      "relationshipSide": "left",
+      "relationshipType": "many-to-one",
+      "relationshipValidateRules": "required"
+    },
+    {
+      "options": {
+        "onDelete": "CASCADE",
+        "onUpdate": "CASCADE"
+      },
+      "otherEntityField": "lastName",
+      "otherEntityName": "recruiter",
+      "otherEntityRelationshipName": "ndaStatus",
+      "relationshipName": "mediator",
+      "relationshipSide": "left",
+      "relationshipType": "many-to-one",
+      "relationshipValidateRules": "required"
+    },
+    {
+      "options": {
+        "onDelete": "CASCADE",
+        "onUpdate": "CASCADE"
+      },
+      "otherEntityField": "lastName",
+      "otherEntityName": "candidate",
+      "otherEntityRelationshipName": "ndaStatus",
+      "relationshipName": "candidate",
+      "relationshipSide": "left",
+      "relationshipType": "many-to-one",
+      "relationshipValidateRules": "required"
+    }
+  ],
+  "searchEngine": "no"
+}

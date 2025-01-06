@@ -1,0 +1,139 @@
+{
+  "annotations": {
+    "changelogDate": "20240524145024"
+  },
+  "applications": ["HRSolution"],
+  "fields": [
+    {
+      "fieldName": "firstName",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "lastName",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "profileImage",
+      "fieldType": "byte[]",
+      "fieldTypeBlobContent": "image"
+    },
+    {
+      "fieldName": "address",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "role",
+      "fieldType": "UserRole",
+      "fieldValidateRules": ["required"],
+      "fieldValues": "ADMIN,RECRUITER,EMPLOYER"
+    },
+    {
+      "fieldName": "status",
+      "fieldType": "UserStatus",
+      "fieldValidateRules": ["required"],
+      "fieldValues": "ACTIVE,DEACTIVATED,BANNED"
+    },
+    {
+      "fieldName": "name",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "label",
+      "fieldType": "String",
+      "fieldValidateRules": ["required"]
+    }
+  ],
+  "name": "Employer",
+  "relationships": [
+    {
+      "options": {
+        "onDelete": "CASCADE",
+        "onUpdate": "CASCADE"
+      },
+      "otherEntityField": "login",
+      "otherEntityName": "user",
+      "relationshipName": "relatedUser",
+      "relationshipSide": "left",
+      "relationshipType": "one-to-one",
+      "relationshipValidateRules": "required",
+      "relationshipWithBuiltInEntity": true
+    },
+    {
+      "options": {
+        "onUpdate": "CASCADE"
+      },
+      "otherEntityField": "balance",
+      "otherEntityName": "wallet",
+      "relationshipName": "wallet",
+      "relationshipSide": "left",
+      "relationshipType": "one-to-one",
+      "relationshipValidateRules": "required"
+    },
+    {
+      "options": {
+        "onDelete": "CASCADE",
+        "onUpdate": "CASCADE"
+      },
+      "otherEntityName": "domain",
+      "relationshipName": "operationalDomain",
+      "relationshipSide": "left",
+      "relationshipType": "one-to-many",
+      "relationshipValidateRules": "required"
+    },
+    {
+      "options": {
+        "onUpdate": "CASCADE"
+      },
+      "otherEntityName": "appAccount",
+      "otherEntityRelationshipName": "ifEmployer",
+      "relationshipName": "paymentAccount",
+      "relationshipSide": "left",
+      "relationshipType": "one-to-many",
+      "relationshipValidateRules": "required"
+    },
+    {
+      "options": {
+        "onUpdate": "CASCADE"
+      },
+      "otherEntityField": "title",
+      "otherEntityName": "application",
+      "otherEntityRelationshipName": "employer",
+      "relationshipName": "application",
+      "relationshipSide": "left",
+      "relationshipType": "one-to-many"
+    },
+    {
+      "options": {
+        "onUpdate": "CASCADE"
+      },
+      "otherEntityField": "label",
+      "otherEntityName": "contract",
+      "otherEntityRelationshipName": "employer",
+      "relationshipName": "contract",
+      "relationshipSide": "left",
+      "relationshipType": "one-to-many"
+    },
+    {
+      "options": {
+        "onUpdate": "CASCADE"
+      },
+      "otherEntityField": "label",
+      "otherEntityName": "template",
+      "otherEntityRelationshipName": "owner",
+      "relationshipName": "template",
+      "relationshipSide": "left",
+      "relationshipType": "one-to-many"
+    },
+    {
+      "options": {
+        "onUpdate": "CASCADE"
+      },
+      "otherEntityName": "nDA",
+      "otherEntityRelationshipName": "employer",
+      "relationshipName": "ndaStatus",
+      "relationshipSide": "right",
+      "relationshipType": "one-to-many"
+    }
+  ],
+  "searchEngine": "no"
+}

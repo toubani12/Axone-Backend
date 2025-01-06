@@ -1,0 +1,134 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    <form name="editForm" novalidate (ngSubmit)="save()" [formGroup]="editForm">
+      <h2 id="jhi-request-heading" data-cy="RequestCreateUpdateHeading" jhiTranslate="hrSolutionApp.request.home.createOrEditLabel">
+        Create or edit a Request
+      </h2>
+
+      <div>
+        <jhi-alert-error></jhi-alert-error>
+
+        @if (editForm.controls.id.value !== null) {
+          <div class="mb-3">
+            <label class="form-label" for="field_id" jhiTranslate="hrSolutionApp.request.id">ID</label>
+            <input type="number" class="form-control" name="id" id="field_id" data-cy="id" formControlName="id" [readonly]="true" />
+          </div>
+        }
+
+        <div class="mb-3">
+          <label class="form-label" for="field_status" jhiTranslate="hrSolutionApp.request.status">Status</label>
+          <select class="form-control" name="status" formControlName="status" id="field_status" data-cy="status">
+            <option [ngValue]="null">{{ 'hrSolutionApp.RequestStatus.null' | translate }}</option>
+            @for (requestStatus of requestStatusValues; track $index) {
+              <option [value]="requestStatus">{{ 'hrSolutionApp.RequestStatus.' + requestStatus | translate }}</option>
+            }
+          </select>
+          @if (editForm.get('status')!.invalid && (editForm.get('status')!.dirty || editForm.get('status')!.touched)) {
+            <div>
+              @if (editForm.get('status')?.errors?.required) {
+                <small class="form-text text-danger" jhiTranslate="entity.validation.required">This field is required.</small>
+              }
+            </div>
+          }
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" for="field_expressionOfInterest" jhiTranslate="hrSolutionApp.request.expressionOfInterest"
+            >Expression Of Interest</label
+          >
+          <input
+            type="text"
+            class="form-control"
+            name="expressionOfInterest"
+            id="field_expressionOfInterest"
+            data-cy="expressionOfInterest"
+            formControlName="expressionOfInterest"
+          />
+          @if (
+            editForm.get('expressionOfInterest')!.invalid &&
+            (editForm.get('expressionOfInterest')!.dirty || editForm.get('expressionOfInterest')!.touched)
+          ) {
+            <div>
+              @if (editForm.get('expressionOfInterest')?.errors?.required) {
+                <small class="form-text text-danger" jhiTranslate="entity.validation.required">This field is required.</small>
+              }
+            </div>
+          }
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" for="field_relatedApplication" jhiTranslate="hrSolutionApp.request.relatedApplication"
+            >Related Application</label
+          >
+          <select
+            class="form-control"
+            id="field_relatedApplication"
+            data-cy="relatedApplication"
+            name="relatedApplication"
+            formControlName="relatedApplication"
+            [compareWith]="compareApplication"
+          >
+            @if (editForm.get(['relatedApplication'])!.value == null) {
+              <option [ngValue]="null" selected></option>
+            }
+            @for (applicationOption of relatedApplicationsCollection; track $index) {
+              <option [ngValue]="applicationOption">{{ applicationOption.id }}</option>
+            }
+          </select>
+        </div>
+        @if (
+          editForm.get(['relatedApplication'])!.invalid &&
+          (editForm.get(['relatedApplication'])!.dirty || editForm.get(['relatedApplication'])!.touched)
+        ) {
+          <div>
+            @if (editForm.get(['relatedApplication'])?.errors?.required) {
+              <small class="form-text text-danger" jhiTranslate="entity.validation.required">This field is required.</small>
+            }
+          </div>
+        }
+
+        <div class="mb-3">
+          <label class="form-label" for="field_recruiter" jhiTranslate="hrSolutionApp.request.recruiter">Recruiter</label>
+          <select
+            class="form-control"
+            id="field_recruiter"
+            data-cy="recruiter"
+            name="recruiter"
+            formControlName="recruiter"
+            [compareWith]="compareRecruiter"
+          >
+            @if (editForm.get(['recruiter'])!.value == null) {
+              <option [ngValue]="null" selected></option>
+            }
+            @for (recruiterOption of recruitersSharedCollection; track $index) {
+              <option [ngValue]="recruiterOption">{{ recruiterOption.id }}</option>
+            }
+          </select>
+        </div>
+        @if (editForm.get(['recruiter'])!.invalid && (editForm.get(['recruiter'])!.dirty || editForm.get(['recruiter'])!.touched)) {
+          <div>
+            @if (editForm.get(['recruiter'])?.errors?.required) {
+              <small class="form-text text-danger" jhiTranslate="entity.validation.required">This field is required.</small>
+            }
+          </div>
+        }
+      </div>
+
+      <div>
+        <button type="button" id="cancel-save" data-cy="entityCreateCancelButton" class="btn btn-secondary" (click)="previousState()">
+          <fa-icon icon="ban"></fa-icon>&nbsp;<span jhiTranslate="entity.action.cancel">Cancel</span>
+        </button>
+
+        <button
+          type="submit"
+          id="save-entity"
+          data-cy="entityCreateSaveButton"
+          [disabled]="editForm.invalid || isSaving"
+          class="btn btn-primary"
+        >
+          <fa-icon icon="save"></fa-icon>&nbsp;<span jhiTranslate="entity.action.save">Save</span>
+        </button>
+      </div>
+    </form>
+  </div>
+</div>

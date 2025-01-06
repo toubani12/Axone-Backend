@@ -1,0 +1,69 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    @if (domain()) {
+      <div>
+        <h2 data-cy="domainDetailsHeading"><span jhiTranslate="hrSolutionApp.domain.detail.title">Domain</span></h2>
+
+        <hr />
+
+        <jhi-alert-error></jhi-alert-error>
+
+        <jhi-alert></jhi-alert>
+
+        <dl class="row-md jh-entity-details">
+          <dt><span jhiTranslate="global.field.id">ID</span></dt>
+          <dd>
+            <span>{{ domain()!.id }}</span>
+          </dd>
+          <dt><span jhiTranslate="hrSolutionApp.domain.name">Name</span></dt>
+          <dd>
+            <span>{{ domain()!.name }}</span>
+          </dd>
+          <dt><span jhiTranslate="hrSolutionApp.domain.recruiter">Recruiter</span></dt>
+          <dd>
+            @for (recruiter of domain()!.recruiters; track $index; let last = $last) {
+              <span>
+                <a [routerLink]="['/recruiter', recruiter.id, 'view']">{{ recruiter?.id }}</a
+                >{{ last ? '' : ', ' }}
+              </span>
+            }
+          </dd>
+          <dt><span jhiTranslate="hrSolutionApp.domain.candidate">Candidate</span></dt>
+          <dd>
+            @for (candidate of domain()!.candidates; track $index; let last = $last) {
+              <span>
+                <a [routerLink]="['/candidate', candidate.id, 'view']">{{ candidate?.id }}</a
+                >{{ last ? '' : ', ' }}
+              </span>
+            }
+          </dd>
+          <dt><span jhiTranslate="hrSolutionApp.domain.application">Application</span></dt>
+          <dd>
+            @for (application of domain()!.applications; track $index; let last = $last) {
+              <span>
+                <a [routerLink]="['/application', application.id, 'view']">{{ application?.id }}</a
+                >{{ last ? '' : ', ' }}
+              </span>
+            }
+          </dd>
+          <dt><span jhiTranslate="hrSolutionApp.domain.employer">Employer</span></dt>
+          <dd>
+            @if (domain()!.employer) {
+              <div>
+                <a [routerLink]="['/employer', domain()!.employer?.id, 'view']">{{ domain()!.employer?.id }}</a>
+              </div>
+            }
+          </dd>
+        </dl>
+
+        <button type="submit" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">
+          <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back">Back</span>
+        </button>
+
+        <button type="button" [routerLink]="['/domain', domain()!.id, 'edit']" class="btn btn-primary">
+          <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit">Edit</span>
+        </button>
+      </div>
+    }
+  </div>
+</div>

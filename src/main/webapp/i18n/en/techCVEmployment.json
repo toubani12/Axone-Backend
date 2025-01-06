@@ -1,0 +1,25 @@
+{
+  "hrSolutionApp": {
+    "techCVEmployment": {
+      "home": {
+        "title": "Tech CV Employments",
+        "refreshListLabel": "Refresh list",
+        "createLabel": "Create a new Tech CV Employment",
+        "createOrEditLabel": "Create or edit a Tech CV Employment",
+        "notFound": "No Tech CV Employments found"
+      },
+      "created": "A new Tech CV Employment is created with identifier {{ param }}",
+      "updated": "A Tech CV Employment is updated with identifier {{ param }}",
+      "deleted": "A Tech CV Employment is deleted with identifier {{ param }}",
+      "delete": {
+        "question": "Are you sure you want to delete Tech CV Employment {{ id }}?"
+      },
+      "detail": {
+        "title": "Tech CV Employment"
+      },
+      "id": "ID",
+      "employment": "Employment",
+      "technicalCV": "Technical CV"
+    }
+  }
+}

@@ -1,0 +1,46 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    @if (techCVSoftSkills()) {
+      <div>
+        <h2 data-cy="techCVSoftSkillsDetailsHeading">
+          <span jhiTranslate="hrSolutionApp.techCVSoftSkills.detail.title">Tech CV Soft Skills</span>
+        </h2>
+
+        <hr />
+
+        <jhi-alert-error></jhi-alert-error>
+
+        <jhi-alert></jhi-alert>
+
+        <dl class="row-md jh-entity-details">
+          <dt><span jhiTranslate="global.field.id">ID</span></dt>
+          <dd>
+            <span>{{ techCVSoftSkills()!.id }}</span>
+          </dd>
+          <dt><span jhiTranslate="hrSolutionApp.techCVSoftSkills.skills">Skills</span></dt>
+          <dd>
+            <span>{{ techCVSoftSkills()!.skills }}</span>
+          </dd>
+          <dt><span jhiTranslate="hrSolutionApp.techCVSoftSkills.technicalCV">Technical CV</span></dt>
+          <dd>
+            @if (techCVSoftSkills()!.technicalCV) {
+              <div>
+                <a [routerLink]="['/technical-cv', techCVSoftSkills()!.technicalCV?.id, 'view']">{{
+                  techCVSoftSkills()!.technicalCV?.id
+                }}</a>
+              </div>
+            }
+          </dd>
+        </dl>
+
+        <button type="submit" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">
+          <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back">Back</span>
+        </button>
+
+        <button type="button" [routerLink]="['/tech-cv-soft-skills', techCVSoftSkills()!.id, 'edit']" class="btn btn-primary">
+          <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit">Edit</span>
+        </button>
+      </div>
+    }
+  </div>
+</div>

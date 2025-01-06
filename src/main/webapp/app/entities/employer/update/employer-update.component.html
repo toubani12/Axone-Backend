@@ -1,0 +1,204 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    <form name="editForm" novalidate (ngSubmit)="save()" [formGroup]="editForm">
+      <h2 id="jhi-employer-heading" data-cy="EmployerCreateUpdateHeading" jhiTranslate="hrSolutionApp.employer.home.createOrEditLabel">
+        Create or edit a Employer
+      </h2>
+
+      <div>
+        <jhi-alert-error></jhi-alert-error>
+
+        @if (editForm.controls.id.value !== null) {
+          <div class="mb-3">
+            <label class="form-label" for="field_id" jhiTranslate="hrSolutionApp.employer.id">ID</label>
+            <input type="number" class="form-control" name="id" id="field_id" data-cy="id" formControlName="id" [readonly]="true" />
+          </div>
+        }
+
+        <div class="mb-3">
+          <label class="form-label" for="field_firstName" jhiTranslate="hrSolutionApp.employer.firstName">First Name</label>
+          <input type="text" class="form-control" name="firstName" id="field_firstName" data-cy="firstName" formControlName="firstName" />
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" for="field_lastName" jhiTranslate="hrSolutionApp.employer.lastName">Last Name</label>
+          <input type="text" class="form-control" name="lastName" id="field_lastName" data-cy="lastName" formControlName="lastName" />
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" for="field_profileImage" jhiTranslate="hrSolutionApp.employer.profileImage">Profile Image</label>
+          <div>
+            @if (editForm.get('profileImage')!.value) {
+              <img
+                [src]="'data:' + editForm.get('profileImageContentType')!.value + ';base64,' + editForm.get('profileImage')!.value"
+                style="max-height: 100px"
+                alt="employer"
+              />
+            }
+            @if (editForm.get('profileImage')!.value) {
+              <div class="form-text text-danger clearfix">
+                <span class="pull-start"
+                  >{{ editForm.get('profileImageContentType')!.value }}, {{ byteSize(editForm.get('profileImage')!.value!) }}</span
+                >
+                <button
+                  type="button"
+                  (click)="clearInputImage('profileImage', 'profileImageContentType', 'file_profileImage')"
+                  class="btn btn-secondary btn-xs pull-end"
+                >
+                  <fa-icon icon="times"></fa-icon>
+                </button>
+              </div>
+            }
+            <input
+              type="file"
+              id="file_profileImage"
+              data-cy="profileImage"
+              (change)="setFileData($event, 'profileImage', true)"
+              accept="image/*"
+              jhiTranslate="entity.action.addimage"
+            />
+          </div>
+          <input
+            type="hidden"
+            class="form-control"
+            name="profileImage"
+            id="field_profileImage"
+            data-cy="profileImage"
+            formControlName="profileImage"
+          />
+          <input
+            type="hidden"
+            class="form-control"
+            name="profileImageContentType"
+            id="field_profileImageContentType"
+            formControlName="profileImageContentType"
+          />
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" for="field_address" jhiTranslate="hrSolutionApp.employer.address">Address</label>
+          <input type="text" class="form-control" name="address" id="field_address" data-cy="address" formControlName="address" />
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" for="field_role" jhiTranslate="hrSolutionApp.employer.role">Role</label>
+          <select class="form-control" name="role" formControlName="role" id="field_role" data-cy="role">
+            <option [ngValue]="null">{{ 'hrSolutionApp.UserRole.null' | translate }}</option>
+            @for (userRole of userRoleValues; track $index) {
+              <option [value]="userRole">{{ 'hrSolutionApp.UserRole.' + userRole | translate }}</option>
+            }
+          </select>
+          @if (editForm.get('role')!.invalid && (editForm.get('role')!.dirty || editForm.get('role')!.touched)) {
+            <div>
+              @if (editForm.get('role')?.errors?.required) {
+                <small class="form-text text-danger" jhiTranslate="entity.validation.required">This field is required.</small>
+              }
+            </div>
+          }
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" for="field_status" jhiTranslate="hrSolutionApp.employer.status">Status</label>
+          <select class="form-control" name="status" formControlName="status" id="field_status" data-cy="status">
+            <option [ngValue]="null">{{ 'hrSolutionApp.UserStatus.null' | translate }}</option>
+            @for (userStatus of userStatusValues; track $index) {
+              <option [value]="userStatus">{{ 'hrSolutionApp.UserStatus.' + userStatus | translate }}</option>
+            }
+          </select>
+          @if (editForm.get('status')!.invalid && (editForm.get('status')!.dirty || editForm.get('status')!.touched)) {
+            <div>
+              @if (editForm.get('status')?.errors?.required) {
+                <small class="form-text text-danger" jhiTranslate="entity.validation.required">This field is required.</small>
+              }
+            </div>
+          }
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" for="field_name" jhiTranslate="hrSolutionApp.employer.name">Name</label>
+          <input type="text" class="form-control" name="name" id="field_name" data-cy="name" formControlName="name" />
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" for="field_label" jhiTranslate="hrSolutionApp.employer.label">Label</label>
+          <input type="text" class="form-control" name="label" id="field_label" data-cy="label" formControlName="label" />
+          @if (editForm.get('label')!.invalid && (editForm.get('label')!.dirty || editForm.get('label')!.touched)) {
+            <div>
+              @if (editForm.get('label')?.errors?.required) {
+                <small class="form-text text-danger" jhiTranslate="entity.validation.required">This field is required.</small>
+              }
+            </div>
+          }
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" for="field_relatedUser" jhiTranslate="hrSolutionApp.employer.relatedUser">Related User</label>
+          <select
+            class="form-control"
+            id="field_relatedUser"
+            data-cy="relatedUser"
+            name="relatedUser"
+            formControlName="relatedUser"
+            [compareWith]="compareUser"
+          >
+            @if (!editForm.get('relatedUser')!.value) {
+              <option [ngValue]="null" selected></option>
+            }
+            @for (userOption of usersSharedCollection; track $index) {
+              <option [ngValue]="userOption">{{ userOption.login }}</option>
+            }
+          </select>
+        </div>
+        @if (editForm.get(['relatedUser'])!.invalid && (editForm.get(['relatedUser'])!.dirty || editForm.get(['relatedUser'])!.touched)) {
+          <div>
+            @if (editForm.get(['relatedUser'])?.errors?.required) {
+              <small class="form-text text-danger" jhiTranslate="entity.validation.required">This field is required.</small>
+            }
+          </div>
+        }
+
+        <div class="mb-3">
+          <label class="form-label" for="field_wallet" jhiTranslate="hrSolutionApp.employer.wallet">Wallet</label>
+          <select
+            class="form-control"
+            id="field_wallet"
+            data-cy="wallet"
+            name="wallet"
+            formControlName="wallet"
+            [compareWith]="compareWallet"
+          >
+            @if (editForm.get(['wallet'])!.value == null) {
+              <option [ngValue]="null" selected></option>
+            }
+            @for (walletOption of walletsCollection; track $index) {
+              <option [ngValue]="walletOption">{{ walletOption.balance }}</option>
+            }
+          </select>
+        </div>
+        @if (editForm.get(['wallet'])!.invalid && (editForm.get(['wallet'])!.dirty || editForm.get(['wallet'])!.touched)) {
+          <div>
+            @if (editForm.get(['wallet'])?.errors?.required) {
+              <small class="form-text text-danger" jhiTranslate="entity.validation.required">This field is required.</small>
+            }
+          </div>
+        }
+      </div>
+
+      <div>
+        <button type="button" id="cancel-save" data-cy="entityCreateCancelButton" class="btn btn-secondary" (click)="previousState()">
+          <fa-icon icon="ban"></fa-icon>&nbsp;<span jhiTranslate="entity.action.cancel">Cancel</span>
+        </button>
+
+        <button
+          type="submit"
+          id="save-entity"
+          data-cy="entityCreateSaveButton"
+          [disabled]="editForm.invalid || isSaving"
+          class="btn btn-primary"
+        >
+          <fa-icon icon="save"></fa-icon>&nbsp;<span jhiTranslate="entity.action.save">Save</span>
+        </button>
+      </div>
+    </form>
+  </div>
+</div>

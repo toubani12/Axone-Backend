@@ -1,0 +1,28 @@
+{
+  "hrSolutionApp": {
+    "domain": {
+      "home": {
+        "title": "Domains",
+        "refreshListLabel": "Refresh list",
+        "createLabel": "Create a new Domain",
+        "createOrEditLabel": "Create or edit a Domain",
+        "notFound": "No Domains found"
+      },
+      "created": "A new Domain is created with identifier {{ param }}",
+      "updated": "A Domain is updated with identifier {{ param }}",
+      "deleted": "A Domain is deleted with identifier {{ param }}",
+      "delete": {
+        "question": "Are you sure you want to delete Domain {{ id }}?"
+      },
+      "detail": {
+        "title": "Domain"
+      },
+      "id": "ID",
+      "name": "Name",
+      "recruiter": "Recruiter",
+      "candidate": "Candidate",
+      "application": "Application",
+      "employer": "Employer"
+    }
+  }
+}

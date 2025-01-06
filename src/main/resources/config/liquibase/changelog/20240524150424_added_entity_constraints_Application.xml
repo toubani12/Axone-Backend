@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="utf-8"?>
+<databaseChangeLog
+    xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+    xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-latest.xsd
+                        http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd">
+    <!--
+        Added the constraints for entity Application.
+    -->
+    <changeSet id="20240524150424-2" author="jhipster">
+
+        <addForeignKeyConstraint baseColumnNames="application_id"
+                                 baseTableName="rel_application__contract_type"
+                                 constraintName="fk_rel_application__contract_type__application_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="application"
+                                 onUpdate="CASCADE"
+                                 />
+
+        <addForeignKeyConstraint baseColumnNames="contract_type_id"
+                                 baseTableName="rel_application__contract_type"
+                                 constraintName="fk_rel_application__contract_type__contract_type_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="contract_type"
+                                 onUpdate="CASCADE"
+                                 />
+
+        <addForeignKeyConstraint baseColumnNames="application_id"
+                                 baseTableName="rel_application__contract_template"
+                                 constraintName="fk_rel_application__contract_template__application_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="application"
+                                 onUpdate="CASCADE"
+                                 />
+
+        <addForeignKeyConstraint baseColumnNames="contract_template_id"
+                                 baseTableName="rel_application__contract_template"
+                                 constraintName="fk_rel_application__contract_template__contract_template_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="template"
+                                 onUpdate="CASCADE"
+                                 />
+
+        <addForeignKeyConstraint baseColumnNames="application_id"
+                                 baseTableName="rel_application__criteria"
+                                 constraintName="fk_rel_application__criteria__application_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="application"
+                                 onUpdate="CASCADE"
+                                 />
+
+        <addForeignKeyConstraint baseColumnNames="criteria_id"
+                                 baseTableName="rel_application__criteria"
+                                 constraintName="fk_rel_application__criteria__criteria_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="criteria"
+                                 onUpdate="CASCADE"
+                                 />
+
+        <addForeignKeyConstraint baseColumnNames="application_id"
+                                 baseTableName="rel_application__domain"
+                                 constraintName="fk_rel_application__domain__application_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="application"
+                                 onUpdate="CASCADE"
+                                 />
+
+        <addForeignKeyConstraint baseColumnNames="domain_id"
+                                 baseTableName="rel_application__domain"
+                                 constraintName="fk_rel_application__domain__domain_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="domain"
+                                 onUpdate="CASCADE"
+                                 />
+
+        <addForeignKeyConstraint baseColumnNames="employer_id"
+                                 baseTableName="application"
+                                 constraintName="fk_application__employer_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="employer"
+                                 onUpdate="CASCADE"
+                                 />
+    </changeSet>
+</databaseChangeLog>

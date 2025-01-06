@@ -1,0 +1,25 @@
+{
+  "hrSolutionApp": {
+    "techCVEducation": {
+      "home": {
+        "title": "Tech CV Educations",
+        "refreshListLabel": "Refresh list",
+        "createLabel": "Create a new Tech CV Education",
+        "createOrEditLabel": "Create or edit a Tech CV Education",
+        "notFound": "No Tech CV Educations found"
+      },
+      "created": "A new Tech CV Education is created with identifier {{ param }}",
+      "updated": "A Tech CV Education is updated with identifier {{ param }}",
+      "deleted": "A Tech CV Education is deleted with identifier {{ param }}",
+      "delete": {
+        "question": "Are you sure you want to delete Tech CV Education {{ id }}?"
+      },
+      "detail": {
+        "title": "Tech CV Education"
+      },
+      "id": "ID",
+      "education": "Education",
+      "technicalCV": "Technical CV"
+    }
+  }
+}

@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>
+<databaseChangeLog
+    xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+    xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-latest.xsd
+                        http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd">
+    <!--
+        Added the constraints for entity AppAccount.
+    -->
+    <changeSet id="20240524151124-2" author="jhipster">
+
+        <addForeignKeyConstraint baseColumnNames="related_user_id"
+                                 baseTableName="app_account"
+                                 constraintName="fk_app_account__related_user_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="jhi_user"
+                                 onDelete="CASCADE"
+                                 onUpdate="CASCADE"
+                                 />
+
+        <addForeignKeyConstraint baseColumnNames="app_account_id"
+                                 baseTableName="rel_app_account__type"
+                                 constraintName="fk_rel_app_account__type__app_account_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="app_account"
+                                 onUpdate="CASCADE"
+                                 />
+
+        <addForeignKeyConstraint baseColumnNames="type_id"
+                                 baseTableName="rel_app_account__type"
+                                 constraintName="fk_rel_app_account__type__type_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="app_account_type"
+                                 onUpdate="CASCADE"
+                                 />
+
+        <addForeignKeyConstraint baseColumnNames="app_account_id"
+                                 baseTableName="rel_app_account__provider"
+                                 constraintName="fk_rel_app_account__provider__app_account_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="app_account"
+                                 onUpdate="CASCADE"
+                                 />
+
+        <addForeignKeyConstraint baseColumnNames="provider_id"
+                                 baseTableName="rel_app_account__provider"
+                                 constraintName="fk_rel_app_account__provider__provider_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="provider"
+                                 onUpdate="CASCADE"
+                                 />
+
+        <addForeignKeyConstraint baseColumnNames="if_employer_id"
+                                 baseTableName="app_account"
+                                 constraintName="fk_app_account__if_employer_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="employer"
+                                 onDelete="CASCADE"
+                                 onUpdate="CASCADE"
+                                 />
+    </changeSet>
+</databaseChangeLog>

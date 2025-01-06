@@ -1,0 +1,9 @@
+# This configuration is intended for development purpose, it's **your** responsibility to harden it for production
+name: hrsolution
+services:
+  mysql:
+    extends:
+      file:
+        ./mysql.yml
+      service:
+        mysql

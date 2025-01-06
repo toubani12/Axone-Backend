@@ -1,0 +1,41 @@
+{
+  "hrSolutionApp": {
+    "recruiter": {
+      "home": {
+        "title": "Recruiters",
+        "refreshListLabel": "Refresh list",
+        "createLabel": "Create a new Recruiter",
+        "createOrEditLabel": "Create or edit a Recruiter",
+        "notFound": "No Recruiters found"
+      },
+      "created": "A new Recruiter is created with identifier {{ param }}",
+      "updated": "A Recruiter is updated with identifier {{ param }}",
+      "deleted": "A Recruiter is deleted with identifier {{ param }}",
+      "delete": {
+        "question": "Are you sure you want to delete Recruiter {{ id }}?"
+      },
+      "detail": {
+        "title": "Recruiter"
+      },
+      "id": "ID",
+      "firstName": "First Name",
+      "lastName": "Last Name",
+      "profileImage": "Profile Image",
+      "address": "Address",
+      "role": "Role",
+      "status": "Status",
+      "name": "Name",
+      "label": "Label",
+      "linkedinUrl": "Linkedin Url",
+      "approvedExperience": "Approved Experience",
+      "score": "Score",
+      "relatedUser": "Related User",
+      "wallet": "Wallet",
+      "requests": "Requests",
+      "applications": "Applications",
+      "operationalDomain": "Operational Domain",
+      "ndaStatus": "Nda Status",
+      "contracts": "Contracts"
+    }
+  }
+}

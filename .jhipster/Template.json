@@ -1,0 +1,70 @@
+{
+  "annotations": {
+    "changelogDate": "20240524150824"
+  },
+  "applications": ["HRSolution"],
+  "fields": [
+    {
+      "fieldName": "label",
+      "fieldType": "String",
+      "fieldValidateRules": ["required"]
+    },
+    {
+      "fieldName": "type",
+      "fieldType": "TemplateContractType",
+      "fieldValidateRules": ["required"],
+      "fieldValues": "CDI,CDD,MISSION,FREELANCE,REMOTE"
+    },
+    {
+      "fieldName": "description",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "standard",
+      "fieldType": "Boolean",
+      "fieldValidateRules": ["required"]
+    },
+    {
+      "fieldName": "docLink",
+      "fieldType": "byte[]",
+      "fieldTypeBlobContent": "any",
+      "fieldValidateRules": ["required"]
+    }
+  ],
+  "name": "Template",
+  "relationships": [
+    {
+      "options": {
+        "onUpdate": "CASCADE"
+      },
+      "otherEntityName": "contract",
+      "otherEntityRelationshipName": "template",
+      "relationshipName": "contract",
+      "relationshipSide": "right",
+      "relationshipType": "one-to-one"
+    },
+    {
+      "options": {
+        "onUpdate": "CASCADE"
+      },
+      "otherEntityField": "lastName",
+      "otherEntityName": "employer",
+      "otherEntityRelationshipName": "template",
+      "relationshipName": "owner",
+      "relationshipSide": "right",
+      "relationshipType": "many-to-one",
+      "relationshipValidateRules": "required"
+    },
+    {
+      "options": {
+        "onUpdate": "CASCADE"
+      },
+      "otherEntityName": "application",
+      "otherEntityRelationshipName": "contractTemplate",
+      "relationshipName": "application",
+      "relationshipSide": "right",
+      "relationshipType": "many-to-many"
+    }
+  ],
+  "searchEngine": "no"
+}

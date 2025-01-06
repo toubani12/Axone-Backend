@@ -1,0 +1,108 @@
+<div>
+  <h2 id="page-heading" data-cy="ProviderHeading">
+    <span jhiTranslate="hrSolutionApp.provider.home.title">Providers</span>
+
+    <div class="d-flex justify-content-end">
+      <button class="btn btn-info me-2" (click)="load()" [disabled]="isLoading">
+        <fa-icon icon="sync" [spin]="isLoading"></fa-icon>
+        <span jhiTranslate="hrSolutionApp.provider.home.refreshListLabel">Refresh list</span>
+      </button>
+
+      <button
+        id="jh-create-entity"
+        data-cy="entityCreateButton"
+        class="btn btn-primary jh-create-entity create-provider"
+        [routerLink]="['/provider/new']"
+      >
+        <fa-icon icon="plus"></fa-icon>
+        <span jhiTranslate="hrSolutionApp.provider.home.createLabel">Create a new Provider</span>
+      </button>
+    </div>
+  </h2>
+
+  <jhi-alert-error></jhi-alert-error>
+
+  <jhi-alert></jhi-alert>
+
+  @if (providers?.length === 0) {
+    <div class="alert alert-warning" id="no-result">
+      <span jhiTranslate="hrSolutionApp.provider.home.notFound">No Providers found</span>
+    </div>
+  }
+
+  @if (providers && providers.length > 0) {
+    <div class="table-responsive table-entities" id="entities">
+      <table class="table table-striped" aria-describedby="page-heading">
+        <thead>
+          <tr jhiSort [sortState]="sortState" (sortChange)="navigateToWithComponentValues($event)">
+            <th scope="col" jhiSortBy="id">
+              <div class="d-flex">
+                <span jhiTranslate="global.field.id">ID</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="name">
+              <div class="d-flex">
+                <span jhiTranslate="hrSolutionApp.provider.name">Name</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="country">
+              <div class="d-flex">
+                <span jhiTranslate="hrSolutionApp.provider.country">Country</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="appAccount.id">
+              <div class="d-flex">
+                <span jhiTranslate="hrSolutionApp.provider.appAccount">App Account</span>
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col"></th>
+          </tr>
+        </thead>
+        <tbody>
+          @for (provider of providers; track trackId) {
+            <tr data-cy="entityTable">
+              <td>
+                <a [routerLink]="['/provider', provider.id, 'view']">{{ provider.id }}</a>
+              </td>
+              <td>{{ provider.name }}</td>
+              <td>{{ provider.country }}</td>
+              <td>
+                @for (appAccount of provider.appAccounts; track $index; let last = $last) {
+                  <span>
+                    <a class="form-control-static" [routerLink]="['/app-account', appAccount.id, 'view']">{{ appAccount.id }}</a
+                    >{{ last ? '' : ', ' }}
+                  </span>
+                }
+              </td>
+              <td class="text-end">
+                <div class="btn-group">
+                  <a [routerLink]="['/provider', provider.id, 'view']" class="btn btn-info btn-sm" data-cy="entityDetailsButton">
+                    <fa-icon icon="eye"></fa-icon>
+                    <span class="d-none d-md-inline" jhiTranslate="entity.action.view">View</span>
+                  </a>
+
+                  <a [routerLink]="['/provider', provider.id, 'edit']" class="btn btn-primary btn-sm" data-cy="entityEditButton">
+                    <fa-icon icon="pencil-alt"></fa-icon>
+                    <span class="d-none d-md-inline" jhiTranslate="entity.action.edit">Edit</span>
+                  </a>
+
+                  <button type="submit" (click)="delete(provider)" class="btn btn-danger btn-sm" data-cy="entityDeleteButton">
+                    <fa-icon icon="times"></fa-icon>
+                    <span class="d-none d-md-inline" jhiTranslate="entity.action.delete">Delete</span>
+                  </button>
+                </div>
+              </td>
+            </tr>
+          }
+        </tbody>
+      </table>
+    </div>
+  }
+</div>

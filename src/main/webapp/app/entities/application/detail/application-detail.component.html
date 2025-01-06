@@ -1,0 +1,142 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    @if (application()) {
+      <div>
+        <h2 data-cy="applicationDetailsHeading"><span jhiTranslate="hrSolutionApp.application.detail.title">Application</span></h2>
+
+        <hr />
+
+        <jhi-alert-error></jhi-alert-error>
+
+        <jhi-alert></jhi-alert>
+
+        <dl class="row-md jh-entity-details">
+          <dt><span jhiTranslate="global.field.id">ID</span></dt>
+          <dd>
+            <span>{{ application()!.id }}</span>
+          </dd>
+          <dt><span jhiTranslate="hrSolutionApp.application.title">Title</span></dt>
+          <dd>
+            <span>{{ application()!.title }}</span>
+          </dd>
+          <dt><span jhiTranslate="hrSolutionApp.application.description">Description</span></dt>
+          <dd>
+            <span>{{ application()!.description }}</span>
+          </dd>
+          <dt><span jhiTranslate="hrSolutionApp.application.numberOfCandidates">Number Of Candidates</span></dt>
+          <dd>
+            <span>{{ application()!.numberOfCandidates }}</span>
+          </dd>
+          <dt><span jhiTranslate="hrSolutionApp.application.paymentAmount">Payment Amount</span></dt>
+          <dd>
+            <span>{{ application()!.paymentAmount }}</span>
+          </dd>
+          <dt><span jhiTranslate="hrSolutionApp.application.recruiterIncomeRate">Recruiter Income Rate</span></dt>
+          <dd>
+            <span>{{ application()!.recruiterIncomeRate }}</span>
+          </dd>
+          <dt><span jhiTranslate="hrSolutionApp.application.candidateIncomeRate">Candidate Income Rate</span></dt>
+          <dd>
+            <span>{{ application()!.candidateIncomeRate }}</span>
+          </dd>
+          <dt><span jhiTranslate="hrSolutionApp.application.deadline">Deadline</span></dt>
+          <dd>
+            <span>{{ application()!.deadline | formatMediumDate }}</span>
+          </dd>
+          <dt><span jhiTranslate="hrSolutionApp.application.status">Status</span></dt>
+          <dd>
+            <span [jhiTranslate]="'hrSolutionApp.ApplicationStatus.' + (application()!.status ?? 'null')">{{
+              { null: '', NEW: 'NEW', OPEN: 'OPEN', CLOSED: 'CLOSED', DONE: 'DONE', ABORTED: 'ABORTED' }[application()!.status ?? 'null']
+            }}</span>
+          </dd>
+          <dt><span jhiTranslate="hrSolutionApp.application.createdAt">Created At</span></dt>
+          <dd>
+            <span>{{ application()!.createdAt | formatMediumDatetime }}</span>
+          </dd>
+          <dt><span jhiTranslate="hrSolutionApp.application.openedAt">Opened At</span></dt>
+          <dd>
+            <span>{{ application()!.openedAt | formatMediumDatetime }}</span>
+          </dd>
+          <dt><span jhiTranslate="hrSolutionApp.application.closedAt">Closed At</span></dt>
+          <dd>
+            <span>{{ application()!.closedAt | formatMediumDatetime }}</span>
+          </dd>
+          <dt><span jhiTranslate="hrSolutionApp.application.doneAt">Done At</span></dt>
+          <dd>
+            <span>{{ application()!.doneAt | formatMediumDatetime }}</span>
+          </dd>
+          <dt><span jhiTranslate="hrSolutionApp.application.contractType">Contract Type</span></dt>
+          <dd>
+            @for (contractType of application()!.contractTypes; track $index; let last = $last) {
+              <span>
+                <a [routerLink]="['/contract-type', contractType.id, 'view']">{{ contractType?.name }}</a
+                >{{ last ? '' : ', ' }}
+              </span>
+            }
+          </dd>
+          <dt><span jhiTranslate="hrSolutionApp.application.contractTemplate">Contract Template</span></dt>
+          <dd>
+            @for (contractTemplate of application()!.contractTemplates; track $index; let last = $last) {
+              <span>
+                <a [routerLink]="['/template', contractTemplate.id, 'view']">{{ contractTemplate?.label }}</a
+                >{{ last ? '' : ', ' }}
+              </span>
+            }
+          </dd>
+          <dt><span jhiTranslate="hrSolutionApp.application.criteria">Criteria</span></dt>
+          <dd>
+            @for (criteria of application()!.criteria; track $index; let last = $last) {
+              <span>
+                <a [routerLink]="['/criteria', criteria.id, 'view']">{{ criteria?.name }}</a
+                >{{ last ? '' : ', ' }}
+              </span>
+            }
+          </dd>
+          <dt><span jhiTranslate="hrSolutionApp.application.domain">Domain</span></dt>
+          <dd>
+            @for (domain of application()!.domains; track $index; let last = $last) {
+              <span>
+                <a [routerLink]="['/domain', domain.id, 'view']">{{ domain?.name }}</a
+                >{{ last ? '' : ', ' }}
+              </span>
+            }
+          </dd>
+          <dt><span jhiTranslate="hrSolutionApp.application.employer">Employer</span></dt>
+          <dd>
+            @if (application()!.employer) {
+              <div>
+                <a [routerLink]="['/employer', application()!.employer?.id, 'view']">{{ application()!.employer?.lastName }}</a>
+              </div>
+            }
+          </dd>
+          <dt><span jhiTranslate="hrSolutionApp.application.recruiters">Recruiters</span></dt>
+          <dd>
+            @for (recruiters of application()!.recruiters; track $index; let last = $last) {
+              <span>
+                <a [routerLink]="['/recruiter', recruiters.id, 'view']">{{ recruiters?.lastName }}</a
+                >{{ last ? '' : ', ' }}
+              </span>
+            }
+          </dd>
+          <dt><span jhiTranslate="hrSolutionApp.application.candidates">Candidates</span></dt>
+          <dd>
+            @for (candidates of application()!.candidates; track $index; let last = $last) {
+              <span>
+                <a [routerLink]="['/candidate', candidates.id, 'view']">{{ candidates?.lastName }}</a
+                >{{ last ? '' : ', ' }}
+              </span>
+            }
+          </dd>
+        </dl>
+
+        <button type="submit" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">
+          <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back">Back</span>
+        </button>
+
+        <button type="button" [routerLink]="['/application', application()!.id, 'edit']" class="btn btn-primary">
+          <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit">Edit</span>
+        </button>
+      </div>
+    }
+  </div>
+</div>

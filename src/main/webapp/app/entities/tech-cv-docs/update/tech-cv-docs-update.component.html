@@ -1,0 +1,112 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    <form name="editForm" novalidate (ngSubmit)="save()" [formGroup]="editForm">
+      <h2
+        id="jhi-tech-cv-docs-heading"
+        data-cy="TechCVDocsCreateUpdateHeading"
+        jhiTranslate="hrSolutionApp.techCVDocs.home.createOrEditLabel"
+      >
+        Create or edit a Tech CV Docs
+      </h2>
+
+      <div>
+        <jhi-alert-error></jhi-alert-error>
+
+        @if (editForm.controls.id.value !== null) {
+          <div class="mb-3">
+            <label class="form-label" for="field_id" jhiTranslate="hrSolutionApp.techCVDocs.id">ID</label>
+            <input type="number" class="form-control" name="id" id="field_id" data-cy="id" formControlName="id" [readonly]="true" />
+          </div>
+        }
+
+        <div class="mb-3">
+          <label class="form-label" for="field_attachedDoc" jhiTranslate="hrSolutionApp.techCVDocs.attachedDoc">Attached Doc</label>
+          <div>
+            @if (editForm.get('attachedDoc')!.value) {
+              <div class="form-text text-danger clearfix">
+                <a
+                  class="pull-start"
+                  (click)="openFile(editForm.get('attachedDoc')!.value!, editForm.get('attachedDocContentType')!.value!)"
+                  jhiTranslate="entity.action.open"
+                  >Open</a
+                ><br />
+                <span class="pull-start"
+                  >{{ editForm.get('attachedDocContentType')!.value }}, {{ byteSize(editForm.get('attachedDoc')!.value!) }}</span
+                >
+                <button
+                  type="button"
+                  (click)="editForm.patchValue({ attachedDoc: undefined, attachedDocContentType: undefined })"
+                  class="btn btn-secondary btn-xs pull-end"
+                >
+                  <fa-icon icon="times"></fa-icon>
+                </button>
+              </div>
+            }
+            <input
+              type="file"
+              id="file_attachedDoc"
+              data-cy="attachedDoc"
+              (change)="setFileData($event, 'attachedDoc', false)"
+              jhiTranslate="entity.action.addblob"
+            />
+          </div>
+          <input
+            type="hidden"
+            class="form-control"
+            name="attachedDoc"
+            id="field_attachedDoc"
+            data-cy="attachedDoc"
+            formControlName="attachedDoc"
+          />
+          <input
+            type="hidden"
+            class="form-control"
+            name="attachedDocContentType"
+            id="field_attachedDocContentType"
+            formControlName="attachedDocContentType"
+          />
+          @if (editForm.get('attachedDoc')!.invalid && (editForm.get('attachedDoc')!.dirty || editForm.get('attachedDoc')!.touched)) {
+            <div>
+              @if (editForm.get('attachedDoc')?.errors?.required) {
+                <small class="form-text text-danger" jhiTranslate="entity.validation.required">This field is required.</small>
+              }
+            </div>
+          }
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" for="field_technicalCV" jhiTranslate="hrSolutionApp.techCVDocs.technicalCV">Technical CV</label>
+          <select
+            class="form-control"
+            id="field_technicalCV"
+            data-cy="technicalCV"
+            name="technicalCV"
+            formControlName="technicalCV"
+            [compareWith]="compareTechnicalCV"
+          >
+            <option [ngValue]="null"></option>
+            @for (technicalCVOption of technicalCVSSharedCollection; track $index) {
+              <option [ngValue]="technicalCVOption">{{ technicalCVOption.id }}</option>
+            }
+          </select>
+        </div>
+      </div>
+
+      <div>
+        <button type="button" id="cancel-save" data-cy="entityCreateCancelButton" class="btn btn-secondary" (click)="previousState()">
+          <fa-icon icon="ban"></fa-icon>&nbsp;<span jhiTranslate="entity.action.cancel">Cancel</span>
+        </button>
+
+        <button
+          type="submit"
+          id="save-entity"
+          data-cy="entityCreateSaveButton"
+          [disabled]="editForm.invalid || isSaving"
+          class="btn btn-primary"
+        >
+          <fa-icon icon="save"></fa-icon>&nbsp;<span jhiTranslate="entity.action.save">Save</span>
+        </button>
+      </div>
+    </form>
+  </div>
+</div>

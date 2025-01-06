@@ -1,0 +1,11 @@
+id;label;type;status;direct_contract;payment_amount;recruiter_income_rate;candidate_income_rate;template_id;recruiter_id;employer_id;application_id
+1;marksman kind miserably;REMOTE;CREATED;false;13051.74;6913.98;17832.67;1;1;1;1
+2;ick geez;FREELANCE;PROCESSING;true;6058.91;29988.6;26534.56;2;2;2;2
+3;whenever during;CDI;PROCESSING;false;20195.36;30076.96;19521.02;3;2;2;3
+4;once unless doff;REMOTE;CLOSED;false;30090.82;23739.3;15123.21;4;2;2;4
+5;yum knavishly;MISSION;CLOSED;false;30692.04;30506.97;25120.8;5;1;1;5
+6;mmm that;FREELANCE;CREATED;false;21533.99;882.79;17728.88;6;1;1;6
+7;hence meanwhile;CDI;ABORTED;false;626.85;27847.18;6863.85;7;1;2;7
+8;ouch pointed yowza;CDD;CREATED;true;20501.47;20625.04;6783.39;8;1;2;8
+9;without;CDD;CLOSED;true;2106.68;12978.61;26834.12;9;1;1;9
+10;unbutton;REMOTE;PROCESSING;true;9734.17;18376.77;10117.65;10;1;2;10

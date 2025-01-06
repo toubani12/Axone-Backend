@@ -1,0 +1,29 @@
+{
+  "hrSolutionApp": {
+    "nDA": {
+      "home": {
+        "title": "NDAS",
+        "refreshListLabel": "Refresh list",
+        "createLabel": "Create a new NDA",
+        "createOrEditLabel": "Create or edit a NDA",
+        "notFound": "No NDAS found"
+      },
+      "created": "A new NDA is created with identifier {{ param }}",
+      "updated": "A NDA is updated with identifier {{ param }}",
+      "deleted": "A NDA is deleted with identifier {{ param }}",
+      "delete": {
+        "question": "Are you sure you want to delete NDA {{ id }}?"
+      },
+      "detail": {
+        "title": "NDA"
+      },
+      "id": "ID",
+      "document": "Document",
+      "status": "Status",
+      "period": "Period",
+      "employer": "Employer",
+      "mediator": "Mediator",
+      "candidate": "Candidate"
+    }
+  }
+}

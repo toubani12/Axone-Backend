@@ -1,0 +1,29 @@
+{
+  "annotations": {
+    "changelogDate": "20240524145824"
+  },
+  "applications": ["HRSolution"],
+  "entityTableName": "tech_cv_achievement",
+  "fields": [
+    {
+      "fieldName": "achievement",
+      "fieldType": "String",
+      "fieldValidateRules": ["required"]
+    }
+  ],
+  "name": "TechCVAchievement",
+  "relationships": [
+    {
+      "options": {
+        "onDelete": "CASCADE",
+        "onUpdate": "CASCADE"
+      },
+      "otherEntityName": "technicalCV",
+      "otherEntityRelationshipName": "achievements",
+      "relationshipName": "technicalCV",
+      "relationshipSide": "right",
+      "relationshipType": "many-to-one"
+    }
+  ],
+  "searchEngine": "no"
+}

@@ -1,0 +1,227 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    <form name="editForm" novalidate (ngSubmit)="save()" [formGroup]="editForm">
+      <h2 id="jhi-candidate-heading" data-cy="CandidateCreateUpdateHeading" jhiTranslate="hrSolutionApp.candidate.home.createOrEditLabel">
+        Create or edit a Candidate
+      </h2>
+
+      <div>
+        <jhi-alert-error></jhi-alert-error>
+
+        @if (editForm.controls.id.value !== null) {
+          <div class="mb-3">
+            <label class="form-label" for="field_id" jhiTranslate="hrSolutionApp.candidate.id">ID</label>
+            <input type="number" class="form-control" name="id" id="field_id" data-cy="id" formControlName="id" [readonly]="true" />
+          </div>
+        }
+
+        <div class="mb-3">
+          <label class="form-label" for="field_firstName" jhiTranslate="hrSolutionApp.candidate.firstName">First Name</label>
+          <input type="text" class="form-control" name="firstName" id="field_firstName" data-cy="firstName" formControlName="firstName" />
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" for="field_lastName" jhiTranslate="hrSolutionApp.candidate.lastName">Last Name</label>
+          <input type="text" class="form-control" name="lastName" id="field_lastName" data-cy="lastName" formControlName="lastName" />
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" for="field_linkedinUrl" jhiTranslate="hrSolutionApp.candidate.linkedinUrl">Linkedin Url</label>
+          <input
+            type="text"
+            class="form-control"
+            name="linkedinUrl"
+            id="field_linkedinUrl"
+            data-cy="linkedinUrl"
+            formControlName="linkedinUrl"
+          />
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" for="field_fullName" jhiTranslate="hrSolutionApp.candidate.fullName">Full Name</label>
+          <input type="text" class="form-control" name="fullName" id="field_fullName" data-cy="fullName" formControlName="fullName" />
+          @if (editForm.get('fullName')!.invalid && (editForm.get('fullName')!.dirty || editForm.get('fullName')!.touched)) {
+            <div>
+              @if (editForm.get('fullName')?.errors?.required) {
+                <small class="form-text text-danger" jhiTranslate="entity.validation.required">This field is required.</small>
+              }
+            </div>
+          }
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" for="field_yearsOfExperience" jhiTranslate="hrSolutionApp.candidate.yearsOfExperience"
+            >Years Of Experience</label
+          >
+          <input
+            type="number"
+            class="form-control"
+            name="yearsOfExperience"
+            id="field_yearsOfExperience"
+            data-cy="yearsOfExperience"
+            formControlName="yearsOfExperience"
+          />
+          @if (
+            editForm.get('yearsOfExperience')!.invalid &&
+            (editForm.get('yearsOfExperience')!.dirty || editForm.get('yearsOfExperience')!.touched)
+          ) {
+            <div>
+              @if (editForm.get('yearsOfExperience')?.errors?.required) {
+                <small class="form-text text-danger" jhiTranslate="entity.validation.required">This field is required.</small>
+              }
+              <small
+                class="form-text text-danger"
+                [hidden]="!editForm.get('yearsOfExperience')?.errors?.number"
+                jhiTranslate="entity.validation.number"
+                >This field should be a number.</small
+              >
+            </div>
+          }
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" for="field_currentSalary" jhiTranslate="hrSolutionApp.candidate.currentSalary">Current Salary</label>
+          <input
+            type="number"
+            class="form-control"
+            name="currentSalary"
+            id="field_currentSalary"
+            data-cy="currentSalary"
+            formControlName="currentSalary"
+          />
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" for="field_desiredSalary" jhiTranslate="hrSolutionApp.candidate.desiredSalary">Desired Salary</label>
+          <input
+            type="number"
+            class="form-control"
+            name="desiredSalary"
+            id="field_desiredSalary"
+            data-cy="desiredSalary"
+            formControlName="desiredSalary"
+          />
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" for="field_hasContract" jhiTranslate="hrSolutionApp.candidate.hasContract">Has Contract</label>
+          <input
+            type="checkbox"
+            class="form-check"
+            name="hasContract"
+            id="field_hasContract"
+            data-cy="hasContract"
+            formControlName="hasContract"
+          />
+          @if (editForm.get('hasContract')!.invalid && (editForm.get('hasContract')!.dirty || editForm.get('hasContract')!.touched)) {
+            <div>
+              @if (editForm.get('hasContract')?.errors?.required) {
+                <small class="form-text text-danger" jhiTranslate="entity.validation.required">This field is required.</small>
+              }
+            </div>
+          }
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" for="field_hired" jhiTranslate="hrSolutionApp.candidate.hired">Hired</label>
+          <input type="checkbox" class="form-check" name="hired" id="field_hired" data-cy="hired" formControlName="hired" />
+          @if (editForm.get('hired')!.invalid && (editForm.get('hired')!.dirty || editForm.get('hired')!.touched)) {
+            <div>
+              @if (editForm.get('hired')?.errors?.required) {
+                <small class="form-text text-danger" jhiTranslate="entity.validation.required">This field is required.</small>
+              }
+            </div>
+          }
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" for="field_rate" jhiTranslate="hrSolutionApp.candidate.rate">Rate</label>
+          <input type="number" class="form-control" name="rate" id="field_rate" data-cy="rate" formControlName="rate" />
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" for="field_techCV" jhiTranslate="hrSolutionApp.candidate.techCV">Tech CV</label>
+          <select
+            class="form-control"
+            id="field_techCV"
+            data-cy="techCV"
+            name="techCV"
+            formControlName="techCV"
+            [compareWith]="compareTechnicalCV"
+          >
+            @if (editForm.get(['techCV'])!.value == null) {
+              <option [ngValue]="null" selected></option>
+            }
+            @for (technicalCVOption of techCVSCollection; track $index) {
+              <option [ngValue]="technicalCVOption">{{ technicalCVOption.name }}</option>
+            }
+          </select>
+        </div>
+        @if (editForm.get(['techCV'])!.invalid && (editForm.get(['techCV'])!.dirty || editForm.get(['techCV'])!.touched)) {
+          <div>
+            @if (editForm.get(['techCV'])?.errors?.required) {
+              <small class="form-text text-danger" jhiTranslate="entity.validation.required">This field is required.</small>
+            }
+          </div>
+        }
+
+        <div class="mb-3">
+          <label for="field_domains" jhiTranslate="hrSolutionApp.candidate.domain">Domain</label>
+          <select
+            class="form-control"
+            id="field_domains"
+            data-cy="domain"
+            multiple
+            name="domains"
+            formControlName="domains"
+            [compareWith]="compareDomain"
+          >
+            @for (domainOption of domainsSharedCollection; track $index) {
+              <option [ngValue]="domainOption">{{ domainOption.name }}</option>
+            }
+          </select>
+        </div>
+        @if (editForm.get(['domains'])!.invalid && (editForm.get(['domains'])!.dirty || editForm.get(['domains'])!.touched)) {
+          <div>
+            @if (editForm.get(['domains'])?.errors?.required) {
+              <small class="form-text text-danger" jhiTranslate="entity.validation.required">This field is required.</small>
+            }
+          </div>
+        }
+
+        <div class="mb-3">
+          <label for="field_applications" jhiTranslate="hrSolutionApp.candidate.applications">Applications</label>
+          <select
+            class="form-control"
+            id="field_applications"
+            data-cy="applications"
+            multiple
+            name="applications"
+            formControlName="applications"
+            [compareWith]="compareApplication"
+          >
+            @for (applicationOption of applicationsSharedCollection; track $index) {
+              <option [ngValue]="applicationOption">{{ applicationOption.title }}</option>
+            }
+          </select>
+        </div>
+      </div>
+
+      <div>
+        <button type="button" id="cancel-save" data-cy="entityCreateCancelButton" class="btn btn-secondary" (click)="previousState()">
+          <fa-icon icon="ban"></fa-icon>&nbsp;<span jhiTranslate="entity.action.cancel">Cancel</span>
+        </button>
+
+        <button
+          type="submit"
+          id="save-entity"
+          data-cy="entityCreateSaveButton"
+          [disabled]="editForm.invalid || isSaving"
+          class="btn btn-primary"
+        >
+          <fa-icon icon="save"></fa-icon>&nbsp;<span jhiTranslate="entity.action.save">Save</span>
+        </button>
+      </div>
+    </form>
+  </div>
+</div>

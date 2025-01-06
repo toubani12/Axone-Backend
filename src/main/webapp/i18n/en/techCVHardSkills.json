@@ -1,0 +1,25 @@
+{
+  "hrSolutionApp": {
+    "techCVHardSkills": {
+      "home": {
+        "title": "Tech CV Hard Skills",
+        "refreshListLabel": "Refresh list",
+        "createLabel": "Create a new Tech CV Hard Skills",
+        "createOrEditLabel": "Create or edit a Tech CV Hard Skills",
+        "notFound": "No Tech CV Hard Skills found"
+      },
+      "created": "A new Tech CV Hard Skills is created with identifier {{ param }}",
+      "updated": "A Tech CV Hard Skills is updated with identifier {{ param }}",
+      "deleted": "A Tech CV Hard Skills is deleted with identifier {{ param }}",
+      "delete": {
+        "question": "Are you sure you want to delete Tech CV Hard Skills {{ id }}?"
+      },
+      "detail": {
+        "title": "Tech CV Hard Skills"
+      },
+      "id": "ID",
+      "skills": "Skills",
+      "technicalCV": "Technical CV"
+    }
+  }
+}

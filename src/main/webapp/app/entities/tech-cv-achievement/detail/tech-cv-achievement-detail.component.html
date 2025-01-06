@@ -1,0 +1,46 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    @if (techCVAchievement()) {
+      <div>
+        <h2 data-cy="techCVAchievementDetailsHeading">
+          <span jhiTranslate="hrSolutionApp.techCVAchievement.detail.title">Tech CV Achievement</span>
+        </h2>
+
+        <hr />
+
+        <jhi-alert-error></jhi-alert-error>
+
+        <jhi-alert></jhi-alert>
+
+        <dl class="row-md jh-entity-details">
+          <dt><span jhiTranslate="global.field.id">ID</span></dt>
+          <dd>
+            <span>{{ techCVAchievement()!.id }}</span>
+          </dd>
+          <dt><span jhiTranslate="hrSolutionApp.techCVAchievement.achievement">Achievement</span></dt>
+          <dd>
+            <span>{{ techCVAchievement()!.achievement }}</span>
+          </dd>
+          <dt><span jhiTranslate="hrSolutionApp.techCVAchievement.technicalCV">Technical CV</span></dt>
+          <dd>
+            @if (techCVAchievement()!.technicalCV) {
+              <div>
+                <a [routerLink]="['/technical-cv', techCVAchievement()!.technicalCV?.id, 'view']">{{
+                  techCVAchievement()!.technicalCV?.id
+                }}</a>
+              </div>
+            }
+          </dd>
+        </dl>
+
+        <button type="submit" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">
+          <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back">Back</span>
+        </button>
+
+        <button type="button" [routerLink]="['/tech-cv-achievement', techCVAchievement()!.id, 'edit']" class="btn btn-primary">
+          <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit">Edit</span>
+        </button>
+      </div>
+    }
+  </div>
+</div>

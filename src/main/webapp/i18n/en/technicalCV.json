@@ -1,0 +1,35 @@
+{
+  "hrSolutionApp": {
+    "technicalCV": {
+      "home": {
+        "title": "Technical CVS",
+        "refreshListLabel": "Refresh list",
+        "createLabel": "Create a new Technical CV",
+        "createOrEditLabel": "Create or edit a Technical CV",
+        "notFound": "No Technical CVS found"
+      },
+      "created": "A new Technical CV is created with identifier {{ param }}",
+      "updated": "A Technical CV is updated with identifier {{ param }}",
+      "deleted": "A Technical CV is deleted with identifier {{ param }}",
+      "delete": {
+        "question": "Are you sure you want to delete Technical CV {{ id }}?"
+      },
+      "detail": {
+        "title": "Technical CV"
+      },
+      "id": "ID",
+      "name": "Name",
+      "level": "Level",
+      "profileDescription": "Profile Description",
+      "hardSkills": "Hard Skills",
+      "softSkills": "Soft Skills",
+      "education": "Education",
+      "employments": "Employments",
+      "projects": "Projects",
+      "achievements": "Achievements",
+      "attachedDocs": "Attached Docs",
+      "altActivities": "Alt Activities",
+      "candidate": "Candidate"
+    }
+  }
+}

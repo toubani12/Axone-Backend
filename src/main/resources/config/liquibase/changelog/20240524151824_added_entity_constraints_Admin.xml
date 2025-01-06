@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<databaseChangeLog
+    xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+    xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-latest.xsd
+                        http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd">
+    <!--
+        Added the constraints for entity Admin.
+    -->
+    <changeSet id="20240524151824-2" author="jhipster">
+
+        <addForeignKeyConstraint baseColumnNames="related_user_id"
+                                 baseTableName="admin"
+                                 constraintName="fk_admin__related_user_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="jhi_user"
+                                 onDelete="CASCADE"
+                                 onUpdate="CASCADE"
+                                 />
+
+        <addForeignKeyConstraint baseColumnNames="system_wallet_id"
+                                 baseTableName="admin"
+                                 constraintName="fk_admin__system_wallet_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="wallet"
+                                 onUpdate="CASCADE"
+                                 />
+    </changeSet>
+</databaseChangeLog>

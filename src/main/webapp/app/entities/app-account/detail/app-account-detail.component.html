@@ -1,0 +1,76 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    @if (appAccount()) {
+      <div>
+        <h2 data-cy="appAccountDetailsHeading"><span jhiTranslate="hrSolutionApp.appAccount.detail.title">App Account</span></h2>
+
+        <hr />
+
+        <jhi-alert-error></jhi-alert-error>
+
+        <jhi-alert></jhi-alert>
+
+        <dl class="row-md jh-entity-details">
+          <dt><span jhiTranslate="global.field.id">ID</span></dt>
+          <dd>
+            <span>{{ appAccount()!.id }}</span>
+          </dd>
+          <dt><span jhiTranslate="hrSolutionApp.appAccount.accountNumber">Account Number</span></dt>
+          <dd>
+            <span>{{ appAccount()!.accountNumber }}</span>
+          </dd>
+          <dt><span jhiTranslate="hrSolutionApp.appAccount.cardNumber">Card Number</span></dt>
+          <dd>
+            <span>{{ appAccount()!.cardNumber }}</span>
+          </dd>
+          <dt><span jhiTranslate="hrSolutionApp.appAccount.endDate">End Date</span></dt>
+          <dd>
+            <span>{{ appAccount()!.endDate | formatMediumDate }}</span>
+          </dd>
+          <dt><span jhiTranslate="hrSolutionApp.appAccount.cvv">Cvv</span></dt>
+          <dd>
+            <span>{{ appAccount()!.cvv }}</span>
+          </dd>
+          <dt><span jhiTranslate="hrSolutionApp.appAccount.relatedUser">Related User</span></dt>
+          <dd>
+            <span>{{ appAccount()!.relatedUser?.login }}</span>
+          </dd>
+          <dt><span jhiTranslate="hrSolutionApp.appAccount.type">Type</span></dt>
+          <dd>
+            @for (type of appAccount()!.types; track $index; let last = $last) {
+              <span>
+                <a [routerLink]="['/app-account-type', type.id, 'view']">{{ type?.type }}</a
+                >{{ last ? '' : ', ' }}
+              </span>
+            }
+          </dd>
+          <dt><span jhiTranslate="hrSolutionApp.appAccount.provider">Provider</span></dt>
+          <dd>
+            @for (provider of appAccount()!.providers; track $index; let last = $last) {
+              <span>
+                <a [routerLink]="['/provider', provider.id, 'view']">{{ provider?.name }}</a
+                >{{ last ? '' : ', ' }}
+              </span>
+            }
+          </dd>
+          <dt><span jhiTranslate="hrSolutionApp.appAccount.ifEmployer">If Employer</span></dt>
+          <dd>
+            @if (appAccount()!.ifEmployer) {
+              <div>
+                <a [routerLink]="['/employer', appAccount()!.ifEmployer?.id, 'view']">{{ appAccount()!.ifEmployer?.id }}</a>
+              </div>
+            }
+          </dd>
+        </dl>
+
+        <button type="submit" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">
+          <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back">Back</span>
+        </button>
+
+        <button type="button" [routerLink]="['/app-account', appAccount()!.id, 'edit']" class="btn btn-primary">
+          <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit">Edit</span>
+        </button>
+      </div>
+    }
+  </div>
+</div>

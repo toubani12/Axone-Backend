@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<databaseChangeLog
+    xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+    xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-latest.xsd
+                        http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd">
+    <!--
+        Added the constraints for entity AppTest.
+    -->
+    <changeSet id="20240524151424-2" author="jhipster">
+
+        <addForeignKeyConstraint baseColumnNames="app_test_id"
+                                 baseTableName="rel_app_test__type"
+                                 constraintName="fk_rel_app_test__type__app_test_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="app_test"
+                                 onUpdate="CASCADE"
+                                 />
+
+        <addForeignKeyConstraint baseColumnNames="type_id"
+                                 baseTableName="rel_app_test__type"
+                                 constraintName="fk_rel_app_test__type__type_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="app_test_type"
+                                 onUpdate="CASCADE"
+                                 />
+    </changeSet>
+</databaseChangeLog>

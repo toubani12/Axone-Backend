@@ -1,0 +1,36 @@
+{
+  "annotations": {
+    "changelogDate": "20240524151624"
+  },
+  "applications": ["HRSolution"],
+  "fields": [
+    {
+      "fieldName": "question",
+      "fieldType": "String",
+      "fieldValidateRules": ["required"]
+    },
+    {
+      "fieldName": "answer",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "correctAnswer",
+      "fieldType": "String"
+    }
+  ],
+  "name": "CustomQuestion",
+  "relationships": [
+    {
+      "options": {
+        "onDelete": "CASCADE",
+        "onUpdate": "CASCADE"
+      },
+      "otherEntityName": "appTest",
+      "otherEntityRelationshipName": "customQuestions",
+      "relationshipName": "appTest",
+      "relationshipSide": "right",
+      "relationshipType": "many-to-one"
+    }
+  ],
+  "searchEngine": "no"
+}

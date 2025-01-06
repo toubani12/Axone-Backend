@@ -1,0 +1,136 @@
+{
+  "annotations": {
+    "changelogDate": "20240524144924"
+  },
+  "applications": ["HRSolution"],
+  "fields": [
+    {
+      "fieldName": "firstName",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "lastName",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "profileImage",
+      "fieldType": "byte[]",
+      "fieldTypeBlobContent": "image"
+    },
+    {
+      "fieldName": "address",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "role",
+      "fieldType": "UserRole",
+      "fieldValidateRules": ["required"],
+      "fieldValues": "ADMIN,RECRUITER,EMPLOYER"
+    },
+    {
+      "fieldName": "status",
+      "fieldType": "UserStatus",
+      "fieldValidateRules": ["required"],
+      "fieldValues": "ACTIVE,DEACTIVATED,BANNED"
+    },
+    {
+      "fieldName": "name",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "label",
+      "fieldType": "String",
+      "fieldValidateRules": ["required"]
+    },
+    {
+      "fieldName": "linkedinUrl",
+      "fieldType": "String",
+      "fieldValidateRules": ["required"]
+    },
+    {
+      "fieldName": "approvedExperience",
+      "fieldType": "Boolean"
+    },
+    {
+      "fieldName": "score",
+      "fieldType": "Float"
+    }
+  ],
+  "name": "Recruiter",
+  "relationships": [
+    {
+      "options": {
+        "onDelete": "CASCADE",
+        "onUpdate": "CASCADE"
+      },
+      "otherEntityField": "login",
+      "otherEntityName": "user",
+      "relationshipName": "relatedUser",
+      "relationshipSide": "left",
+      "relationshipType": "one-to-one",
+      "relationshipValidateRules": "required",
+      "relationshipWithBuiltInEntity": true
+    },
+    {
+      "options": {
+        "onUpdate": "CASCADE"
+      },
+      "otherEntityField": "balance",
+      "otherEntityName": "wallet",
+      "relationshipName": "wallet",
+      "relationshipSide": "left",
+      "relationshipType": "one-to-one",
+      "relationshipValidateRules": "required"
+    },
+    {
+      "otherEntityName": "request",
+      "otherEntityRelationshipName": "recruiter",
+      "relationshipName": "requests",
+      "relationshipSide": "left",
+      "relationshipType": "one-to-many"
+    },
+    {
+      "options": {
+        "onUpdate": "CASCADE"
+      },
+      "otherEntityField": "title",
+      "otherEntityName": "application",
+      "otherEntityRelationshipName": "recruiters",
+      "relationshipName": "applications",
+      "relationshipSide": "left",
+      "relationshipType": "many-to-many"
+    },
+    {
+      "options": {
+        "onUpdate": "CASCADE"
+      },
+      "otherEntityField": "name",
+      "otherEntityName": "domain",
+      "relationshipName": "operationalDomain",
+      "relationshipSide": "left",
+      "relationshipType": "many-to-many",
+      "relationshipValidateRules": "required"
+    },
+    {
+      "options": {
+        "onUpdate": "CASCADE"
+      },
+      "otherEntityName": "nDA",
+      "otherEntityRelationshipName": "mediator",
+      "relationshipName": "ndaStatus",
+      "relationshipSide": "right",
+      "relationshipType": "one-to-many"
+    },
+    {
+      "options": {
+        "onUpdate": "CASCADE"
+      },
+      "otherEntityName": "contract",
+      "otherEntityRelationshipName": "recruiter",
+      "relationshipName": "contracts",
+      "relationshipSide": "right",
+      "relationshipType": "one-to-many"
+    }
+  ],
+  "searchEngine": "no"
+}

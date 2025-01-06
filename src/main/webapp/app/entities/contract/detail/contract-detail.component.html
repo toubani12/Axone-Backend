@@ -1,0 +1,102 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    @if (contract()) {
+      <div>
+        <h2 data-cy="contractDetailsHeading"><span jhiTranslate="hrSolutionApp.contract.detail.title">Contract</span></h2>
+
+        <hr />
+
+        <jhi-alert-error></jhi-alert-error>
+
+        <jhi-alert></jhi-alert>
+
+        <dl class="row-md jh-entity-details">
+          <dt><span jhiTranslate="global.field.id">ID</span></dt>
+          <dd>
+            <span>{{ contract()!.id }}</span>
+          </dd>
+          <dt><span jhiTranslate="hrSolutionApp.contract.label">Label</span></dt>
+          <dd>
+            <span>{{ contract()!.label }}</span>
+          </dd>
+          <dt><span jhiTranslate="hrSolutionApp.contract.type">Type</span></dt>
+          <dd>
+            <span [jhiTranslate]="'hrSolutionApp.TemplateContractType.' + (contract()!.type ?? 'null')">{{
+              { null: '', CDI: 'CDI', CDD: 'CDD', MISSION: 'MISSION', FREELANCE: 'FREELANCE', REMOTE: 'REMOTE' }[contract()!.type ?? 'null']
+            }}</span>
+          </dd>
+          <dt><span jhiTranslate="hrSolutionApp.contract.status">Status</span></dt>
+          <dd>
+            <span [jhiTranslate]="'hrSolutionApp.ContractStatus.' + (contract()!.status ?? 'null')">{{
+              { null: '', CREATED: 'CREATED', PROCESSING: 'PROCESSING', CLOSED: 'CLOSED', ABORTED: 'ABORTED' }[contract()!.status ?? 'null']
+            }}</span>
+          </dd>
+          <dt><span jhiTranslate="hrSolutionApp.contract.directContract">Direct Contract</span></dt>
+          <dd>
+            <span>{{ contract()!.directContract }}</span>
+          </dd>
+          <dt><span jhiTranslate="hrSolutionApp.contract.paymentAmount">Payment Amount</span></dt>
+          <dd>
+            <span>{{ contract()!.paymentAmount }}</span>
+          </dd>
+          <dt><span jhiTranslate="hrSolutionApp.contract.recruiterIncomeRate">Recruiter Income Rate</span></dt>
+          <dd>
+            <span>{{ contract()!.recruiterIncomeRate }}</span>
+          </dd>
+          <dt><span jhiTranslate="hrSolutionApp.contract.candidateIncomeRate">Candidate Income Rate</span></dt>
+          <dd>
+            <span>{{ contract()!.candidateIncomeRate }}</span>
+          </dd>
+          <dt><span jhiTranslate="hrSolutionApp.contract.template">Template</span></dt>
+          <dd>
+            @if (contract()!.template) {
+              <div>
+                <a [routerLink]="['/template', contract()!.template?.id, 'view']">{{ contract()!.template?.id }}</a>
+              </div>
+            }
+          </dd>
+          <dt><span jhiTranslate="hrSolutionApp.contract.candidate">Candidate</span></dt>
+          <dd>
+            @if (contract()!.candidate) {
+              <div>
+                <a [routerLink]="['/candidate', contract()!.candidate?.id, 'view']">{{ contract()!.candidate?.lastName }}</a>
+              </div>
+            }
+          </dd>
+          <dt><span jhiTranslate="hrSolutionApp.contract.recruiter">Recruiter</span></dt>
+          <dd>
+            @if (contract()!.recruiter) {
+              <div>
+                <a [routerLink]="['/recruiter', contract()!.recruiter?.id, 'view']">{{ contract()!.recruiter?.lastName }}</a>
+              </div>
+            }
+          </dd>
+          <dt><span jhiTranslate="hrSolutionApp.contract.employer">Employer</span></dt>
+          <dd>
+            @if (contract()!.employer) {
+              <div>
+                <a [routerLink]="['/employer', contract()!.employer?.id, 'view']">{{ contract()!.employer?.lastName }}</a>
+              </div>
+            }
+          </dd>
+          <dt><span jhiTranslate="hrSolutionApp.contract.application">Application</span></dt>
+          <dd>
+            @if (contract()!.application) {
+              <div>
+                <a [routerLink]="['/application', contract()!.application?.id, 'view']">{{ contract()!.application?.id }}</a>
+              </div>
+            }
+          </dd>
+        </dl>
+
+        <button type="submit" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">
+          <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back">Back</span>
+        </button>
+
+        <button type="button" [routerLink]="['/contract', contract()!.id, 'edit']" class="btn btn-primary">
+          <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit">Edit</span>
+        </button>
+      </div>
+    }
+  </div>
+</div>

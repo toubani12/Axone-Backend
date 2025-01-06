@@ -1,0 +1,199 @@
+<div>
+  <h2 id="page-heading" data-cy="CandidateHeading">
+    <span jhiTranslate="hrSolutionApp.candidate.home.title">Candidates</span>
+
+    <div class="d-flex justify-content-end">
+      <button class="btn btn-info me-2" (click)="load()" [disabled]="isLoading">
+        <fa-icon icon="sync" [spin]="isLoading"></fa-icon>
+        <span jhiTranslate="hrSolutionApp.candidate.home.refreshListLabel">Refresh list</span>
+      </button>
+
+      <button
+        id="jh-create-entity"
+        data-cy="entityCreateButton"
+        class="btn btn-primary jh-create-entity create-candidate"
+        [routerLink]="['/candidate/new']"
+      >
+        <fa-icon icon="plus"></fa-icon>
+        <span jhiTranslate="hrSolutionApp.candidate.home.createLabel">Create a new Candidate</span>
+      </button>
+    </div>
+  </h2>
+
+  <jhi-alert-error></jhi-alert-error>
+
+  <jhi-alert></jhi-alert>
+
+  @if (candidates?.length === 0) {
+    <div class="alert alert-warning" id="no-result">
+      <span jhiTranslate="hrSolutionApp.candidate.home.notFound">No Candidates found</span>
+    </div>
+  }
+
+  @if (candidates && candidates.length > 0) {
+    <div class="table-responsive table-entities" id="entities">
+      <table class="table table-striped" aria-describedby="page-heading">
+        <thead>
+          <tr jhiSort [sortState]="sortState" (sortChange)="navigateToWithComponentValues($event)">
+            <th scope="col" jhiSortBy="id">
+              <div class="d-flex">
+                <span jhiTranslate="global.field.id">ID</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="firstName">
+              <div class="d-flex">
+                <span jhiTranslate="hrSolutionApp.candidate.firstName">First Name</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="lastName">
+              <div class="d-flex">
+                <span jhiTranslate="hrSolutionApp.candidate.lastName">Last Name</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="linkedinUrl">
+              <div class="d-flex">
+                <span jhiTranslate="hrSolutionApp.candidate.linkedinUrl">Linkedin Url</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="fullName">
+              <div class="d-flex">
+                <span jhiTranslate="hrSolutionApp.candidate.fullName">Full Name</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="yearsOfExperience">
+              <div class="d-flex">
+                <span jhiTranslate="hrSolutionApp.candidate.yearsOfExperience">Years Of Experience</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="currentSalary">
+              <div class="d-flex">
+                <span jhiTranslate="hrSolutionApp.candidate.currentSalary">Current Salary</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="desiredSalary">
+              <div class="d-flex">
+                <span jhiTranslate="hrSolutionApp.candidate.desiredSalary">Desired Salary</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="hasContract">
+              <div class="d-flex">
+                <span jhiTranslate="hrSolutionApp.candidate.hasContract">Has Contract</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="hired">
+              <div class="d-flex">
+                <span jhiTranslate="hrSolutionApp.candidate.hired">Hired</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="rate">
+              <div class="d-flex">
+                <span jhiTranslate="hrSolutionApp.candidate.rate">Rate</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="techCV.name">
+              <div class="d-flex">
+                <span jhiTranslate="hrSolutionApp.candidate.techCV">Tech CV</span>
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="domain.name">
+              <div class="d-flex">
+                <span jhiTranslate="hrSolutionApp.candidate.domain">Domain</span>
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="applications.title">
+              <div class="d-flex">
+                <span jhiTranslate="hrSolutionApp.candidate.applications">Applications</span>
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col"></th>
+          </tr>
+        </thead>
+        <tbody>
+          @for (candidate of candidates; track trackId) {
+            <tr data-cy="entityTable">
+              <td>
+                <a [routerLink]="['/candidate', candidate.id, 'view']">{{ candidate.id }}</a>
+              </td>
+              <td>{{ candidate.firstName }}</td>
+              <td>{{ candidate.lastName }}</td>
+              <td>{{ candidate.linkedinUrl }}</td>
+              <td>{{ candidate.fullName }}</td>
+              <td>{{ candidate.yearsOfExperience }}</td>
+              <td>{{ candidate.currentSalary }}</td>
+              <td>{{ candidate.desiredSalary }}</td>
+              <td>{{ candidate.hasContract }}</td>
+              <td>{{ candidate.hired }}</td>
+              <td>{{ candidate.rate }}</td>
+              <td>
+                @if (candidate.techCV) {
+                  <div>
+                    <a [routerLink]="['/technical-cv', candidate.techCV.id, 'view']">{{ candidate.techCV.name }}</a>
+                  </div>
+                }
+              </td>
+              <td>
+                @for (domain of candidate.domains; track $index; let last = $last) {
+                  <span>
+                    <a class="form-control-static" [routerLink]="['/domain', domain.id, 'view']">{{ domain.name }}</a
+                    >{{ last ? '' : ', ' }}
+                  </span>
+                }
+              </td>
+              <td>
+                @for (applications of candidate.applications; track $index; let last = $last) {
+                  <span>
+                    <a class="form-control-static" [routerLink]="['/application', applications.id, 'view']">{{ applications.title }}</a
+                    >{{ last ? '' : ', ' }}
+                  </span>
+                }
+              </td>
+              <td class="text-end">
+                <div class="btn-group">
+                  <a [routerLink]="['/candidate', candidate.id, 'view']" class="btn btn-info btn-sm" data-cy="entityDetailsButton">
+                    <fa-icon icon="eye"></fa-icon>
+                    <span class="d-none d-md-inline" jhiTranslate="entity.action.view">View</span>
+                  </a>
+
+                  <a [routerLink]="['/candidate', candidate.id, 'edit']" class="btn btn-primary btn-sm" data-cy="entityEditButton">
+                    <fa-icon icon="pencil-alt"></fa-icon>
+                    <span class="d-none d-md-inline" jhiTranslate="entity.action.edit">Edit</span>
+                  </a>
+
+                  <button type="submit" (click)="delete(candidate)" class="btn btn-danger btn-sm" data-cy="entityDeleteButton">
+                    <fa-icon icon="times"></fa-icon>
+                    <span class="d-none d-md-inline" jhiTranslate="entity.action.delete">Delete</span>
+                  </button>
+                </div>
+              </td>
+            </tr>
+          }
+        </tbody>
+      </table>
+    </div>
+  }
+</div>

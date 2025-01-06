@@ -1,0 +1,10 @@
+{
+  "hrSolutionApp": {
+    "TechCVLevel": {
+      "null": "",
+      "BEGINNER": "BEGINNER",
+      "INTERMEDIATE": "INTERMEDIATE",
+      "EXPERT": "EXPERT"
+    }
+  }
+}

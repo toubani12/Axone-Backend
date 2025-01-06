@@ -1,0 +1,25 @@
+{
+  "hrSolutionApp": {
+    "techCVAchievement": {
+      "home": {
+        "title": "Tech CV Achievements",
+        "refreshListLabel": "Refresh list",
+        "createLabel": "Create a new Tech CV Achievement",
+        "createOrEditLabel": "Create or edit a Tech CV Achievement",
+        "notFound": "No Tech CV Achievements found"
+      },
+      "created": "A new Tech CV Achievement is created with identifier {{ param }}",
+      "updated": "A Tech CV Achievement is updated with identifier {{ param }}",
+      "deleted": "A Tech CV Achievement is deleted with identifier {{ param }}",
+      "delete": {
+        "question": "Are you sure you want to delete Tech CV Achievement {{ id }}?"
+      },
+      "detail": {
+        "title": "Tech CV Achievement"
+      },
+      "id": "ID",
+      "achievement": "Achievement",
+      "technicalCV": "Technical CV"
+    }
+  }
+}

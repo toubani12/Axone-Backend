@@ -1,0 +1,30 @@
+{
+  "annotations": {
+    "changelogDate": "20240524145924"
+  },
+  "applications": ["HRSolution"],
+  "entityTableName": "tech_cv_docs",
+  "fields": [
+    {
+      "fieldName": "attachedDoc",
+      "fieldType": "byte[]",
+      "fieldTypeBlobContent": "any",
+      "fieldValidateRules": ["required"]
+    }
+  ],
+  "name": "TechCVDocs",
+  "relationships": [
+    {
+      "options": {
+        "onDelete": "CASCADE",
+        "onUpdate": "CASCADE"
+      },
+      "otherEntityName": "technicalCV",
+      "otherEntityRelationshipName": "attachedDocs",
+      "relationshipName": "technicalCV",
+      "relationshipSide": "right",
+      "relationshipType": "many-to-one"
+    }
+  ],
+  "searchEngine": "no"
+}

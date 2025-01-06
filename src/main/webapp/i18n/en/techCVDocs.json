@@ -1,0 +1,25 @@
+{
+  "hrSolutionApp": {
+    "techCVDocs": {
+      "home": {
+        "title": "Tech CV Docs",
+        "refreshListLabel": "Refresh list",
+        "createLabel": "Create a new Tech CV Docs",
+        "createOrEditLabel": "Create or edit a Tech CV Docs",
+        "notFound": "No Tech CV Docs found"
+      },
+      "created": "A new Tech CV Docs is created with identifier {{ param }}",
+      "updated": "A Tech CV Docs is updated with identifier {{ param }}",
+      "deleted": "A Tech CV Docs is deleted with identifier {{ param }}",
+      "delete": {
+        "question": "Are you sure you want to delete Tech CV Docs {{ id }}?"
+      },
+      "detail": {
+        "title": "Tech CV Docs"
+      },
+      "id": "ID",
+      "attachedDoc": "Attached Doc",
+      "technicalCV": "Technical CV"
+    }
+  }
+}

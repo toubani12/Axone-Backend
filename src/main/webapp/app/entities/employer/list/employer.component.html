@@ -1,0 +1,179 @@
+<div>
+  <h2 id="page-heading" data-cy="EmployerHeading">
+    <span jhiTranslate="hrSolutionApp.employer.home.title">Employers</span>
+
+    <div class="d-flex justify-content-end">
+      <button class="btn btn-info me-2" (click)="load()" [disabled]="isLoading">
+        <fa-icon icon="sync" [spin]="isLoading"></fa-icon>
+        <span jhiTranslate="hrSolutionApp.employer.home.refreshListLabel">Refresh list</span>
+      </button>
+
+      <button
+        id="jh-create-entity"
+        data-cy="entityCreateButton"
+        class="btn btn-primary jh-create-entity create-employer"
+        [routerLink]="['/employer/new']"
+      >
+        <fa-icon icon="plus"></fa-icon>
+        <span jhiTranslate="hrSolutionApp.employer.home.createLabel">Create a new Employer</span>
+      </button>
+    </div>
+  </h2>
+
+  <jhi-alert-error></jhi-alert-error>
+
+  <jhi-alert></jhi-alert>
+
+  @if (employers?.length === 0) {
+    <div class="alert alert-warning" id="no-result">
+      <span jhiTranslate="hrSolutionApp.employer.home.notFound">No Employers found</span>
+    </div>
+  }
+
+  @if (employers && employers.length > 0) {
+    <div class="table-responsive table-entities" id="entities">
+      <table class="table table-striped" aria-describedby="page-heading">
+        <thead>
+          <tr jhiSort [sortState]="sortState" (sortChange)="navigateToWithComponentValues($event)">
+            <th scope="col" jhiSortBy="id">
+              <div class="d-flex">
+                <span jhiTranslate="global.field.id">ID</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="firstName">
+              <div class="d-flex">
+                <span jhiTranslate="hrSolutionApp.employer.firstName">First Name</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="lastName">
+              <div class="d-flex">
+                <span jhiTranslate="hrSolutionApp.employer.lastName">Last Name</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="profileImage">
+              <div class="d-flex">
+                <span jhiTranslate="hrSolutionApp.employer.profileImage">Profile Image</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="address">
+              <div class="d-flex">
+                <span jhiTranslate="hrSolutionApp.employer.address">Address</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="role">
+              <div class="d-flex">
+                <span jhiTranslate="hrSolutionApp.employer.role">Role</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="status">
+              <div class="d-flex">
+                <span jhiTranslate="hrSolutionApp.employer.status">Status</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="name">
+              <div class="d-flex">
+                <span jhiTranslate="hrSolutionApp.employer.name">Name</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="label">
+              <div class="d-flex">
+                <span jhiTranslate="hrSolutionApp.employer.label">Label</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="relatedUser.login">
+              <div class="d-flex">
+                <span jhiTranslate="hrSolutionApp.employer.relatedUser">Related User</span>
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="wallet.balance">
+              <div class="d-flex">
+                <span jhiTranslate="hrSolutionApp.employer.wallet">Wallet</span>
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col"></th>
+          </tr>
+        </thead>
+        <tbody>
+          @for (employer of employers; track trackId) {
+            <tr data-cy="entityTable">
+              <td>
+                <a [routerLink]="['/employer', employer.id, 'view']">{{ employer.id }}</a>
+              </td>
+              <td>{{ employer.firstName }}</td>
+              <td>{{ employer.lastName }}</td>
+              <td>
+                @if (employer.profileImage) {
+                  <a (click)="openFile(employer.profileImage, employer.profileImageContentType)">
+                    <img
+                      [src]="'data:' + employer.profileImageContentType + ';base64,' + employer.profileImage"
+                      style="max-height: 30px"
+                      alt="employer"
+                    />
+                  </a>
+                  <span>{{ employer.profileImageContentType }}, {{ byteSize(employer.profileImage) }}</span>
+                }
+              </td>
+              <td>{{ employer.address }}</td>
+              <td [jhiTranslate]="'hrSolutionApp.UserRole.' + (employer.role ?? 'null')">
+                {{ { null: '', ADMIN: 'ADMIN', RECRUITER: 'RECRUITER', EMPLOYER: 'EMPLOYER' }[employer.role ?? 'null'] }}
+              </td>
+              <td [jhiTranslate]="'hrSolutionApp.UserStatus.' + (employer.status ?? 'null')">
+                {{ { null: '', ACTIVE: 'ACTIVE', DEACTIVATED: 'DEACTIVATED', BANNED: 'BANNED' }[employer.status ?? 'null'] }}
+              </td>
+              <td>{{ employer.name }}</td>
+              <td>{{ employer.label }}</td>
+              <td>
+                {{ employer.relatedUser?.login }}
+              </td>
+              <td>
+                @if (employer.wallet) {
+                  <div>
+                    <a [routerLink]="['/wallet', employer.wallet.id, 'view']">{{ employer.wallet.balance }}</a>
+                  </div>
+                }
+              </td>
+              <td class="text-end">
+                <div class="btn-group">
+                  <a [routerLink]="['/employer', employer.id, 'view']" class="btn btn-info btn-sm" data-cy="entityDetailsButton">
+                    <fa-icon icon="eye"></fa-icon>
+                    <span class="d-none d-md-inline" jhiTranslate="entity.action.view">View</span>
+                  </a>
+
+                  <a [routerLink]="['/employer', employer.id, 'edit']" class="btn btn-primary btn-sm" data-cy="entityEditButton">
+                    <fa-icon icon="pencil-alt"></fa-icon>
+                    <span class="d-none d-md-inline" jhiTranslate="entity.action.edit">Edit</span>
+                  </a>
+
+                  <button type="submit" (click)="delete(employer)" class="btn btn-danger btn-sm" data-cy="entityDeleteButton">
+                    <fa-icon icon="times"></fa-icon>
+                    <span class="d-none d-md-inline" jhiTranslate="entity.action.delete">Delete</span>
+                  </button>
+                </div>
+              </td>
+            </tr>
+          }
+        </tbody>
+      </table>
+    </div>
+  }
+</div>

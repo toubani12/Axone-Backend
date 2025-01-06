@@ -1,0 +1,43 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    @if (appTestType()) {
+      <div>
+        <h2 data-cy="appTestTypeDetailsHeading"><span jhiTranslate="hrSolutionApp.appTestType.detail.title">App Test Type</span></h2>
+
+        <hr />
+
+        <jhi-alert-error></jhi-alert-error>
+
+        <jhi-alert></jhi-alert>
+
+        <dl class="row-md jh-entity-details">
+          <dt><span jhiTranslate="global.field.id">ID</span></dt>
+          <dd>
+            <span>{{ appTestType()!.id }}</span>
+          </dd>
+          <dt><span jhiTranslate="hrSolutionApp.appTestType.type">Type</span></dt>
+          <dd>
+            <span>{{ appTestType()!.type }}</span>
+          </dd>
+          <dt><span jhiTranslate="hrSolutionApp.appTestType.appTest">App Test</span></dt>
+          <dd>
+            @for (appTest of appTestType()!.appTests; track $index; let last = $last) {
+              <span>
+                <a [routerLink]="['/app-test', appTest.id, 'view']">{{ appTest?.id }}</a
+                >{{ last ? '' : ', ' }}
+              </span>
+            }
+          </dd>
+        </dl>
+
+        <button type="submit" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">
+          <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back">Back</span>
+        </button>
+
+        <button type="button" [routerLink]="['/app-test-type', appTestType()!.id, 'edit']" class="btn btn-primary">
+          <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit">Edit</span>
+        </button>
+      </div>
+    }
+  </div>
+</div>

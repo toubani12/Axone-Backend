@@ -1,0 +1,25 @@
+{
+  "hrSolutionApp": {
+    "techCVAltActivities": {
+      "home": {
+        "title": "Tech CV Alt Activities",
+        "refreshListLabel": "Refresh list",
+        "createLabel": "Create a new Tech CV Alt Activities",
+        "createOrEditLabel": "Create or edit a Tech CV Alt Activities",
+        "notFound": "No Tech CV Alt Activities found"
+      },
+      "created": "A new Tech CV Alt Activities is created with identifier {{ param }}",
+      "updated": "A Tech CV Alt Activities is updated with identifier {{ param }}",
+      "deleted": "A Tech CV Alt Activities is deleted with identifier {{ param }}",
+      "delete": {
+        "question": "Are you sure you want to delete Tech CV Alt Activities {{ id }}?"
+      },
+      "detail": {
+        "title": "Tech CV Alt Activities"
+      },
+      "id": "ID",
+      "activities": "Activities",
+      "technicalCV": "Technical CV"
+    }
+  }
+}

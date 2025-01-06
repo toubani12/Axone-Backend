@@ -1,0 +1,51 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    @if (techCVDocs()) {
+      <div>
+        <h2 data-cy="techCVDocsDetailsHeading"><span jhiTranslate="hrSolutionApp.techCVDocs.detail.title">Tech CV Docs</span></h2>
+
+        <hr />
+
+        <jhi-alert-error></jhi-alert-error>
+
+        <jhi-alert></jhi-alert>
+
+        <dl class="row-md jh-entity-details">
+          <dt><span jhiTranslate="global.field.id">ID</span></dt>
+          <dd>
+            <span>{{ techCVDocs()!.id }}</span>
+          </dd>
+          <dt><span jhiTranslate="hrSolutionApp.techCVDocs.attachedDoc">Attached Doc</span></dt>
+          <dd>
+            @if (techCVDocs()!.attachedDoc) {
+              <div>
+                <a
+                  (click)="openFile(techCVDocs()!.attachedDoc ?? '', techCVDocs()!.attachedDocContentType)"
+                  jhiTranslate="entity.action.open"
+                  >Open</a
+                >
+                {{ techCVDocs()!.attachedDocContentType }}, {{ byteSize(techCVDocs()!.attachedDoc ?? '') }}
+              </div>
+            }
+          </dd>
+          <dt><span jhiTranslate="hrSolutionApp.techCVDocs.technicalCV">Technical CV</span></dt>
+          <dd>
+            @if (techCVDocs()!.technicalCV) {
+              <div>
+                <a [routerLink]="['/technical-cv', techCVDocs()!.technicalCV?.id, 'view']">{{ techCVDocs()!.technicalCV?.id }}</a>
+              </div>
+            }
+          </dd>
+        </dl>
+
+        <button type="submit" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">
+          <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back">Back</span>
+        </button>
+
+        <button type="button" [routerLink]="['/tech-cv-docs', techCVDocs()!.id, 'edit']" class="btn btn-primary">
+          <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit">Edit</span>
+        </button>
+      </div>
+    }
+  </div>
+</div>

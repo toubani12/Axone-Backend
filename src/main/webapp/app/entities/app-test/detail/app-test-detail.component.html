@@ -1,0 +1,75 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    @if (appTest()) {
+      <div>
+        <h2 data-cy="appTestDetailsHeading"><span jhiTranslate="hrSolutionApp.appTest.detail.title">App Test</span></h2>
+
+        <hr />
+
+        <jhi-alert-error></jhi-alert-error>
+
+        <jhi-alert></jhi-alert>
+
+        <dl class="row-md jh-entity-details">
+          <dt><span jhiTranslate="global.field.id">ID</span></dt>
+          <dd>
+            <span>{{ appTest()!.id }}</span>
+          </dd>
+          <dt><span jhiTranslate="hrSolutionApp.appTest.name">Name</span></dt>
+          <dd>
+            <span>{{ appTest()!.name }}</span>
+          </dd>
+          <dt><span jhiTranslate="hrSolutionApp.appTest.invitationLink">Invitation Link</span></dt>
+          <dd>
+            <span>{{ appTest()!.invitationLink }}</span>
+          </dd>
+          <dt><span jhiTranslate="hrSolutionApp.appTest.totalScore">Total Score</span></dt>
+          <dd>
+            <span>{{ appTest()!.totalScore }}</span>
+          </dd>
+          <dt><span jhiTranslate="hrSolutionApp.appTest.status">Status</span></dt>
+          <dd>
+            <span>{{ appTest()!.status }}</span>
+          </dd>
+          <dt><span jhiTranslate="hrSolutionApp.appTest.completed">Completed</span></dt>
+          <dd>
+            <span>{{ appTest()!.completed }}</span>
+          </dd>
+          <dt><span jhiTranslate="hrSolutionApp.appTest.testID">Test ID</span></dt>
+          <dd>
+            <span>{{ appTest()!.testID }}</span>
+          </dd>
+          <dt><span jhiTranslate="hrSolutionApp.appTest.algorithm">Algorithm</span></dt>
+          <dd>
+            <span>{{ appTest()!.algorithm }}</span>
+          </dd>
+          <dt><span jhiTranslate="hrSolutionApp.appTest.isCodeTest">Is Code Test</span></dt>
+          <dd>
+            <span>{{ appTest()!.isCodeTest }}</span>
+          </dd>
+          <dt><span jhiTranslate="hrSolutionApp.appTest.duration">Duration</span></dt>
+          <dd>
+            <span>{{ appTest()!.duration }}</span>
+          </dd>
+          <dt><span jhiTranslate="hrSolutionApp.appTest.type">Type</span></dt>
+          <dd>
+            @for (type of appTest()!.types; track $index; let last = $last) {
+              <span>
+                <a [routerLink]="['/app-test-type', type.id, 'view']">{{ type?.type }}</a
+                >{{ last ? '' : ', ' }}
+              </span>
+            }
+          </dd>
+        </dl>
+
+        <button type="submit" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">
+          <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back">Back</span>
+        </button>
+
+        <button type="button" [routerLink]="['/app-test', appTest()!.id, 'edit']" class="btn btn-primary">
+          <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit">Edit</span>
+        </button>
+      </div>
+    }
+  </div>
+</div>

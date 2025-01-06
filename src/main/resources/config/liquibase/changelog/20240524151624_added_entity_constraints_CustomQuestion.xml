@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<databaseChangeLog
+    xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+    xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-latest.xsd
+                        http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd">
+    <!--
+        Added the constraints for entity CustomQuestion.
+    -->
+    <changeSet id="20240524151624-2" author="jhipster">
+
+        <addForeignKeyConstraint baseColumnNames="app_test_id"
+                                 baseTableName="custom_question"
+                                 constraintName="fk_custom_question__app_test_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="app_test"
+                                 onDelete="CASCADE"
+                                 onUpdate="CASCADE"
+                                 />
+    </changeSet>
+</databaseChangeLog>

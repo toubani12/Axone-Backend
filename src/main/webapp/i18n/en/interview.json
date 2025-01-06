@@ -1,0 +1,33 @@
+{
+  "hrSolutionApp": {
+    "interview": {
+      "home": {
+        "title": "Interviews",
+        "refreshListLabel": "Refresh list",
+        "createLabel": "Create a new Interview",
+        "createOrEditLabel": "Create or edit a Interview",
+        "notFound": "No Interviews found"
+      },
+      "created": "A new Interview is created with identifier {{ param }}",
+      "updated": "A Interview is updated with identifier {{ param }}",
+      "deleted": "A Interview is deleted with identifier {{ param }}",
+      "delete": {
+        "question": "Are you sure you want to delete Interview {{ id }}?"
+      },
+      "detail": {
+        "title": "Interview"
+      },
+      "id": "ID",
+      "label": "Label",
+      "entryLink": "Entry Link",
+      "invitationLink": "Invitation Link",
+      "interviewResult": "Interview Result",
+      "rate": "Rate",
+      "startedAt": "Started At",
+      "endedAt": "Ended At",
+      "comments": "Comments",
+      "attendee": "Attendee",
+      "application": "Application"
+    }
+  }
+}

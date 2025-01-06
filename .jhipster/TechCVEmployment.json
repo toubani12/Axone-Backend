@@ -1,0 +1,29 @@
+{
+  "annotations": {
+    "changelogDate": "20240524145624"
+  },
+  "applications": ["HRSolution"],
+  "entityTableName": "tech_cv_employment",
+  "fields": [
+    {
+      "fieldName": "employment",
+      "fieldType": "String",
+      "fieldValidateRules": ["required"]
+    }
+  ],
+  "name": "TechCVEmployment",
+  "relationships": [
+    {
+      "options": {
+        "onDelete": "CASCADE",
+        "onUpdate": "CASCADE"
+      },
+      "otherEntityName": "technicalCV",
+      "otherEntityRelationshipName": "employments",
+      "relationshipName": "technicalCV",
+      "relationshipSide": "right",
+      "relationshipType": "many-to-one"
+    }
+  ],
+  "searchEngine": "no"
+}

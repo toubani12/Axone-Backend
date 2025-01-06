@@ -1,0 +1,39 @@
+{
+  "hrSolutionApp": {
+    "employer": {
+      "home": {
+        "title": "Employers",
+        "refreshListLabel": "Refresh list",
+        "createLabel": "Create a new Employer",
+        "createOrEditLabel": "Create or edit a Employer",
+        "notFound": "No Employers found"
+      },
+      "created": "A new Employer is created with identifier {{ param }}",
+      "updated": "A Employer is updated with identifier {{ param }}",
+      "deleted": "A Employer is deleted with identifier {{ param }}",
+      "delete": {
+        "question": "Are you sure you want to delete Employer {{ id }}?"
+      },
+      "detail": {
+        "title": "Employer"
+      },
+      "id": "ID",
+      "firstName": "First Name",
+      "lastName": "Last Name",
+      "profileImage": "Profile Image",
+      "address": "Address",
+      "role": "Role",
+      "status": "Status",
+      "name": "Name",
+      "label": "Label",
+      "relatedUser": "Related User",
+      "wallet": "Wallet",
+      "operationalDomain": "Operational Domain",
+      "paymentAccount": "Payment Account",
+      "application": "Application",
+      "contract": "Contract",
+      "template": "Template",
+      "ndaStatus": "Nda Status"
+    }
+  }
+}

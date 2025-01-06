@@ -1,0 +1,29 @@
+{
+  "annotations": {
+    "changelogDate": "20240524150024"
+  },
+  "applications": ["HRSolution"],
+  "entityTableName": "tech_cv_hard_skills",
+  "fields": [
+    {
+      "fieldName": "skills",
+      "fieldType": "String",
+      "fieldValidateRules": ["required"]
+    }
+  ],
+  "name": "TechCVHardSkills",
+  "relationships": [
+    {
+      "options": {
+        "onDelete": "CASCADE",
+        "onUpdate": "CASCADE"
+      },
+      "otherEntityName": "technicalCV",
+      "otherEntityRelationshipName": "hardSkills",
+      "relationshipName": "technicalCV",
+      "relationshipSide": "right",
+      "relationshipType": "many-to-one"
+    }
+  ],
+  "searchEngine": "no"
+}

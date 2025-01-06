@@ -1,0 +1,10 @@
+{
+  "hrSolutionApp": {
+    "UserStatus": {
+      "null": "",
+      "ACTIVE": "ACTIVE",
+      "DEACTIVATED": "DEACTIVATED",
+      "BANNED": "BANNED"
+    }
+  }
+}

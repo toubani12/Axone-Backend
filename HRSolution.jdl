@@ -1,0 +1,262 @@
+application {
+  config {
+    baseName HRSolution
+    applicationType monolith
+    packageName com.axone.hrsolution
+    authenticationType jwt
+    prodDatabaseType mysql
+    clientFramework angularX
+  }
+
+  entities *
+}
+
+entity Recruiter {
+    firstName String
+    lastName String
+    profileImage ImageBlob
+    address String
+    role UserRole required
+    status UserStatus required
+    name String
+    label String required
+    linkedinUrl String required
+    approvedExperience Boolean
+    score Float
+}
+
+entity Employer {
+    firstName String
+    lastName String
+    profileImage ImageBlob
+    address String
+    role UserRole required
+    status UserStatus required
+    name String
+    label String required
+}
+
+enum UserRole {
+    ADMIN, RECRUITER, EMPLOYER
+}
+enum UserStatus {
+    ACTIVE, DEACTIVATED, BANNED
+}
+
+entity Candidate {
+    firstName String
+    lastName String
+    linkedinUrl String
+    fullName String required
+    yearsOfExperience Integer required
+    currentSalary Double
+    desiredSalary Double
+    hasContract Boolean required
+    hired Boolean required
+    rate Float
+}
+entity Resume {
+    resume AnyBlob required
+}
+entity NDA {
+    document AnyBlob required
+    status NDAStatus required
+    period LocalDate required
+}
+enum NDAStatus {
+    PROCESSING, SIGNED, REJECTED, REVOKED
+}
+entity TechnicalCV {
+    name String required
+    level TechCVLevel required
+    profileDescription String
+}
+enum TechCVLevel {
+    BEGINNER, INTERMEDIATE, EXPERT
+}
+entity TechCVEducation {
+    education String required
+}
+entity TechCVEmployment {
+    employment String required
+}
+entity TechCVProject {
+    project String required
+}
+entity TechCVAchievement {
+    achievement String required
+}
+entity TechCVDocs {
+    attachedDoc AnyBlob required
+}
+entity TechCVHardSkills {
+    skills String required
+}
+entity TechCVSoftSkills {
+    skills String required
+}
+entity TechCVAltActivities {
+    activities String required
+}
+
+entity Request {
+    status RequestStatus required
+    expressionOfInterest String required
+}
+enum RequestStatus {
+    PROCESSING, ACCEPTED, REJECTED, REVOKED
+}
+entity Application {
+    title String required
+    description String required
+    numberOfCandidates Integer required
+    paymentAmount Double required
+    recruiterIncomeRate Float
+    candidateIncomeRate Float
+    deadline LocalDate
+    status ApplicationStatus required
+    createdAt Instant
+    openedAt Instant
+    closedAt Instant
+    doneAt Instant
+}
+enum ApplicationStatus {
+    NEW, OPEN, CLOSED, DONE, ABORTED
+}
+entity ContractType {
+    name String required
+}
+entity Domain {
+    name String required
+}
+entity Criteria {
+    name String required
+}
+entity Template {
+    label String required
+    type TemplateContractType required
+    description String
+    standard Boolean required
+    docLink AnyBlob required
+}
+enum TemplateContractType {
+    CDI, CDD, MISSION, FREELANCE, REMOTE
+}
+entity Contract {
+    label String required
+    type TemplateContractType required
+    status ContractStatus required
+    directContract Boolean required
+    paymentAmount Double required
+    recruiterIncomeRate Float required
+    candidateIncomeRate Float required
+}
+enum ContractStatus {
+    CREATED, PROCESSING, CLOSED, ABORTED
+}
+entity Wallet {
+    balance Double required
+    status WalletStatus required
+}
+enum WalletStatus {
+    ACTIVE, DEACTIVATED, BANNED
+}
+entity AppAccount {
+    accountNumber Long required
+    cardNumber Long
+    endDate LocalDate
+    cvv Integer
+}
+entity Provider {
+    name String required
+    country String
+}
+entity AppAccountType {
+    type String required
+}
+entity AppTest {
+    name String required
+    invitationLink String required
+    totalScore Integer
+    status String
+    completed Boolean
+    testID Long
+    algorithm String
+    isCodeTest Boolean
+    duration Integer
+}
+entity AppTestType {
+    type String required
+}
+entity CustomQuestion {
+    question String required
+    answer String
+    correctAnswer String
+}
+entity Interview {
+    label String required
+    entryLink String required
+    invitationLink String required
+    interviewResult Boolean
+    rate Float
+    startedAt LocalDate
+    endedAt LocalDate
+    comments String
+}
+entity Admin {
+    systemName String required
+}
+relationship OneToOne {
+    @OnDelete("CASCADE") @OnUpdate("CASCADE") Recruiter{relatedUser(login) required} to @OnDelete("CASCADE") @OnUpdate("CASCADE") User with builtInEntity ,
+    @OnDelete("CASCADE") @OnUpdate("CASCADE") Employer{relatedUser(login) required} to @OnDelete("CASCADE") @OnUpdate("CASCADE") User with builtInEntity ,
+    @OnDelete("CASCADE") @OnUpdate("CASCADE") Admin{relatedUser(login) required} to @OnDelete("CASCADE") @OnUpdate("CASCADE") User with builtInEntity ,
+    @OnDelete("CASCADE") @OnUpdate("CASCADE") Recruiter{wallet(balance) required} to @OnUpdate("CASCADE") Wallet ,
+    @OnDelete("CASCADE") @OnUpdate("CASCADE") Candidate{techCV(name) required} to @OnUpdate("CASCADE") TechnicalCV{candidate}
+    @OnDelete("CASCADE") @OnUpdate("CASCADE") Employer{wallet(balance) required}  to @OnUpdate("CASCADE") Wallet ,
+    @OnUpdate("CASCADE") Wallet{relatedToAccount} to @OnUpdate("CASCADE") AppAccount{relatedWallet} ,
+    @OnUpdate("CASCADE") AppAccount{relatedUser(login) required} to @OnDelete("CASCADE") @OnUpdate("CASCADE") User with builtInEntity ,
+    @OnUpdate("CASCADE") Admin{systemWallet(balance) required} to @OnUpdate("CASCADE") Wallet ,
+    Request{relatedApplication required} to @OnDelete("CASCADE") @OnUpdate("CASCADE") Application ,
+    @OnUpdate("CASCADE") Contract{template required} to Template ,
+    @OnUpdate("CASCADE") Contract{candidate(lastName)} to @OnUpdate("CASCADE") Candidate
+}
+relationship OneToMany {
+    @OnDelete("CASCADE") @OnUpdate("CASCADE") Recruiter{requests} to Request{recruiter required} ,
+    @OnUpdate("CASCADE") Candidate{interviewResult} to @OnUpdate("CASCADE") Interview{attendee} ,
+    @OnDelete("CASCADE") @OnUpdate("CASCADE") TechnicalCV{hardSkills required} to @OnUpdate("CASCADE") TechCVHardSkills ,
+    @OnDelete("CASCADE") @OnUpdate("CASCADE") TechnicalCV{softSkills required} to @OnUpdate("CASCADE") TechCVSoftSkills ,
+    @OnDelete("CASCADE") @OnUpdate("CASCADE") TechnicalCV{education} to @OnUpdate("CASCADE") TechCVEducation ,
+    @OnDelete("CASCADE") @OnUpdate("CASCADE") TechnicalCV{employments} to @OnUpdate("CASCADE") TechCVEmployment ,
+    @OnDelete("CASCADE") @OnUpdate("CASCADE") TechnicalCV{projects} to @OnUpdate("CASCADE") TechCVProject ,
+    @OnDelete("CASCADE") @OnUpdate("CASCADE") TechnicalCV{achievements} to @OnUpdate("CASCADE") TechCVAchievement ,
+    @OnDelete("CASCADE") @OnUpdate("CASCADE") TechnicalCV{attachedDocs} to @OnUpdate("CASCADE") TechCVDocs ,
+    @OnDelete("CASCADE") @OnUpdate("CASCADE") TechnicalCV{altActivities} to @OnUpdate("CASCADE") TechCVAltActivities ,
+    Employer{operationalDomain required} to @OnDelete("CASCADE") @OnUpdate("CASCADE") Domain ,
+    @OnDelete("CASCADE") @OnUpdate("CASCADE") Employer{paymentAccount required} to @OnUpdate("CASCADE") AppAccount{ifEmployer} ,
+    @OnUpdate("CASCADE") Employer{application(title)} to @OnUpdate("CASCADE") Application{employer(lastName) required} ,
+    @OnUpdate("CASCADE") Employer{contract(label)} to @OnUpdate("CASCADE") Contract{employer(lastName) required} ,
+    @OnUpdate("CASCADE") Employer{template(label)} to @OnUpdate("CASCADE") Template{owner(lastName) required} ,
+    @OnUpdate("CASCADE") Application{contracts(label)} to @OnUpdate("CASCADE") Contract{application required} ,
+    @OnUpdate("CASCADE") Application{interviews} to @OnUpdate("CASCADE") Interview{application required} ,
+    @OnDelete("CASCADE") @OnUpdate("CASCADE") AppTest{customQuestions} to @OnUpdate("CASCADE") CustomQuestion,
+    @OnDelete("CASCADE") Candidate{candidateResume(resume)} to @OnUpdate("CASCADE") Resume{owner}
+}
+relationship ManyToOne {
+    @OnUpdate("CASCADE") NDA{employer(lastName) required} to @OnDelete("CASCADE") @OnUpdate("CASCADE") Employer{ndaStatus} ,
+    @OnUpdate("CASCADE") NDA{mediator(lastName) required} to @OnDelete("CASCADE") @OnUpdate("CASCADE") Recruiter{ndaStatus} ,
+    @OnUpdate("CASCADE") NDA{candidate(lastName) required} to @OnDelete("CASCADE") @OnUpdate("CASCADE") Candidate{ndaStatus} ,
+    @OnUpdate("CASCADE") Contract{recruiter(lastName) required} to @OnUpdate("CASCADE") Recruiter{contracts} ,
+}
+relationship ManyToMany {
+    @OnDelete("CASCADE") @OnUpdate("CASCADE") Recruiter{applications(title)} to @OnUpdate("CASCADE") Application{recruiters(lastName)} ,
+    @OnUpdate("CASCADE") Recruiter{operationalDomain(name) required} to @OnUpdate("CASCADE") Domain ,
+    @OnUpdate("CASCADE") Candidate{domain(name) required} to @OnUpdate("CASCADE") Domain ,
+    @OnUpdate("CASCADE") Application{contractType(name) required} to @OnUpdate("CASCADE") ContractType ,
+    @OnUpdate("CASCADE") Application{contractTemplate(label)} to @OnUpdate("CASCADE") Template ,
+    @OnUpdate("CASCADE") Application{criteria(name) required} to @OnUpdate("CASCADE") Criteria ,
+    @OnUpdate("CASCADE") Application{domain(name) required} to @OnUpdate("CASCADE") Domain ,
+    @OnUpdate("CASCADE") AppAccount{type(type) required} to @OnUpdate("CASCADE") AppAccountType ,
+    @OnUpdate("CASCADE") AppAccount{provider(name) required} to @OnUpdate("CASCADE") Provider ,
+    @OnUpdate("CASCADE") Candidate{applications(title)} to @OnUpdate("CASCADE") Application{candidates(lastName)} ,
+    @OnUpdate("CASCADE") AppTest{type(type)} to @OnUpdate("CASCADE") AppTestType
+}

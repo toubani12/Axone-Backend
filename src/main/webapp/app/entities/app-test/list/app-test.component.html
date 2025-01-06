@@ -1,0 +1,164 @@
+<div>
+  <h2 id="page-heading" data-cy="AppTestHeading">
+    <span jhiTranslate="hrSolutionApp.appTest.home.title">App Tests</span>
+
+    <div class="d-flex justify-content-end">
+      <button class="btn btn-info me-2" (click)="load()" [disabled]="isLoading">
+        <fa-icon icon="sync" [spin]="isLoading"></fa-icon>
+        <span jhiTranslate="hrSolutionApp.appTest.home.refreshListLabel">Refresh list</span>
+      </button>
+
+      <button
+        id="jh-create-entity"
+        data-cy="entityCreateButton"
+        class="btn btn-primary jh-create-entity create-app-test"
+        [routerLink]="['/app-test/new']"
+      >
+        <fa-icon icon="plus"></fa-icon>
+        <span jhiTranslate="hrSolutionApp.appTest.home.createLabel">Create a new App Test</span>
+      </button>
+    </div>
+  </h2>
+
+  <jhi-alert-error></jhi-alert-error>
+
+  <jhi-alert></jhi-alert>
+
+  @if (appTests?.length === 0) {
+    <div class="alert alert-warning" id="no-result">
+      <span jhiTranslate="hrSolutionApp.appTest.home.notFound">No App Tests found</span>
+    </div>
+  }
+
+  @if (appTests && appTests.length > 0) {
+    <div class="table-responsive table-entities" id="entities">
+      <table class="table table-striped" aria-describedby="page-heading">
+        <thead>
+          <tr jhiSort [sortState]="sortState" (sortChange)="navigateToWithComponentValues($event)">
+            <th scope="col" jhiSortBy="id">
+              <div class="d-flex">
+                <span jhiTranslate="global.field.id">ID</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="name">
+              <div class="d-flex">
+                <span jhiTranslate="hrSolutionApp.appTest.name">Name</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="invitationLink">
+              <div class="d-flex">
+                <span jhiTranslate="hrSolutionApp.appTest.invitationLink">Invitation Link</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="totalScore">
+              <div class="d-flex">
+                <span jhiTranslate="hrSolutionApp.appTest.totalScore">Total Score</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="status">
+              <div class="d-flex">
+                <span jhiTranslate="hrSolutionApp.appTest.status">Status</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="completed">
+              <div class="d-flex">
+                <span jhiTranslate="hrSolutionApp.appTest.completed">Completed</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="testID">
+              <div class="d-flex">
+                <span jhiTranslate="hrSolutionApp.appTest.testID">Test ID</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="algorithm">
+              <div class="d-flex">
+                <span jhiTranslate="hrSolutionApp.appTest.algorithm">Algorithm</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="isCodeTest">
+              <div class="d-flex">
+                <span jhiTranslate="hrSolutionApp.appTest.isCodeTest">Is Code Test</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="duration">
+              <div class="d-flex">
+                <span jhiTranslate="hrSolutionApp.appTest.duration">Duration</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="type.type">
+              <div class="d-flex">
+                <span jhiTranslate="hrSolutionApp.appTest.type">Type</span>
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col"></th>
+          </tr>
+        </thead>
+        <tbody>
+          @for (appTest of appTests; track trackId) {
+            <tr data-cy="entityTable">
+              <td>
+                <a [routerLink]="['/app-test', appTest.id, 'view']">{{ appTest.id }}</a>
+              </td>
+              <td>{{ appTest.name }}</td>
+              <td>{{ appTest.invitationLink }}</td>
+              <td>{{ appTest.totalScore }}</td>
+              <td>{{ appTest.status }}</td>
+              <td>{{ appTest.completed }}</td>
+              <td>{{ appTest.testID }}</td>
+              <td>{{ appTest.algorithm }}</td>
+              <td>{{ appTest.isCodeTest }}</td>
+              <td>{{ appTest.duration }}</td>
+              <td>
+                @for (type of appTest.types; track $index; let last = $last) {
+                  <span>
+                    <a class="form-control-static" [routerLink]="['/app-test-type', type.id, 'view']">{{ type.type }}</a
+                    >{{ last ? '' : ', ' }}
+                  </span>
+                }
+              </td>
+              <td class="text-end">
+                <div class="btn-group">
+                  <a [routerLink]="['/app-test', appTest.id, 'view']" class="btn btn-info btn-sm" data-cy="entityDetailsButton">
+                    <fa-icon icon="eye"></fa-icon>
+                    <span class="d-none d-md-inline" jhiTranslate="entity.action.view">View</span>
+                  </a>
+
+                  <a [routerLink]="['/app-test', appTest.id, 'edit']" class="btn btn-primary btn-sm" data-cy="entityEditButton">
+                    <fa-icon icon="pencil-alt"></fa-icon>
+                    <span class="d-none d-md-inline" jhiTranslate="entity.action.edit">Edit</span>
+                  </a>
+
+                  <button type="submit" (click)="delete(appTest)" class="btn btn-danger btn-sm" data-cy="entityDeleteButton">
+                    <fa-icon icon="times"></fa-icon>
+                    <span class="d-none d-md-inline" jhiTranslate="entity.action.delete">Delete</span>
+                  </button>
+                </div>
+              </td>
+            </tr>
+          }
+        </tbody>
+      </table>
+    </div>
+  }
+</div>

@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>
+<databaseChangeLog
+    xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+    xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-latest.xsd
+                        http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd">
+    <!--
+        Added the constraints for entity Recruiter.
+    -->
+    <changeSet id="20240524144924-2" author="jhipster">
+
+        <addForeignKeyConstraint baseColumnNames="related_user_id"
+                                 baseTableName="recruiter"
+                                 constraintName="fk_recruiter__related_user_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="jhi_user"
+                                 onDelete="CASCADE"
+                                 onUpdate="CASCADE"
+                                 />
+
+        <addForeignKeyConstraint baseColumnNames="wallet_id"
+                                 baseTableName="recruiter"
+                                 constraintName="fk_recruiter__wallet_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="wallet"
+                                 onUpdate="CASCADE"
+                                 />
+
+        <addForeignKeyConstraint baseColumnNames="recruiter_id"
+                                 baseTableName="rel_recruiter__applications"
+                                 constraintName="fk_rel_recruiter__applications__recruiter_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="recruiter"
+                                 onUpdate="CASCADE"
+                                 />
+
+        <addForeignKeyConstraint baseColumnNames="applications_id"
+                                 baseTableName="rel_recruiter__applications"
+                                 constraintName="fk_rel_recruiter__applications__applications_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="application"
+                                 onDelete="CASCADE"
+                                 onUpdate="CASCADE"
+                                 />
+
+        <addForeignKeyConstraint baseColumnNames="recruiter_id"
+                                 baseTableName="rel_recruiter__operational_domain"
+                                 constraintName="fk_rel_recruiter__operational_domain__recruiter_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="recruiter"
+                                 onUpdate="CASCADE"
+                                 />
+
+        <addForeignKeyConstraint baseColumnNames="operational_domain_id"
+                                 baseTableName="rel_recruiter__operational_domain"
+                                 constraintName="fk_rel_recruiter__operational_domain__operational_domain_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="domain"
+                                 onUpdate="CASCADE"
+                                 />
+    </changeSet>
+</databaseChangeLog>

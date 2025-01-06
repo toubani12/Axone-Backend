@@ -1,0 +1,46 @@
+{
+  "annotations": {
+    "changelogDate": "20240524150324"
+  },
+  "applications": ["HRSolution"],
+  "fields": [
+    {
+      "fieldName": "status",
+      "fieldType": "RequestStatus",
+      "fieldValidateRules": ["required"],
+      "fieldValues": "PROCESSING,ACCEPTED,REJECTED,REVOKED"
+    },
+    {
+      "fieldName": "expressionOfInterest",
+      "fieldType": "String",
+      "fieldValidateRules": ["required"]
+    }
+  ],
+  "name": "Request",
+  "relationships": [
+    {
+      "options": {
+        "onDelete": "CASCADE",
+        "onUpdate": "CASCADE"
+      },
+      "otherEntityName": "application",
+      "relationshipName": "relatedApplication",
+      "relationshipSide": "left",
+      "relationshipType": "one-to-one",
+      "relationshipValidateRules": "required"
+    },
+    {
+      "options": {
+        "onDelete": "CASCADE",
+        "onUpdate": "CASCADE"
+      },
+      "otherEntityName": "recruiter",
+      "otherEntityRelationshipName": "requests",
+      "relationshipName": "recruiter",
+      "relationshipSide": "right",
+      "relationshipType": "many-to-one",
+      "relationshipValidateRules": "required"
+    }
+  ],
+  "searchEngine": "no"
+}

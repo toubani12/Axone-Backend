@@ -1,0 +1,25 @@
+{
+  "hrSolutionApp": {
+    "techCVSoftSkills": {
+      "home": {
+        "title": "Tech CV Soft Skills",
+        "refreshListLabel": "Refresh list",
+        "createLabel": "Create a new Tech CV Soft Skills",
+        "createOrEditLabel": "Create or edit a Tech CV Soft Skills",
+        "notFound": "No Tech CV Soft Skills found"
+      },
+      "created": "A new Tech CV Soft Skills is created with identifier {{ param }}",
+      "updated": "A Tech CV Soft Skills is updated with identifier {{ param }}",
+      "deleted": "A Tech CV Soft Skills is deleted with identifier {{ param }}",
+      "delete": {
+        "question": "Are you sure you want to delete Tech CV Soft Skills {{ id }}?"
+      },
+      "detail": {
+        "title": "Tech CV Soft Skills"
+      },
+      "id": "ID",
+      "skills": "Skills",
+      "technicalCV": "Technical CV"
+    }
+  }
+}

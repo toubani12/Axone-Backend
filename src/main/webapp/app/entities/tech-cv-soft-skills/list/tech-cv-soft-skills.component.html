@@ -1,0 +1,107 @@
+<div>
+  <h2 id="page-heading" data-cy="TechCVSoftSkillsHeading">
+    <span jhiTranslate="hrSolutionApp.techCVSoftSkills.home.title">Tech CV Soft Skills</span>
+
+    <div class="d-flex justify-content-end">
+      <button class="btn btn-info me-2" (click)="load()" [disabled]="isLoading">
+        <fa-icon icon="sync" [spin]="isLoading"></fa-icon>
+        <span jhiTranslate="hrSolutionApp.techCVSoftSkills.home.refreshListLabel">Refresh list</span>
+      </button>
+
+      <button
+        id="jh-create-entity"
+        data-cy="entityCreateButton"
+        class="btn btn-primary jh-create-entity create-tech-cv-soft-skills"
+        [routerLink]="['/tech-cv-soft-skills/new']"
+      >
+        <fa-icon icon="plus"></fa-icon>
+        <span jhiTranslate="hrSolutionApp.techCVSoftSkills.home.createLabel">Create a new Tech CV Soft Skills</span>
+      </button>
+    </div>
+  </h2>
+
+  <jhi-alert-error></jhi-alert-error>
+
+  <jhi-alert></jhi-alert>
+
+  @if (techCVSoftSkills?.length === 0) {
+    <div class="alert alert-warning" id="no-result">
+      <span jhiTranslate="hrSolutionApp.techCVSoftSkills.home.notFound">No Tech CV Soft Skills found</span>
+    </div>
+  }
+
+  @if (techCVSoftSkills && techCVSoftSkills.length > 0) {
+    <div class="table-responsive table-entities" id="entities">
+      <table class="table table-striped" aria-describedby="page-heading">
+        <thead>
+          <tr jhiSort [sortState]="sortState" (sortChange)="navigateToWithComponentValues($event)">
+            <th scope="col" jhiSortBy="id">
+              <div class="d-flex">
+                <span jhiTranslate="global.field.id">ID</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="skills">
+              <div class="d-flex">
+                <span jhiTranslate="hrSolutionApp.techCVSoftSkills.skills">Skills</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="technicalCV.id">
+              <div class="d-flex">
+                <span jhiTranslate="hrSolutionApp.techCVSoftSkills.technicalCV">Technical CV</span>
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col"></th>
+          </tr>
+        </thead>
+        <tbody>
+          @for (techCVSoftSkills of techCVSoftSkills; track trackId) {
+            <tr data-cy="entityTable">
+              <td>
+                <a [routerLink]="['/tech-cv-soft-skills', techCVSoftSkills.id, 'view']">{{ techCVSoftSkills.id }}</a>
+              </td>
+              <td>{{ techCVSoftSkills.skills }}</td>
+              <td>
+                @if (techCVSoftSkills.technicalCV) {
+                  <div>
+                    <a [routerLink]="['/technical-cv', techCVSoftSkills.technicalCV.id, 'view']">{{ techCVSoftSkills.technicalCV.id }}</a>
+                  </div>
+                }
+              </td>
+              <td class="text-end">
+                <div class="btn-group">
+                  <a
+                    [routerLink]="['/tech-cv-soft-skills', techCVSoftSkills.id, 'view']"
+                    class="btn btn-info btn-sm"
+                    data-cy="entityDetailsButton"
+                  >
+                    <fa-icon icon="eye"></fa-icon>
+                    <span class="d-none d-md-inline" jhiTranslate="entity.action.view">View</span>
+                  </a>
+
+                  <a
+                    [routerLink]="['/tech-cv-soft-skills', techCVSoftSkills.id, 'edit']"
+                    class="btn btn-primary btn-sm"
+                    data-cy="entityEditButton"
+                  >
+                    <fa-icon icon="pencil-alt"></fa-icon>
+                    <span class="d-none d-md-inline" jhiTranslate="entity.action.edit">Edit</span>
+                  </a>
+
+                  <button type="submit" (click)="delete(techCVSoftSkills)" class="btn btn-danger btn-sm" data-cy="entityDeleteButton">
+                    <fa-icon icon="times"></fa-icon>
+                    <span class="d-none d-md-inline" jhiTranslate="entity.action.delete">Delete</span>
+                  </button>
+                </div>
+              </td>
+            </tr>
+          }
+        </tbody>
+      </table>
+    </div>
+  }
+</div>

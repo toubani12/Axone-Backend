@@ -1,0 +1,190 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    <form name="editForm" novalidate (ngSubmit)="save()" [formGroup]="editForm">
+      <h2
+        id="jhi-app-account-heading"
+        data-cy="AppAccountCreateUpdateHeading"
+        jhiTranslate="hrSolutionApp.appAccount.home.createOrEditLabel"
+      >
+        Create or edit a App Account
+      </h2>
+
+      <div>
+        <jhi-alert-error></jhi-alert-error>
+
+        @if (editForm.controls.id.value !== null) {
+          <div class="mb-3">
+            <label class="form-label" for="field_id" jhiTranslate="hrSolutionApp.appAccount.id">ID</label>
+            <input type="number" class="form-control" name="id" id="field_id" data-cy="id" formControlName="id" [readonly]="true" />
+          </div>
+        }
+
+        <div class="mb-3">
+          <label class="form-label" for="field_accountNumber" jhiTranslate="hrSolutionApp.appAccount.accountNumber">Account Number</label>
+          <input
+            type="number"
+            class="form-control"
+            name="accountNumber"
+            id="field_accountNumber"
+            data-cy="accountNumber"
+            formControlName="accountNumber"
+          />
+          @if (editForm.get('accountNumber')!.invalid && (editForm.get('accountNumber')!.dirty || editForm.get('accountNumber')!.touched)) {
+            <div>
+              @if (editForm.get('accountNumber')?.errors?.required) {
+                <small class="form-text text-danger" jhiTranslate="entity.validation.required">This field is required.</small>
+              }
+              <small
+                class="form-text text-danger"
+                [hidden]="!editForm.get('accountNumber')?.errors?.number"
+                jhiTranslate="entity.validation.number"
+                >This field should be a number.</small
+              >
+            </div>
+          }
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" for="field_cardNumber" jhiTranslate="hrSolutionApp.appAccount.cardNumber">Card Number</label>
+          <input
+            type="number"
+            class="form-control"
+            name="cardNumber"
+            id="field_cardNumber"
+            data-cy="cardNumber"
+            formControlName="cardNumber"
+          />
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" for="field_endDate" jhiTranslate="hrSolutionApp.appAccount.endDate">End Date</label>
+          <div class="input-group">
+            <input
+              id="field_endDate"
+              data-cy="endDate"
+              type="text"
+              class="form-control"
+              name="endDate"
+              ngbDatepicker
+              #endDateDp="ngbDatepicker"
+              formControlName="endDate"
+            />
+            <button type="button" class="btn btn-secondary" (click)="endDateDp.toggle()"><fa-icon icon="calendar-alt"></fa-icon></button>
+          </div>
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" for="field_cvv" jhiTranslate="hrSolutionApp.appAccount.cvv">Cvv</label>
+          <input type="number" class="form-control" name="cvv" id="field_cvv" data-cy="cvv" formControlName="cvv" />
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" for="field_relatedUser" jhiTranslate="hrSolutionApp.appAccount.relatedUser">Related User</label>
+          <select
+            class="form-control"
+            id="field_relatedUser"
+            data-cy="relatedUser"
+            name="relatedUser"
+            formControlName="relatedUser"
+            [compareWith]="compareUser"
+          >
+            @if (!editForm.get('relatedUser')!.value) {
+              <option [ngValue]="null" selected></option>
+            }
+            @for (userOption of usersSharedCollection; track $index) {
+              <option [ngValue]="userOption">{{ userOption.login }}</option>
+            }
+          </select>
+        </div>
+        @if (editForm.get(['relatedUser'])!.invalid && (editForm.get(['relatedUser'])!.dirty || editForm.get(['relatedUser'])!.touched)) {
+          <div>
+            @if (editForm.get(['relatedUser'])?.errors?.required) {
+              <small class="form-text text-danger" jhiTranslate="entity.validation.required">This field is required.</small>
+            }
+          </div>
+        }
+
+        <div class="mb-3">
+          <label for="field_types" jhiTranslate="hrSolutionApp.appAccount.type">Type</label>
+          <select
+            class="form-control"
+            id="field_types"
+            data-cy="type"
+            multiple
+            name="types"
+            formControlName="types"
+            [compareWith]="compareAppAccountType"
+          >
+            @for (appAccountTypeOption of appAccountTypesSharedCollection; track $index) {
+              <option [ngValue]="appAccountTypeOption">{{ appAccountTypeOption.type }}</option>
+            }
+          </select>
+        </div>
+        @if (editForm.get(['types'])!.invalid && (editForm.get(['types'])!.dirty || editForm.get(['types'])!.touched)) {
+          <div>
+            @if (editForm.get(['types'])?.errors?.required) {
+              <small class="form-text text-danger" jhiTranslate="entity.validation.required">This field is required.</small>
+            }
+          </div>
+        }
+
+        <div class="mb-3">
+          <label for="field_providers" jhiTranslate="hrSolutionApp.appAccount.provider">Provider</label>
+          <select
+            class="form-control"
+            id="field_providers"
+            data-cy="provider"
+            multiple
+            name="providers"
+            formControlName="providers"
+            [compareWith]="compareProvider"
+          >
+            @for (providerOption of providersSharedCollection; track $index) {
+              <option [ngValue]="providerOption">{{ providerOption.name }}</option>
+            }
+          </select>
+        </div>
+        @if (editForm.get(['providers'])!.invalid && (editForm.get(['providers'])!.dirty || editForm.get(['providers'])!.touched)) {
+          <div>
+            @if (editForm.get(['providers'])?.errors?.required) {
+              <small class="form-text text-danger" jhiTranslate="entity.validation.required">This field is required.</small>
+            }
+          </div>
+        }
+
+        <div class="mb-3">
+          <label class="form-label" for="field_ifEmployer" jhiTranslate="hrSolutionApp.appAccount.ifEmployer">If Employer</label>
+          <select
+            class="form-control"
+            id="field_ifEmployer"
+            data-cy="ifEmployer"
+            name="ifEmployer"
+            formControlName="ifEmployer"
+            [compareWith]="compareEmployer"
+          >
+            <option [ngValue]="null"></option>
+            @for (employerOption of employersSharedCollection; track $index) {
+              <option [ngValue]="employerOption">{{ employerOption.id }}</option>
+            }
+          </select>
+        </div>
+      </div>
+
+      <div>
+        <button type="button" id="cancel-save" data-cy="entityCreateCancelButton" class="btn btn-secondary" (click)="previousState()">
+          <fa-icon icon="ban"></fa-icon>&nbsp;<span jhiTranslate="entity.action.cancel">Cancel</span>
+        </button>
+
+        <button
+          type="submit"
+          id="save-entity"
+          data-cy="entityCreateSaveButton"
+          [disabled]="editForm.invalid || isSaving"
+          class="btn btn-primary"
+        >
+          <fa-icon icon="save"></fa-icon>&nbsp;<span jhiTranslate="entity.action.save">Save</span>
+        </button>
+      </div>
+    </form>
+  </div>
+</div>

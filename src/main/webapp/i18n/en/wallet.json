@@ -1,0 +1,29 @@
+{
+  "hrSolutionApp": {
+    "wallet": {
+      "home": {
+        "title": "Wallets",
+        "refreshListLabel": "Refresh list",
+        "createLabel": "Create a new Wallet",
+        "createOrEditLabel": "Create or edit a Wallet",
+        "notFound": "No Wallets found"
+      },
+      "created": "A new Wallet is created with identifier {{ param }}",
+      "updated": "A Wallet is updated with identifier {{ param }}",
+      "deleted": "A Wallet is deleted with identifier {{ param }}",
+      "delete": {
+        "question": "Are you sure you want to delete Wallet {{ id }}?"
+      },
+      "detail": {
+        "title": "Wallet"
+      },
+      "id": "ID",
+      "balance": "Balance",
+      "status": "Status",
+      "relatedToAccount": "Related To Account",
+      "recruiter": "Recruiter",
+      "employer": "Employer",
+      "admin": "Admin"
+    }
+  }
+}

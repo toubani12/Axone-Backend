@@ -1,0 +1,32 @@
+{
+  "hrSolutionApp": {
+    "appAccount": {
+      "home": {
+        "title": "App Accounts",
+        "refreshListLabel": "Refresh list",
+        "createLabel": "Create a new App Account",
+        "createOrEditLabel": "Create or edit a App Account",
+        "notFound": "No App Accounts found"
+      },
+      "created": "A new App Account is created with identifier {{ param }}",
+      "updated": "A App Account is updated with identifier {{ param }}",
+      "deleted": "A App Account is deleted with identifier {{ param }}",
+      "delete": {
+        "question": "Are you sure you want to delete App Account {{ id }}?"
+      },
+      "detail": {
+        "title": "App Account"
+      },
+      "id": "ID",
+      "accountNumber": "Account Number",
+      "cardNumber": "Card Number",
+      "endDate": "End Date",
+      "cvv": "Cvv",
+      "relatedUser": "Related User",
+      "type": "Type",
+      "provider": "Provider",
+      "relatedWallet": "Related Wallet",
+      "ifEmployer": "If Employer"
+    }
+  }
+}

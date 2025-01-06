@@ -1,0 +1,43 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    @if (criteria()) {
+      <div>
+        <h2 data-cy="criteriaDetailsHeading"><span jhiTranslate="hrSolutionApp.criteria.detail.title">Criteria</span></h2>
+
+        <hr />
+
+        <jhi-alert-error></jhi-alert-error>
+
+        <jhi-alert></jhi-alert>
+
+        <dl class="row-md jh-entity-details">
+          <dt><span jhiTranslate="global.field.id">ID</span></dt>
+          <dd>
+            <span>{{ criteria()!.id }}</span>
+          </dd>
+          <dt><span jhiTranslate="hrSolutionApp.criteria.name">Name</span></dt>
+          <dd>
+            <span>{{ criteria()!.name }}</span>
+          </dd>
+          <dt><span jhiTranslate="hrSolutionApp.criteria.application">Application</span></dt>
+          <dd>
+            @for (application of criteria()!.applications; track $index; let last = $last) {
+              <span>
+                <a [routerLink]="['/application', application.id, 'view']">{{ application?.id }}</a
+                >{{ last ? '' : ', ' }}
+              </span>
+            }
+          </dd>
+        </dl>
+
+        <button type="submit" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">
+          <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back">Back</span>
+        </button>
+
+        <button type="button" [routerLink]="['/criteria', criteria()!.id, 'edit']" class="btn btn-primary">
+          <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit">Edit</span>
+        </button>
+      </div>
+    }
+  </div>
+</div>

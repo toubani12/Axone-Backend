@@ -1,0 +1,96 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    @if (candidate()) {
+      <div>
+        <h2 data-cy="candidateDetailsHeading"><span jhiTranslate="hrSolutionApp.candidate.detail.title">Candidate</span></h2>
+
+        <hr />
+
+        <jhi-alert-error></jhi-alert-error>
+
+        <jhi-alert></jhi-alert>
+
+        <dl class="row-md jh-entity-details">
+          <dt><span jhiTranslate="global.field.id">ID</span></dt>
+          <dd>
+            <span>{{ candidate()!.id }}</span>
+          </dd>
+          <dt><span jhiTranslate="hrSolutionApp.candidate.firstName">First Name</span></dt>
+          <dd>
+            <span>{{ candidate()!.firstName }}</span>
+          </dd>
+          <dt><span jhiTranslate="hrSolutionApp.candidate.lastName">Last Name</span></dt>
+          <dd>
+            <span>{{ candidate()!.lastName }}</span>
+          </dd>
+          <dt><span jhiTranslate="hrSolutionApp.candidate.linkedinUrl">Linkedin Url</span></dt>
+          <dd>
+            <span>{{ candidate()!.linkedinUrl }}</span>
+          </dd>
+          <dt><span jhiTranslate="hrSolutionApp.candidate.fullName">Full Name</span></dt>
+          <dd>
+            <span>{{ candidate()!.fullName }}</span>
+          </dd>
+          <dt><span jhiTranslate="hrSolutionApp.candidate.yearsOfExperience">Years Of Experience</span></dt>
+          <dd>
+            <span>{{ candidate()!.yearsOfExperience }}</span>
+          </dd>
+          <dt><span jhiTranslate="hrSolutionApp.candidate.currentSalary">Current Salary</span></dt>
+          <dd>
+            <span>{{ candidate()!.currentSalary }}</span>
+          </dd>
+          <dt><span jhiTranslate="hrSolutionApp.candidate.desiredSalary">Desired Salary</span></dt>
+          <dd>
+            <span>{{ candidate()!.desiredSalary }}</span>
+          </dd>
+          <dt><span jhiTranslate="hrSolutionApp.candidate.hasContract">Has Contract</span></dt>
+          <dd>
+            <span>{{ candidate()!.hasContract }}</span>
+          </dd>
+          <dt><span jhiTranslate="hrSolutionApp.candidate.hired">Hired</span></dt>
+          <dd>
+            <span>{{ candidate()!.hired }}</span>
+          </dd>
+          <dt><span jhiTranslate="hrSolutionApp.candidate.rate">Rate</span></dt>
+          <dd>
+            <span>{{ candidate()!.rate }}</span>
+          </dd>
+          <dt><span jhiTranslate="hrSolutionApp.candidate.techCV">Tech CV</span></dt>
+          <dd>
+            @if (candidate()!.techCV) {
+              <div>
+                <a [routerLink]="['/technical-cv', candidate()!.techCV?.id, 'view']">{{ candidate()!.techCV?.name }}</a>
+              </div>
+            }
+          </dd>
+          <dt><span jhiTranslate="hrSolutionApp.candidate.domain">Domain</span></dt>
+          <dd>
+            @for (domain of candidate()!.domains; track $index; let last = $last) {
+              <span>
+                <a [routerLink]="['/domain', domain.id, 'view']">{{ domain?.name }}</a
+                >{{ last ? '' : ', ' }}
+              </span>
+            }
+          </dd>
+          <dt><span jhiTranslate="hrSolutionApp.candidate.applications">Applications</span></dt>
+          <dd>
+            @for (applications of candidate()!.applications; track $index; let last = $last) {
+              <span>
+                <a [routerLink]="['/application', applications.id, 'view']">{{ applications?.title }}</a
+                >{{ last ? '' : ', ' }}
+              </span>
+            }
+          </dd>
+        </dl>
+
+        <button type="submit" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">
+          <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back">Back</span>
+        </button>
+
+        <button type="button" [routerLink]="['/candidate', candidate()!.id, 'edit']" class="btn btn-primary">
+          <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit">Edit</span>
+        </button>
+      </div>
+    }
+  </div>
+</div>

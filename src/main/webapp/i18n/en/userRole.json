@@ -1,0 +1,10 @@
+{
+  "hrSolutionApp": {
+    "UserRole": {
+      "null": "",
+      "ADMIN": "ADMIN",
+      "RECRUITER": "RECRUITER",
+      "EMPLOYER": "EMPLOYER"
+    }
+  }
+}

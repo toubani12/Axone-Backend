@@ -1,0 +1,131 @@
+{
+  "annotations": {
+    "changelogDate": "20240524145124"
+  },
+  "applications": ["HRSolution"],
+  "fields": [
+    {
+      "fieldName": "firstName",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "lastName",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "linkedinUrl",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "fullName",
+      "fieldType": "String",
+      "fieldValidateRules": ["required"]
+    },
+    {
+      "fieldName": "yearsOfExperience",
+      "fieldType": "Integer",
+      "fieldValidateRules": ["required"]
+    },
+    {
+      "fieldName": "currentSalary",
+      "fieldType": "Double"
+    },
+    {
+      "fieldName": "desiredSalary",
+      "fieldType": "Double"
+    },
+    {
+      "fieldName": "hasContract",
+      "fieldType": "Boolean",
+      "fieldValidateRules": ["required"]
+    },
+    {
+      "fieldName": "hired",
+      "fieldType": "Boolean",
+      "fieldValidateRules": ["required"]
+    },
+    {
+      "fieldName": "rate",
+      "fieldType": "Float"
+    }
+  ],
+  "name": "Candidate",
+  "relationships": [
+    {
+      "options": {
+        "onUpdate": "CASCADE"
+      },
+      "otherEntityField": "name",
+      "otherEntityName": "technicalCV",
+      "otherEntityRelationshipName": "candidate",
+      "relationshipName": "techCV",
+      "relationshipSide": "left",
+      "relationshipType": "one-to-one",
+      "relationshipValidateRules": "required"
+    },
+    {
+      "options": {
+        "onUpdate": "CASCADE"
+      },
+      "otherEntityName": "interview",
+      "otherEntityRelationshipName": "attendee",
+      "relationshipName": "interviewResult",
+      "relationshipSide": "left",
+      "relationshipType": "one-to-many"
+    },
+    {
+      "options": {
+        "onUpdate": "CASCADE"
+      },
+      "otherEntityField": "resume",
+      "otherEntityName": "resume",
+      "otherEntityRelationshipName": "owner",
+      "relationshipName": "candidateResume",
+      "relationshipSide": "left",
+      "relationshipType": "one-to-many"
+    },
+    {
+      "options": {
+        "onUpdate": "CASCADE"
+      },
+      "otherEntityField": "name",
+      "otherEntityName": "domain",
+      "relationshipName": "domain",
+      "relationshipSide": "left",
+      "relationshipType": "many-to-many",
+      "relationshipValidateRules": "required"
+    },
+    {
+      "options": {
+        "onUpdate": "CASCADE"
+      },
+      "otherEntityField": "title",
+      "otherEntityName": "application",
+      "otherEntityRelationshipName": "candidates",
+      "relationshipName": "applications",
+      "relationshipSide": "left",
+      "relationshipType": "many-to-many"
+    },
+    {
+      "options": {
+        "onUpdate": "CASCADE"
+      },
+      "otherEntityName": "contract",
+      "otherEntityRelationshipName": "candidate",
+      "relationshipName": "contract",
+      "relationshipSide": "right",
+      "relationshipType": "one-to-one"
+    },
+    {
+      "options": {
+        "onUpdate": "CASCADE"
+      },
+      "otherEntityName": "nDA",
+      "otherEntityRelationshipName": "candidate",
+      "relationshipName": "ndaStatus",
+      "relationshipSide": "right",
+      "relationshipType": "one-to-many"
+    }
+  ],
+  "searchEngine": "no"
+}

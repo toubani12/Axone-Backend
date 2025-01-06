@@ -1,0 +1,25 @@
+{
+  "hrSolutionApp": {
+    "techCVProject": {
+      "home": {
+        "title": "Tech CV Projects",
+        "refreshListLabel": "Refresh list",
+        "createLabel": "Create a new Tech CV Project",
+        "createOrEditLabel": "Create or edit a Tech CV Project",
+        "notFound": "No Tech CV Projects found"
+      },
+      "created": "A new Tech CV Project is created with identifier {{ param }}",
+      "updated": "A Tech CV Project is updated with identifier {{ param }}",
+      "deleted": "A Tech CV Project is deleted with identifier {{ param }}",
+      "delete": {
+        "question": "Are you sure you want to delete Tech CV Project {{ id }}?"
+      },
+      "detail": {
+        "title": "Tech CV Project"
+      },
+      "id": "ID",
+      "project": "Project",
+      "technicalCV": "Technical CV"
+    }
+  }
+}

@@ -1,0 +1,113 @@
+{
+  "annotations": {
+    "changelogDate": "20240524145424"
+  },
+  "applications": ["HRSolution"],
+  "entityTableName": "technical_cv",
+  "fields": [
+    {
+      "fieldName": "name",
+      "fieldType": "String",
+      "fieldValidateRules": ["required"]
+    },
+    {
+      "fieldName": "level",
+      "fieldType": "TechCVLevel",
+      "fieldValidateRules": ["required"],
+      "fieldValues": "BEGINNER,INTERMEDIATE,EXPERT"
+    },
+    {
+      "fieldName": "profileDescription",
+      "fieldType": "String"
+    }
+  ],
+  "name": "TechnicalCV",
+  "relationships": [
+    {
+      "options": {
+        "onUpdate": "CASCADE"
+      },
+      "otherEntityName": "techCVHardSkills",
+      "relationshipName": "hardSkills",
+      "relationshipSide": "left",
+      "relationshipType": "one-to-many",
+      "relationshipValidateRules": "required"
+    },
+    {
+      "options": {
+        "onUpdate": "CASCADE"
+      },
+      "otherEntityName": "techCVSoftSkills",
+      "relationshipName": "softSkills",
+      "relationshipSide": "left",
+      "relationshipType": "one-to-many",
+      "relationshipValidateRules": "required"
+    },
+    {
+      "options": {
+        "onUpdate": "CASCADE"
+      },
+      "otherEntityName": "techCVEducation",
+      "relationshipName": "education",
+      "relationshipSide": "left",
+      "relationshipType": "one-to-many"
+    },
+    {
+      "options": {
+        "onUpdate": "CASCADE"
+      },
+      "otherEntityName": "techCVEmployment",
+      "relationshipName": "employments",
+      "relationshipSide": "left",
+      "relationshipType": "one-to-many"
+    },
+    {
+      "options": {
+        "onUpdate": "CASCADE"
+      },
+      "otherEntityName": "techCVProject",
+      "relationshipName": "projects",
+      "relationshipSide": "left",
+      "relationshipType": "one-to-many"
+    },
+    {
+      "options": {
+        "onUpdate": "CASCADE"
+      },
+      "otherEntityName": "techCVAchievement",
+      "relationshipName": "achievements",
+      "relationshipSide": "left",
+      "relationshipType": "one-to-many"
+    },
+    {
+      "options": {
+        "onUpdate": "CASCADE"
+      },
+      "otherEntityName": "techCVDocs",
+      "relationshipName": "attachedDocs",
+      "relationshipSide": "left",
+      "relationshipType": "one-to-many"
+    },
+    {
+      "options": {
+        "onUpdate": "CASCADE"
+      },
+      "otherEntityName": "techCVAltActivities",
+      "relationshipName": "altActivities",
+      "relationshipSide": "left",
+      "relationshipType": "one-to-many"
+    },
+    {
+      "options": {
+        "onDelete": "CASCADE",
+        "onUpdate": "CASCADE"
+      },
+      "otherEntityName": "candidate",
+      "otherEntityRelationshipName": "techCV",
+      "relationshipName": "candidate",
+      "relationshipSide": "right",
+      "relationshipType": "one-to-one"
+    }
+  ],
+  "searchEngine": "no"
+}

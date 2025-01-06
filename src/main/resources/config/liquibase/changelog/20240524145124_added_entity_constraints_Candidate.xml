@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<databaseChangeLog
+    xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+    xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-latest.xsd
+                        http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd">
+    <!--
+        Added the constraints for entity Candidate.
+    -->
+    <changeSet id="20240524145124-2" author="jhipster">
+
+        <addForeignKeyConstraint baseColumnNames="techcv_id"
+                                 baseTableName="candidate"
+                                 constraintName="fk_candidate__techcv_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="technical_cv"
+                                 onUpdate="CASCADE"
+                                 />
+
+        <addForeignKeyConstraint baseColumnNames="candidate_id"
+                                 baseTableName="rel_candidate__domain"
+                                 constraintName="fk_rel_candidate__domain__candidate_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="candidate"
+                                 onUpdate="CASCADE"
+                                 />
+
+        <addForeignKeyConstraint baseColumnNames="domain_id"
+                                 baseTableName="rel_candidate__domain"
+                                 constraintName="fk_rel_candidate__domain__domain_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="domain"
+                                 onUpdate="CASCADE"
+                                 />
+
+        <addForeignKeyConstraint baseColumnNames="candidate_id"
+                                 baseTableName="rel_candidate__applications"
+                                 constraintName="fk_rel_candidate__applications__candidate_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="candidate"
+                                 onUpdate="CASCADE"
+                                 />
+
+        <addForeignKeyConstraint baseColumnNames="applications_id"
+                                 baseTableName="rel_candidate__applications"
+                                 constraintName="fk_rel_candidate__applications__applications_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="application"
+                                 onUpdate="CASCADE"
+                                 />
+    </changeSet>
+</databaseChangeLog>

@@ -1,0 +1,10 @@
+{
+  "hrSolutionApp": {
+    "WalletStatus": {
+      "null": "",
+      "ACTIVE": "ACTIVE",
+      "DEACTIVATED": "DEACTIVATED",
+      "BANNED": "BANNED"
+    }
+  }
+}

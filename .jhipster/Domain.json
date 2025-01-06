@@ -1,0 +1,47 @@
+{
+  "annotations": {
+    "changelogDate": "20240524150624"
+  },
+  "applications": ["HRSolution"],
+  "fields": [
+    {
+      "fieldName": "name",
+      "fieldType": "String",
+      "fieldValidateRules": ["required"]
+    }
+  ],
+  "name": "Domain",
+  "relationships": [
+    {
+      "options": {
+        "onUpdate": "CASCADE"
+      },
+      "otherEntityName": "recruiter",
+      "otherEntityRelationshipName": "operationalDomain",
+      "relationshipName": "recruiter",
+      "relationshipSide": "right",
+      "relationshipType": "many-to-many"
+    },
+    {
+      "options": {
+        "onUpdate": "CASCADE"
+      },
+      "otherEntityName": "candidate",
+      "otherEntityRelationshipName": "domain",
+      "relationshipName": "candidate",
+      "relationshipSide": "right",
+      "relationshipType": "many-to-many"
+    },
+    {
+      "options": {
+        "onUpdate": "CASCADE"
+      },
+      "otherEntityName": "application",
+      "otherEntityRelationshipName": "domain",
+      "relationshipName": "application",
+      "relationshipSide": "right",
+      "relationshipType": "many-to-many"
+    }
+  ],
+  "searchEngine": "no"
+}

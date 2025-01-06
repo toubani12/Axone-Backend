@@ -1,0 +1,25 @@
+{
+  "hrSolutionApp": {
+    "appTestType": {
+      "home": {
+        "title": "App Test Types",
+        "refreshListLabel": "Refresh list",
+        "createLabel": "Create a new App Test Type",
+        "createOrEditLabel": "Create or edit a App Test Type",
+        "notFound": "No App Test Types found"
+      },
+      "created": "A new App Test Type is created with identifier {{ param }}",
+      "updated": "A App Test Type is updated with identifier {{ param }}",
+      "deleted": "A App Test Type is deleted with identifier {{ param }}",
+      "delete": {
+        "question": "Are you sure you want to delete App Test Type {{ id }}?"
+      },
+      "detail": {
+        "title": "App Test Type"
+      },
+      "id": "ID",
+      "type": "Type",
+      "appTest": "App Test"
+    }
+  }
+}

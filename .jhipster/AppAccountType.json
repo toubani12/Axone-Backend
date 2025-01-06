@@ -1,0 +1,27 @@
+{
+  "annotations": {
+    "changelogDate": "20240524151324"
+  },
+  "applications": ["HRSolution"],
+  "fields": [
+    {
+      "fieldName": "type",
+      "fieldType": "String",
+      "fieldValidateRules": ["required"]
+    }
+  ],
+  "name": "AppAccountType",
+  "relationships": [
+    {
+      "options": {
+        "onUpdate": "CASCADE"
+      },
+      "otherEntityName": "appAccount",
+      "otherEntityRelationshipName": "type",
+      "relationshipName": "appAccount",
+      "relationshipSide": "right",
+      "relationshipType": "many-to-many"
+    }
+  ],
+  "searchEngine": "no"
+}

@@ -1,0 +1,29 @@
+{
+  "annotations": {
+    "changelogDate": "20240524150224"
+  },
+  "applications": ["HRSolution"],
+  "entityTableName": "tech_cv_alt_activities",
+  "fields": [
+    {
+      "fieldName": "activities",
+      "fieldType": "String",
+      "fieldValidateRules": ["required"]
+    }
+  ],
+  "name": "TechCVAltActivities",
+  "relationships": [
+    {
+      "options": {
+        "onDelete": "CASCADE",
+        "onUpdate": "CASCADE"
+      },
+      "otherEntityName": "technicalCV",
+      "otherEntityRelationshipName": "altActivities",
+      "relationshipName": "technicalCV",
+      "relationshipSide": "right",
+      "relationshipType": "many-to-one"
+    }
+  ],
+  "searchEngine": "no"
+}

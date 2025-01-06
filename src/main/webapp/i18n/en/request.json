@@ -1,0 +1,27 @@
+{
+  "hrSolutionApp": {
+    "request": {
+      "home": {
+        "title": "Requests",
+        "refreshListLabel": "Refresh list",
+        "createLabel": "Create a new Request",
+        "createOrEditLabel": "Create or edit a Request",
+        "notFound": "No Requests found"
+      },
+      "created": "A new Request is created with identifier {{ param }}",
+      "updated": "A Request is updated with identifier {{ param }}",
+      "deleted": "A Request is deleted with identifier {{ param }}",
+      "delete": {
+        "question": "Are you sure you want to delete Request {{ id }}?"
+      },
+      "detail": {
+        "title": "Request"
+      },
+      "id": "ID",
+      "status": "Status",
+      "expressionOfInterest": "Expression Of Interest",
+      "relatedApplication": "Related Application",
+      "recruiter": "Recruiter"
+    }
+  }
+}

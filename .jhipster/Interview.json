@@ -1,0 +1,68 @@
+{
+  "annotations": {
+    "changelogDate": "20240524151724"
+  },
+  "applications": ["HRSolution"],
+  "fields": [
+    {
+      "fieldName": "label",
+      "fieldType": "String",
+      "fieldValidateRules": ["required"]
+    },
+    {
+      "fieldName": "entryLink",
+      "fieldType": "String",
+      "fieldValidateRules": ["required"]
+    },
+    {
+      "fieldName": "invitationLink",
+      "fieldType": "String",
+      "fieldValidateRules": ["required"]
+    },
+    {
+      "fieldName": "interviewResult",
+      "fieldType": "Boolean"
+    },
+    {
+      "fieldName": "rate",
+      "fieldType": "Float"
+    },
+    {
+      "fieldName": "startedAt",
+      "fieldType": "LocalDate"
+    },
+    {
+      "fieldName": "endedAt",
+      "fieldType": "LocalDate"
+    },
+    {
+      "fieldName": "comments",
+      "fieldType": "String"
+    }
+  ],
+  "name": "Interview",
+  "relationships": [
+    {
+      "options": {
+        "onUpdate": "CASCADE"
+      },
+      "otherEntityName": "candidate",
+      "otherEntityRelationshipName": "interviewResult",
+      "relationshipName": "attendee",
+      "relationshipSide": "right",
+      "relationshipType": "many-to-one"
+    },
+    {
+      "options": {
+        "onUpdate": "CASCADE"
+      },
+      "otherEntityName": "application",
+      "otherEntityRelationshipName": "interviews",
+      "relationshipName": "application",
+      "relationshipSide": "right",
+      "relationshipType": "many-to-one",
+      "relationshipValidateRules": "required"
+    }
+  ],
+  "searchEngine": "no"
+}

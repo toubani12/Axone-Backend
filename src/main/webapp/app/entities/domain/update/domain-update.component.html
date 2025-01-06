@@ -1,0 +1,116 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    <form name="editForm" novalidate (ngSubmit)="save()" [formGroup]="editForm">
+      <h2 id="jhi-domain-heading" data-cy="DomainCreateUpdateHeading" jhiTranslate="hrSolutionApp.domain.home.createOrEditLabel">
+        Create or edit a Domain
+      </h2>
+
+      <div>
+        <jhi-alert-error></jhi-alert-error>
+
+        @if (editForm.controls.id.value !== null) {
+          <div class="mb-3">
+            <label class="form-label" for="field_id" jhiTranslate="hrSolutionApp.domain.id">ID</label>
+            <input type="number" class="form-control" name="id" id="field_id" data-cy="id" formControlName="id" [readonly]="true" />
+          </div>
+        }
+
+        <div class="mb-3">
+          <label class="form-label" for="field_name" jhiTranslate="hrSolutionApp.domain.name">Name</label>
+          <input type="text" class="form-control" name="name" id="field_name" data-cy="name" formControlName="name" />
+          @if (editForm.get('name')!.invalid && (editForm.get('name')!.dirty || editForm.get('name')!.touched)) {
+            <div>
+              @if (editForm.get('name')?.errors?.required) {
+                <small class="form-text text-danger" jhiTranslate="entity.validation.required">This field is required.</small>
+              }
+            </div>
+          }
+        </div>
+
+        <div class="mb-3">
+          <label for="field_recruiters" jhiTranslate="hrSolutionApp.domain.recruiter">Recruiter</label>
+          <select
+            class="form-control"
+            id="field_recruiters"
+            data-cy="recruiter"
+            multiple
+            name="recruiters"
+            formControlName="recruiters"
+            [compareWith]="compareRecruiter"
+          >
+            @for (recruiterOption of recruitersSharedCollection; track $index) {
+              <option [ngValue]="recruiterOption">{{ recruiterOption.id }}</option>
+            }
+          </select>
+        </div>
+
+        <div class="mb-3">
+          <label for="field_candidates" jhiTranslate="hrSolutionApp.domain.candidate">Candidate</label>
+          <select
+            class="form-control"
+            id="field_candidates"
+            data-cy="candidate"
+            multiple
+            name="candidates"
+            formControlName="candidates"
+            [compareWith]="compareCandidate"
+          >
+            @for (candidateOption of candidatesSharedCollection; track $index) {
+              <option [ngValue]="candidateOption">{{ candidateOption.id }}</option>
+            }
+          </select>
+        </div>
+
+        <div class="mb-3">
+          <label for="field_applications" jhiTranslate="hrSolutionApp.domain.application">Application</label>
+          <select
+            class="form-control"
+            id="field_applications"
+            data-cy="application"
+            multiple
+            name="applications"
+            formControlName="applications"
+            [compareWith]="compareApplication"
+          >
+            @for (applicationOption of applicationsSharedCollection; track $index) {
+              <option [ngValue]="applicationOption">{{ applicationOption.id }}</option>
+            }
+          </select>
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" for="field_employer" jhiTranslate="hrSolutionApp.domain.employer">Employer</label>
+          <select
+            class="form-control"
+            id="field_employer"
+            data-cy="employer"
+            name="employer"
+            formControlName="employer"
+            [compareWith]="compareEmployer"
+          >
+            <option [ngValue]="null"></option>
+            @for (employerOption of employersSharedCollection; track $index) {
+              <option [ngValue]="employerOption">{{ employerOption.id }}</option>
+            }
+          </select>
+        </div>
+      </div>
+
+      <div>
+        <button type="button" id="cancel-save" data-cy="entityCreateCancelButton" class="btn btn-secondary" (click)="previousState()">
+          <fa-icon icon="ban"></fa-icon>&nbsp;<span jhiTranslate="entity.action.cancel">Cancel</span>
+        </button>
+
+        <button
+          type="submit"
+          id="save-entity"
+          data-cy="entityCreateSaveButton"
+          [disabled]="editForm.invalid || isSaving"
+          class="btn btn-primary"
+        >
+          <fa-icon icon="save"></fa-icon>&nbsp;<span jhiTranslate="entity.action.save">Save</span>
+        </button>
+      </div>
+    </form>
+  </div>
+</div>

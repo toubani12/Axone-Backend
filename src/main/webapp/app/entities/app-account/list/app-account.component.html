@@ -1,0 +1,160 @@
+<div>
+  <h2 id="page-heading" data-cy="AppAccountHeading">
+    <span jhiTranslate="hrSolutionApp.appAccount.home.title">App Accounts</span>
+
+    <div class="d-flex justify-content-end">
+      <button class="btn btn-info me-2" (click)="load()" [disabled]="isLoading">
+        <fa-icon icon="sync" [spin]="isLoading"></fa-icon>
+        <span jhiTranslate="hrSolutionApp.appAccount.home.refreshListLabel">Refresh list</span>
+      </button>
+
+      <button
+        id="jh-create-entity"
+        data-cy="entityCreateButton"
+        class="btn btn-primary jh-create-entity create-app-account"
+        [routerLink]="['/app-account/new']"
+      >
+        <fa-icon icon="plus"></fa-icon>
+        <span jhiTranslate="hrSolutionApp.appAccount.home.createLabel">Create a new App Account</span>
+      </button>
+    </div>
+  </h2>
+
+  <jhi-alert-error></jhi-alert-error>
+
+  <jhi-alert></jhi-alert>
+
+  @if (appAccounts?.length === 0) {
+    <div class="alert alert-warning" id="no-result">
+      <span jhiTranslate="hrSolutionApp.appAccount.home.notFound">No App Accounts found</span>
+    </div>
+  }
+
+  @if (appAccounts && appAccounts.length > 0) {
+    <div class="table-responsive table-entities" id="entities">
+      <table class="table table-striped" aria-describedby="page-heading">
+        <thead>
+          <tr jhiSort [sortState]="sortState" (sortChange)="navigateToWithComponentValues($event)">
+            <th scope="col" jhiSortBy="id">
+              <div class="d-flex">
+                <span jhiTranslate="global.field.id">ID</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="accountNumber">
+              <div class="d-flex">
+                <span jhiTranslate="hrSolutionApp.appAccount.accountNumber">Account Number</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="cardNumber">
+              <div class="d-flex">
+                <span jhiTranslate="hrSolutionApp.appAccount.cardNumber">Card Number</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="endDate">
+              <div class="d-flex">
+                <span jhiTranslate="hrSolutionApp.appAccount.endDate">End Date</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="cvv">
+              <div class="d-flex">
+                <span jhiTranslate="hrSolutionApp.appAccount.cvv">Cvv</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="relatedUser.login">
+              <div class="d-flex">
+                <span jhiTranslate="hrSolutionApp.appAccount.relatedUser">Related User</span>
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="type.type">
+              <div class="d-flex">
+                <span jhiTranslate="hrSolutionApp.appAccount.type">Type</span>
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="provider.name">
+              <div class="d-flex">
+                <span jhiTranslate="hrSolutionApp.appAccount.provider">Provider</span>
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="ifEmployer.id">
+              <div class="d-flex">
+                <span jhiTranslate="hrSolutionApp.appAccount.ifEmployer">If Employer</span>
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col"></th>
+          </tr>
+        </thead>
+        <tbody>
+          @for (appAccount of appAccounts; track trackId) {
+            <tr data-cy="entityTable">
+              <td>
+                <a [routerLink]="['/app-account', appAccount.id, 'view']">{{ appAccount.id }}</a>
+              </td>
+              <td>{{ appAccount.accountNumber }}</td>
+              <td>{{ appAccount.cardNumber }}</td>
+              <td>{{ appAccount.endDate | formatMediumDate }}</td>
+              <td>{{ appAccount.cvv }}</td>
+              <td>
+                {{ appAccount.relatedUser?.login }}
+              </td>
+              <td>
+                @for (type of appAccount.types; track $index; let last = $last) {
+                  <span>
+                    <a class="form-control-static" [routerLink]="['/app-account-type', type.id, 'view']">{{ type.type }}</a
+                    >{{ last ? '' : ', ' }}
+                  </span>
+                }
+              </td>
+              <td>
+                @for (provider of appAccount.providers; track $index; let last = $last) {
+                  <span>
+                    <a class="form-control-static" [routerLink]="['/provider', provider.id, 'view']">{{ provider.name }}</a
+                    >{{ last ? '' : ', ' }}
+                  </span>
+                }
+              </td>
+              <td>
+                @if (appAccount.ifEmployer) {
+                  <div>
+                    <a [routerLink]="['/employer', appAccount.ifEmployer.id, 'view']">{{ appAccount.ifEmployer.id }}</a>
+                  </div>
+                }
+              </td>
+              <td class="text-end">
+                <div class="btn-group">
+                  <a [routerLink]="['/app-account', appAccount.id, 'view']" class="btn btn-info btn-sm" data-cy="entityDetailsButton">
+                    <fa-icon icon="eye"></fa-icon>
+                    <span class="d-none d-md-inline" jhiTranslate="entity.action.view">View</span>
+                  </a>
+
+                  <a [routerLink]="['/app-account', appAccount.id, 'edit']" class="btn btn-primary btn-sm" data-cy="entityEditButton">
+                    <fa-icon icon="pencil-alt"></fa-icon>
+                    <span class="d-none d-md-inline" jhiTranslate="entity.action.edit">Edit</span>
+                  </a>
+
+                  <button type="submit" (click)="delete(appAccount)" class="btn btn-danger btn-sm" data-cy="entityDeleteButton">
+                    <fa-icon icon="times"></fa-icon>
+                    <span class="d-none d-md-inline" jhiTranslate="entity.action.delete">Delete</span>
+                  </button>
+                </div>
+              </td>
+            </tr>
+          }
+        </tbody>
+      </table>
+    </div>
+  }
+</div>

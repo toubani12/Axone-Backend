@@ -1,0 +1,65 @@
+{
+  "annotations": {
+    "changelogDate": "20240524151024"
+  },
+  "applications": ["HRSolution"],
+  "fields": [
+    {
+      "fieldName": "balance",
+      "fieldType": "Double",
+      "fieldValidateRules": ["required"]
+    },
+    {
+      "fieldName": "status",
+      "fieldType": "WalletStatus",
+      "fieldValidateRules": ["required"],
+      "fieldValues": "ACTIVE,DEACTIVATED,BANNED"
+    }
+  ],
+  "name": "Wallet",
+  "relationships": [
+    {
+      "options": {
+        "onUpdate": "CASCADE"
+      },
+      "otherEntityName": "appAccount",
+      "otherEntityRelationshipName": "relatedWallet",
+      "relationshipName": "relatedToAccount",
+      "relationshipSide": "left",
+      "relationshipType": "one-to-one"
+    },
+    {
+      "options": {
+        "onDelete": "CASCADE",
+        "onUpdate": "CASCADE"
+      },
+      "otherEntityName": "recruiter",
+      "otherEntityRelationshipName": "wallet",
+      "relationshipName": "recruiter",
+      "relationshipSide": "right",
+      "relationshipType": "one-to-one"
+    },
+    {
+      "options": {
+        "onDelete": "CASCADE",
+        "onUpdate": "CASCADE"
+      },
+      "otherEntityName": "employer",
+      "otherEntityRelationshipName": "wallet",
+      "relationshipName": "employer",
+      "relationshipSide": "right",
+      "relationshipType": "one-to-one"
+    },
+    {
+      "options": {
+        "onUpdate": "CASCADE"
+      },
+      "otherEntityName": "admin",
+      "otherEntityRelationshipName": "systemWallet",
+      "relationshipName": "admin",
+      "relationshipSide": "right",
+      "relationshipType": "one-to-one"
+    }
+  ],
+  "searchEngine": "no"
+}

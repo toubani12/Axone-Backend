@@ -1,0 +1,40 @@
+{
+  "hrSolutionApp": {
+    "candidate": {
+      "home": {
+        "title": "Candidates",
+        "refreshListLabel": "Refresh list",
+        "createLabel": "Create a new Candidate",
+        "createOrEditLabel": "Create or edit a Candidate",
+        "notFound": "No Candidates found"
+      },
+      "created": "A new Candidate is created with identifier {{ param }}",
+      "updated": "A Candidate is updated with identifier {{ param }}",
+      "deleted": "A Candidate is deleted with identifier {{ param }}",
+      "delete": {
+        "question": "Are you sure you want to delete Candidate {{ id }}?"
+      },
+      "detail": {
+        "title": "Candidate"
+      },
+      "id": "ID",
+      "firstName": "First Name",
+      "lastName": "Last Name",
+      "linkedinUrl": "Linkedin Url",
+      "fullName": "Full Name",
+      "yearsOfExperience": "Years Of Experience",
+      "currentSalary": "Current Salary",
+      "desiredSalary": "Desired Salary",
+      "hasContract": "Has Contract",
+      "hired": "Hired",
+      "rate": "Rate",
+      "techCV": "Tech CV",
+      "interviewResult": "Interview Result",
+      "candidateResume": "Candidate Resume",
+      "domain": "Domain",
+      "applications": "Applications",
+      "contract": "Contract",
+      "ndaStatus": "Nda Status"
+    }
+  }
+}

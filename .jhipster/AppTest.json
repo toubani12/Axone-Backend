@@ -1,0 +1,69 @@
+{
+  "annotations": {
+    "changelogDate": "20240524151424"
+  },
+  "applications": ["HRSolution"],
+  "fields": [
+    {
+      "fieldName": "name",
+      "fieldType": "String",
+      "fieldValidateRules": ["required"]
+    },
+    {
+      "fieldName": "invitationLink",
+      "fieldType": "String",
+      "fieldValidateRules": ["required"]
+    },
+    {
+      "fieldName": "totalScore",
+      "fieldType": "Integer"
+    },
+    {
+      "fieldName": "status",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "completed",
+      "fieldType": "Boolean"
+    },
+    {
+      "fieldName": "testID",
+      "fieldType": "Long"
+    },
+    {
+      "fieldName": "algorithm",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "isCodeTest",
+      "fieldType": "Boolean"
+    },
+    {
+      "fieldName": "duration",
+      "fieldType": "Integer"
+    }
+  ],
+  "name": "AppTest",
+  "relationships": [
+    {
+      "options": {
+        "onUpdate": "CASCADE"
+      },
+      "otherEntityName": "customQuestion",
+      "relationshipName": "customQuestions",
+      "relationshipSide": "left",
+      "relationshipType": "one-to-many"
+    },
+    {
+      "options": {
+        "onUpdate": "CASCADE"
+      },
+      "otherEntityField": "type",
+      "otherEntityName": "appTestType",
+      "relationshipName": "type",
+      "relationshipSide": "left",
+      "relationshipType": "many-to-many"
+    }
+  ],
+  "searchEngine": "no"
+}
